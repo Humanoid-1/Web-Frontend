@@ -1,5 +1,7 @@
 import React from "react";
 import "./Home.css"; // import the custom CSS
+import SliderComponent from "../components/SliderComponent";
+
 
 const categories = [
   { name: "Dell", image: "/Dell.jpg" },
@@ -14,6 +16,8 @@ const categories = [
 
 const Home = () => {
   return (
+    <div>
+    <SliderComponent />
     <div className="home-container">
       <h1 className="home-heading">Shop by Brands</h1>
 
@@ -31,6 +35,7 @@ const Home = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

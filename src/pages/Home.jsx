@@ -13,6 +13,12 @@ const categories = [
   { name: "MSI", image: "/Msi.jpg" },
   { name: "Samsung", image: "/Samsung.jpg" },
 ];
+const Accesories =[
+  {name:"Mouse", image: "/mouse.jpg"},
+  {name:"Keyboard", image: "/keyboard.jpg"},
+  {name:"charger",image:"/adapter.jpg"},
+  {name:"pendrive",image:"/pendrive.jpg"}
+]
 
 const Home = () => {
   return (
@@ -32,6 +38,23 @@ const Home = () => {
               />
             </div>
             <span className="brand-name">{category.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div className="accessories-container">
+      <h1 className="accessories-heading">Accessories</h1>
+      <div className="accessories-grid">
+        {Accesories.map((accessory, index) => (
+          <div className="accessory-card" key={index}>
+            <div className="accessory-image-container">
+              <img
+                src={accessory.image}
+                alt={accessory.name}
+                className="accessory-image"
+              />
+            </div>
+            <span className="accessory-name">{accessory.name}</span>
           </div>
         ))}
       </div>

@@ -1,8 +1,9 @@
 // src/components/SliderComponent.jsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 
 const SliderComponent = () => {
+      const sliderRef = useRef(null);
     const settings = {
         dots: true,
         infinite: true,
@@ -21,6 +22,23 @@ const SliderComponent = () => {
         { id: 5, image: "/lenovo-banner.jpg" },
         { id: 6, image: "/apple-banner.jpg" }
     ];
+    // Add keyboard action
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (!sliderRef.current) return;
+            if (e.key === "ArrowRight") {
+                sliderRef.current.slickNext();
+            }
+            if (e.key === "ArrowLeft") {
+                sliderRef.current.slickPrev();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
+    
     return (
         <div className="slider-container">
             <style>{`
@@ -47,6 +65,7 @@ const SliderComponent = () => {
                     width: 100%;
                     height: 100%;
                     display: block;
+                      
                 }
 
                 .slide-overlay {
@@ -60,7 +79,7 @@ const SliderComponent = () => {
 
                 .slick-dots li button:before {
                     font-size: 18px;
-                    color: #d1c6c6ff;
+                    color: gray;
                     opacity: 1;
                 }
 
@@ -78,7 +97,7 @@ const SliderComponent = () => {
                 }
             `}</style>
 
-            <Slider {...settings}>
+             <Slider ref={sliderRef} {...settings}>
                 {slides.map((slide) => (
                     <div key={slide.id}>
                         <div className="slide-item">

@@ -14,16 +14,8 @@ const Nav = styled.div`
   height: 4rem;
   position: relative;
 
-  .logo {
-    width: 3rem;
-    height: 3rem;
-  }
-
-  .search {
-    position: relative;
-    width: 30%;
-  }
-
+  .logo { width: 3rem; height: 3rem; }
+  .search { position: relative; width: 30%; }
   .input {
     width: 100%;
     height: 2.5rem;
@@ -33,7 +25,6 @@ const Nav = styled.div`
     padding-left: 2rem;
     font-size: 1rem;
   }
-
   .search-icon {
     position: absolute;
     top: 50%;
@@ -42,38 +33,21 @@ const Nav = styled.div`
     color: #888;
     font-size: 1.3rem;
   }
-
   .links {
     height: 100%;
     width: 40%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    font-size: 1.3rem;
   }
-
-  .links a {
-    text-decoration: none;
-    color: black;
-  }
-
-  .hamburger {
-    display: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-  }
+  .links a { text-decoration: none; color: black; }
+  .hamburger { display: none; font-size: 1.8rem; cursor: pointer; }
 
   @media (max-width: 768px) {
-    .links {
-      display: none !important;
-    }
-
-    .hamburger {
-      display: block;
-    }
-
-    .search {
-      width: 50%;
-    }
+    .links { display: none !important; }
+    .hamburger { display: block; }
+    .search { width: 50%; }
   }
 `;
 
@@ -91,24 +65,14 @@ const SideMenu = styled.div`
   transition: left 0.3s ease;
   z-index: 1000;
 
-  a {
-    color: black;
-    text-decoration: none;
-    margin-bottom: 20px;
-    font-size: 18px;
-  }
-
-  .close-btn {
-    font-size: 24px;
-    margin-bottom: 30px;
-    align-self: flex-end;
-    cursor: pointer;
-  }
+  a { color: black; text-decoration: none; margin-bottom: 20px; font-size: 18px; }
+  .close-btn { font-size: 24px; margin-bottom: 30px; align-self: flex-end; cursor: pointer; }
 `;
 
+// ✅ Changed 'show' to transient prop '$show'
 const Overlay = styled.div`
   position: fixed;
-  display: ${props => (props.show ? 'block' : 'none')};
+  display: ${props => (props.$show ? 'block' : 'none')};
   top: 0;
   left: 0;
   height: 100%;
@@ -152,7 +116,7 @@ function Header() {
       </SideMenu>
 
       {/* Overlay */}
-      <Overlay show={menuOpen} onClick={() => setMenuOpen(false)} />
+      <Overlay $show={menuOpen} onClick={() => setMenuOpen(false)} />
     </>
   );
 }

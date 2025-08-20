@@ -23,6 +23,7 @@ export default function AboutPage() {
           <h1>{company.name}</h1>
           <p>
             We specialize in buying, selling, and trading laptops of all brands, plus a complete range of accessories to power your setup. Whether you want a brand-new laptop, a certified refurbished device, or a specific accessory — we make it simple.
+            hello world
           </p>
         </header>
 

@@ -1,26 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-import "./Home.css";
-import SliderComponent from "../components/SliderComponent";
-
-const categories = [
-  { name: "Dell", image: "/Dell.jpg" },
-  { name: "HP", image: "/hp.jpg" },
-  { name: "Asus", image: "/Asus.jpg" },
-  { name: "Apple", image: "/Apple.jpg" },
-  { name: "Lenovo", image: "/Lenovo.jpg" },
-  { name: "Acer", image: "/Acer.jpg" },
-  { name: "MSI", image: "/Msi.jpg" },
-  { name: "Samsung", image: "/Samsung.jpg" },
-];
-
-const Accessories = [
-  { name: "Mouse", image: "/mouse.jpg" },
-  { name: "Keyboard", image: "/keyboard.jpg" },
-  { name: "Charger", image: "/adapter.jpg" },
-  { name: "Pendrive", image: "/pendrive.jpg" },
-=======
 import "./Home.css";
 import SliderComponent from "../components/SliderComponent";
 import dell from "../../public/Dell.jpg";
@@ -38,6 +16,7 @@ import keyboard from "../../public/keyboard.jpg";
 import charger from "../../public/adapter.jpg";
 import pendrive from "../../public/pendrive.jpg";
 import harddisk from "../../public/hard-disk.jpg";
+import { Link } from "react-router-dom";
 
 const categories = [
   { name: "Dell", image: dell },
@@ -58,27 +37,10 @@ const accessories = [
   { name: "Charger", image: charger },
   { name: "Pendrive", image: pendrive },
   { name: "HardDisk", image: harddisk }
->>>>>>> origin/main
 ];
 
 const Home = () => {
   return (
-<<<<<<< HEAD
-    <div>
-      <SliderComponent />
-
-      {/* Brand Section */}
-      <div className="home-container">
-        <h1 className="home-heading">Shop by Brands</h1>
-
-        <div className="brand-grid">
-          {categories.map((category, index) => (
-            <Link
-              key={index}
-              to={`/brand/${category.name}`} // navigate to brand page
-              className="brand-card"
-            >
-=======
     <div className="home-wrapper">
       <SliderComponent />
       
@@ -90,8 +52,9 @@ const Home = () => {
         </div>
         <div className="brand-grid">
           {categories.map((category, index) => (
-            <div className="brand-card" key={index}>
->>>>>>> origin/main
+            <Link to={`/brand/${category.name}`} className="brand-card" key={index}>
+           
+            {/* <div className="brand-card" key={index}> */}
               <div className="brand-image-container">
                 <img
                   src={category.image}
@@ -100,19 +63,8 @@ const Home = () => {
                 />
               </div>
               <span className="brand-name">{category.name}</span>
-<<<<<<< HEAD
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* Accessories Section */}
-      <div className="accessories-container">
-        <h1 className="accessories-heading">Accessories</h1>
-        <div className="accessories-grid">
-          {Accessories.map((accessory, index) => (
-=======
-            </div>
+               </Link>
+            // </div>
           ))}
         </div>
       </section>
@@ -125,7 +77,6 @@ const Home = () => {
         </div>
         <div className="accessories-grid">
           {accessories.map((accessory, index) => (
->>>>>>> origin/main
             <div className="accessory-card" key={index}>
               <div className="accessory-image-container">
                 <img
@@ -138,17 +89,9 @@ const Home = () => {
             </div>
           ))}
         </div>
-<<<<<<< HEAD
-      </div>
-=======
       </section>
->>>>>>> origin/main
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default Home;
-=======
-export default Home;
->>>>>>> origin/main

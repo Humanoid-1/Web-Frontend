@@ -10,14 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "component": "^1.1.0",
+=======
+>>>>>>> origin/main
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.7.1",
     "react-slick": "^0.31.0",
     "slick-carousel": "^1.8.1",
+<<<<<<< HEAD
     "styled": "^1.0.0",
+=======
+>>>>>>> origin/main
     "styled-components": "^6.1.19"
   },
   "devDependencies": {

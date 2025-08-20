@@ -6,4 +6,8 @@ function About() {
   )
 }
 
+<<<<<<< HEAD
 export default About
+=======
+export default About;
+>>>>>>> origin/main

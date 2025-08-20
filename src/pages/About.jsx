@@ -4,7 +4,7 @@ import "./AboutPage.css";
 
 export default function AboutPage() {
   const company = {
-    name: "Humanoid Maker Shop💻",
+    name: "Humanoid Maker Shop",
     mission:
       "To make laptops and accessories affordable, accessible, and reliable for everyone — from students and professionals to gamers and businesses.",
     bullets: [
@@ -28,10 +28,10 @@ export default function AboutPage() {
 
         <div className="about-grid">
           <div className="about-main">
-            <h2>Our Mission🎯</h2>
+            <h2>Our Mission</h2>
             <p>{company.mission}</p>
 
-            <h3>What we offer😊</h3>
+            <h3>What we offer</h3>
             <ul>
               <li>Sales: New, certified refurbished, and pre-owned laptops at competitive prices.</li>
               <li>Purchases: Sell your old laptop quickly — fair valuation and secure payment.</li>
@@ -40,7 +40,7 @@ export default function AboutPage() {
               <li>Support: Expert tech help to match you with the right device and accessories.</li>
             </ul>
 
-            <h3>Why choose us humanoid maker🤔</h3>
+            <h3>Why choose us humanoid maker</h3>
             <div className="why-choose-grid">
               <div className="why-card">
                 <strong>Trusted Quality</strong>
@@ -61,7 +61,7 @@ export default function AboutPage() {
             </div>
 
             <div className="about-promise">
-              <h3>Our promise❤️</h3>
+              <h3>Our promise</h3>
               <p>At {company.name}, we promise honest service, reliable products, and a simple buying or selling experience. Your satisfaction — and the health of the planet — matters to us.</p>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function AboutPage() {
         </div>
         <br />
         <footer className="about-aside">
-            <h4>Quick facts💡</h4>
+            <h4>Quick facts</h4>
             <ul>
               {company.bullets.map((b, i) => (
                 <li key={i}>• {b}</li>

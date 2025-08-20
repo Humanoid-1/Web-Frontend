@@ -23,6 +23,7 @@ export default function AboutPage() {
           <h1>{company.name}</h1>
           <p>
             We specialize in buying, selling, and trading laptops of all brands, plus a complete range of accessories to power your setup. Whether you want a brand-new laptop, a certified refurbished device, or a specific accessory — we make it simple.
+            hello world
           </p>
         </header>
 
@@ -70,7 +71,7 @@ export default function AboutPage() {
         </div>
         <br />
         <footer className="about-aside">
-            <h4>Quick facts</h4>
+            <h4>Quick Facts</h4>
             <ul>
               {company.bullets.map((b, i) => (
                 <li key={i}>• {b}</li>

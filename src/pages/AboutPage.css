@@ -1,0 +1,114 @@
+/* AboutPage.css */
+
+.about-container {
+    background: #ffffff;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.about-section {
+  background: rgb(255, 255, 255);
+    width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.about-header h1 {
+  font-size: 2.2rem;
+  font-weight:1200;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.about-header p {
+  color: #555;
+  line-height: 1.6;
+  font-size: large;
+}
+
+.about-grid {
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.about-main h2,
+.about-main h3,
+.about-aside h4 {
+    font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  font-size: 1.5rem;
+  color: #333;
+  
+}
+
+.about-main p,
+.about-main ul,
+.about-aside ul {
+  color: #555;
+  line-height: 1.5;
+  font-size: large;
+  list-style-type: none;
+}
+
+.about-main ul {
+  padding-left: 20px;
+}
+
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.why-card {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.why-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.about-promise {
+  margin-top: 20px;
+}
+
+.about-aside {
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.about-aside ul {
+  padding-left: 15px;
+}
+
+.aside-button a {
+  display: inline-block;
+  background: #4f46e5;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.aside-button a:hover {
+  background: #4338ca;
+}
+
+.aside-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+

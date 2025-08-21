@@ -95,9 +95,7 @@ function ContactUs() {
 
       <div className="contact-info">
         <h2>Contact Us:</h2>
-        <p>
-          Website: <a href="https://humanoidmaker.com/">Humanoid Maker</a>
-        </p>
+        <p>Website:<a href="https://humanoidmaker.com/">Humanoid Maker</a></p>
         <p>Phone: +91 70115 13955</p>
         <p>
           Address: 4/1711, Bhola Nath Nagar, Mahavir Block, Sunder Park,

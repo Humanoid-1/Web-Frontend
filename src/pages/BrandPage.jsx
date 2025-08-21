@@ -12,7 +12,7 @@ function BrandPage() {
       setError(null);
       try {
         const response = await fetch(
-          `http://localhost:5000/api/laptops/brand/${brand}`
+          `http://localhost:5000/api/getLaptopsByBrand/${brand}`
         );
         const data = await response.json();
         setLaptops(Array.isArray(data) ? data : []);
@@ -75,7 +75,7 @@ function BrandPage() {
         }
         .brand-btn.selected,
         .brand-btn:hover {
-          background: linear-gradient(90deg, #007bff, #0056b3);
+          background: linear-gradient(90deg, #3498db, #0056b3);
           color: #fff;
           box-shadow: 0 6px 20px rgba(0,123,255,0.2);
           transform: translateY(-3px) scale(1.05);
@@ -127,7 +127,7 @@ function BrandPage() {
           margin: 12px 0;
           font-size: 1.3rem;
           font-weight: 700;
-          color: #28a745;
+          color: fff;
         }
         .laptop-specs {
           font-size: 0.9rem;
@@ -143,7 +143,7 @@ function BrandPage() {
           padding: 10px 0;
           border: none;
           border-radius: 8px;
-          background: linear-gradient(90deg, #28a745, #218838);
+          background: linear-gradient(90deg, #3498db, #2a82bdff);
           color: #fff;
           font-weight: 600;
           cursor: pointer;
@@ -153,7 +153,7 @@ function BrandPage() {
           box-shadow: 0 3px 10px rgba(40,167,69,0.2);
         }
         .details-btn:hover {
-          background: linear-gradient(90deg, #218838, #28a745);
+          background: linear-gradient(90deg, #2a82bdff, #2a82bdff);
           box-shadow: 0 6px 18px rgba(40,167,69,0.25);
           transform: translateY(-2px);
         }
@@ -171,7 +171,7 @@ function BrandPage() {
         }
       `}</style>
 
-      <h1 className="brand-title">💻 Laptops by Brand</h1>
+      <h1 className="brand-title"> Laptops by Brand</h1>
 
       {/* Brand Filter Buttons */}
       <div className="brand-buttons">
@@ -204,14 +204,16 @@ function BrandPage() {
       {/* Laptop Grid */}
       <div className="laptop-grid">
         {laptops.map((laptop, index) => (
+          console.log(laptop),
           <div
             key={laptop._id}
             className="laptop-card"
             style={{ animationDelay: `${index * 0.1}s` }} // staggered animation
           >
             {laptop.image_url && (
+             
               <img
-                src={laptop.image_url}
+                src={laptop.image_url[0]}
                 alt={laptop.model}
                 className="laptop-img"
               />

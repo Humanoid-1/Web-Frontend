@@ -1,9 +1,24 @@
+<<<<<<< HEAD
 // src/components/SliderComponent.jsx
 import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 
 const SliderComponent = () => {
       const sliderRef = useRef(null);
+=======
+
+// src/components/SliderComponent.jsx
+import React from "react";
+import Slider from "react-slick";
+import asus from "../../public/asus slider.jpg";
+import hp from "../../public/hp-banner.jpg";
+import dell from "../../public/dell-banner.jpg";
+import acer from "../../public/acer slider.jpg";
+import lenovo from "../../public/lenovo-banner.jpg";
+import apple from "../../public/apple-banner.jpg";  
+
+const SliderComponent = () => {
+>>>>>>> origin/main
     const settings = {
         dots: true,
         infinite: true,
@@ -15,6 +30,7 @@ const SliderComponent = () => {
     };
 
     const slides = [
+<<<<<<< HEAD
         { id: 1, image: "/asus slider.jpg" },
         { id: 2, image: "/hp-banner.jpg" },
         { id: 3, image: "/dell-banner.jpg" },
@@ -39,6 +55,15 @@ const SliderComponent = () => {
     }, []);
 
     
+=======
+        { id: 1, image: asus },
+        { id: 2, image: hp },
+        { id: 3, image: dell },
+        { id: 4, image: acer },
+        { id: 5, image: lenovo },
+        { id: 6, image: apple }
+    ];
+>>>>>>> origin/main
     return (
         <div className="slider-container">
             <style>{`
@@ -65,7 +90,10 @@ const SliderComponent = () => {
                     width: 100%;
                     height: 100%;
                     display: block;
+<<<<<<< HEAD
                       
+=======
+>>>>>>> origin/main
                 }
 
                 .slide-overlay {
@@ -79,7 +107,11 @@ const SliderComponent = () => {
 
                 .slick-dots li button:before {
                     font-size: 18px;
+<<<<<<< HEAD
                     color: gray;
+=======
+                    color: #d1c6c6ff;
+>>>>>>> origin/main
                     opacity: 1;
                 }
 
@@ -97,7 +129,11 @@ const SliderComponent = () => {
                 }
             `}</style>
 
+<<<<<<< HEAD
              <Slider ref={sliderRef} {...settings}>
+=======
+            <Slider {...settings}>
+>>>>>>> origin/main
                 {slides.map((slide) => (
                     <div key={slide.id}>
                         <div className="slide-item">

@@ -1,0 +1,133 @@
+/* AboutPage.css */
+
+.about-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.about-section {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.about-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #0072c6;
+}
+
+.about-header p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.about-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-main h2,
+.about-main h3 {
+  margin-top: 1.5rem;
+  color: #004b8d;
+}
+
+.about-main ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.why-card {
+  background-color: white;
+  padding: 1rem;
+  border-left: 5px solid #0072c6;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.about-promise {
+  background-color: #e6f4ff;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.about-aside {
+  margin-top: 3rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.about-aside ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+.aside-button a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #0072c6;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.aside-button a:hover {
+  background-color: #005999;
+}
+
+.aside-note {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #666;
+}
+
+
+/* 🔁 Responsive Media Queries */
+@media (max-width: 768px) {
+  .about-header h1 {
+    font-size: 2rem;
+  }
+
+  .about-main ul {
+    margin-left: 1rem;
+  }
+
+  .aside-button a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding: 1rem;
+  }
+
+  .about-header p {
+    font-size: 1rem;
+  }
+
+  .why-choose-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-main h2,
+  .about-main h3 {
+    font-size: 1.5rem;
+  }
+}

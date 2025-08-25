@@ -93,21 +93,17 @@ function ContactUs() {
       {/* ToastContainer जहाँ toast notifications दिखेंगे */}
       <ToastContainer/>
 
-      <div className="contact-info">
-        <h2>Contact Us:</h2>
-<<<<<<<<< Temporary merge branch 1
-        <p>
-          Website: <a href="https://humanoidmaker.com/">Humanoid Maker</a>
-        </p>
-=========
-        {/* <p>Website:<a href="https://humanoidmaker.com/">Humanoid Maker</a></p> */}
->>>>>>>>> Temporary merge branch 2
-        <p>Phone: +91 70115 13955</p>
-        <p>
-          Address: 4/1711, Bhola Nath Nagar, Mahavir Block, Sunder Park,
-          Shahdara, Delhi, 110032
-        </p>
-      </div>
+<div className="contact-info">
+  <h2>Contact Us:</h2>
+  <p>
+    Website: <a href="https://humanoidmaker.com/">Humanoid Maker</a>
+  </p>
+  <p>Phone: +91 70115 13955</p>
+  <p>
+    Address: 4/1711, Bhola Nath Nagar, Mahavir Block, Sunder Park,
+    Shahdara, Delhi, 110032
+  </p>
+</div>
 
       <div className="social-links">
         <h2 className="follow-us">Follow Us:</h2>

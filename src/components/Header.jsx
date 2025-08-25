@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../public/humanoid_maker_logo_white-Photoroom.png";
@@ -253,8 +254,10 @@ function Header() {
   return (
     <>
       <Nav>
-        <Logo src={logo} alt="Company Logo" />
-        
+        <NavLink to="/">
+          <Logo src={logo} alt="Company Logo" />
+        </NavLink>
+
         <SearchContainer>
           <SearchIcon />
           <SearchInput type="text" placeholder={currentPlaceholder} />

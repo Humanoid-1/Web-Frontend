@@ -31,7 +31,6 @@ export default function AboutPage() {
           <div className="about-main">
             <h2>Our Mission</h2>
             <p>{company.mission}</p>
-
             <h3>What we offer</h3>
             <ul>
               <li>Sales: New, certified refurbished, and pre-owned laptops at competitive prices.</li>

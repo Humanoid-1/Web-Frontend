@@ -8,6 +8,7 @@ import ContactUs from "./pages/ContactUs";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import BrandPage from "./pages/BrandPage";
+import Footer from "./pages/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/About" element={<About />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/brand/:brandName" element={<BrandPage/>} />
+        <Route path="/accessories" element={<Accessories/>} />
 
       </Routes>
       <Footer />

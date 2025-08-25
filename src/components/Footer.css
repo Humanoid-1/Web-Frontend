@@ -45,12 +45,14 @@ li a{
   list-style: none;
   padding:0;
   color: rgb(242, 230, 230);
+ 
 }
 
 .footer-column ul li {
   margin-bottom: 8px;
   font-size: 10px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .footer-column ul li:hover {
@@ -74,6 +76,7 @@ li a{
 .copyright {
   color:white;
   font-size: 12px;
+  margin-top: 5px;
 }
 
   .footer-bottom {

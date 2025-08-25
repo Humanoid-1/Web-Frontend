@@ -237,6 +237,7 @@ function BrandPage() {
           </div>
         ))}
       </div>
+   
     </div>
   );
 }

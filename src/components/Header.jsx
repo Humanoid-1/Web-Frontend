@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../public/humanoid_maker_logo_white-Photoroom.png";
@@ -27,6 +27,10 @@ const Logo = styled.img`
   height: 50px;
   width: auto;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+  order: 2;
+  margin-left: 20px;}
 `;
 
 const SearchContainer = styled.div`
@@ -49,7 +53,8 @@ const SearchContainer = styled.div`
 
   @media (max-width: 768px) {
     width: 70%;
-    margin: 0 10px;
+    margin: 0 20px;
+    order: 3;
   }
 `;
 
@@ -121,6 +126,8 @@ const MobileMenuButton = styled.div`
 
   @media (max-width: 768px) {
     display: block;
+    order: 1;
+    
   }
 `;
 
@@ -222,6 +229,27 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartItems] = useState(0); 
 
+  const placeholders = [
+    "Search Laptops",
+    "Search Chargers",
+    "Search Hard Disks",
+    "Search Ram",
+    "Search Pan Drives"
+  ];
+  const [currentPlaceholder, setCurrentPlaceholder] = useState(placeholders[0]);
+
+
+  useEffect(() => {
+    // Har 3 second baad placeholder change hoga
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * placeholders.length);
+      setCurrentPlaceholder(placeholders[randomIndex]);
+    }, 2500);
+
+    // Cleanup function
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <Nav>
@@ -229,12 +257,11 @@ function Header() {
         
         <SearchContainer>
           <SearchIcon />
-          <SearchInput type="text" placeholder="Search products..." />
+          <SearchInput type="text" placeholder={currentPlaceholder} />
         </SearchContainer>
 
         <NavLinks>
           <NavItem to="/">Home</NavItem>
-          <NavItem to="/products">Products</NavItem>
           <NavItem to="/About">About</NavItem>
           <NavItem to="/ContactUs">Contact</NavItem>
         </NavLinks>
@@ -262,9 +289,7 @@ function Header() {
         <MobileNavItem to="/" onClick={() => setMenuOpen(false)}>
           Home
         </MobileNavItem>
-        <MobileNavItem to="/products" onClick={() => setMenuOpen(false)}>
-          Products
-        </MobileNavItem>
+        
         <MobileNavItem to="/about" onClick={() => setMenuOpen(false)}>
           About Us
         </MobileNavItem>

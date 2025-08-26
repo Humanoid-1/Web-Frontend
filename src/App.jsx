@@ -6,6 +6,8 @@ import ContactUs from "./pages/ContactUs";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import BrandPage from "./pages/BrandPage";
+import Accessories from "./pages/Accessories";
+import Footer from "./components/Footer";
 
 
 function App() {

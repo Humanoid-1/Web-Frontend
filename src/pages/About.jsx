@@ -78,7 +78,7 @@ export default function AboutPage() {
             </ul>
 <br />
             <div className="aside-button">
-              <a href="/contactUs">Contact Sales</a>
+              <a href="/ContactUs">Contact Sales</a>
             </div>
 
             <div className="aside-note">

@@ -1,26 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-import "./Home.css";
-import SliderComponent from "../components/SliderComponent";
-
-const categories = [
-  { name: "Dell", image: "/Dell.jpg" },
-  { name: "HP", image: "/hp.jpg" },
-  { name: "Asus", image: "/Asus.jpg" },
-  { name: "Apple", image: "/Apple.jpg" },
-  { name: "Lenovo", image: "/Lenovo.jpg" },
-  { name: "Acer", image: "/Acer.jpg" },
-  { name: "MSI", image: "/Msi.jpg" },
-  { name: "Samsung", image: "/Samsung.jpg" },
-];
-
-const Accessories = [
-  { name: "Mouse", image: "/mouse.jpg" },
-  { name: "Keyboard", image: "/keyboard.jpg" },
-  { name: "Charger", image: "/adapter.jpg" },
-  { name: "Pendrive", image: "/pendrive.jpg" },
-=======
 import "./Home.css";
 import SliderComponent from "../components/SliderComponent";
 import dell from "../../public/Dell.jpg";
@@ -59,28 +37,10 @@ const accessories = [
   { name: "Charger", image: charger },
   { name: "Pendrive", image: pendrive },
   { name: "HardDisk", image: harddisk }
->>>>>>> 2be9d79789118cf00c75bf47ac363deff875cf3e
 ];
 
 const Home = () => {
   return (
-<<<<<<< HEAD
-
-    <div>
-      <SliderComponent />
-
-      {/* Brand Section */}
-      <div className="home-container">
-        <h1 className="home-heading">Shop by Brands</h1>
-
-        <div className="brand-grid">
-          {categories.map((category, index) => (
-            <Link
-              key={index}
-              to={`/brand/${category.name}`} // navigate to brand page
-              className="brand-card"
-            >
-=======
     <div className="home-wrapper">
       <SliderComponent />
       
@@ -95,7 +55,6 @@ const Home = () => {
             <Link to={`/brand/${category.name}`} className="brand-card" key={index}>
            
             {/* <div className="brand-card" key={index}> */}
->>>>>>> 2be9d79789118cf00c75bf47ac363deff875cf3e
               <div className="brand-image-container">
                 <img
                   src={category.image}
@@ -104,18 +63,6 @@ const Home = () => {
                 />
               </div>
               <span className="brand-name">{category.name}</span>
-<<<<<<< HEAD
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* Accessories Section */}
-      <div className="accessories-container">
-        <h1 className="accessories-heading">Accessories</h1>
-        <div className="accessories-grid">
-          {Accessories.map((accessory, index) => (
-=======
                </Link>
             // </div>
           ))}
@@ -130,7 +77,6 @@ const Home = () => {
         </div>
         <div className="accessories-grid">
           {accessories.map((accessory, index) => (
->>>>>>> 2be9d79789118cf00c75bf47ac363deff875cf3e
             <div className="accessory-card" key={index}>
               <div className="accessory-image-container">
                 <img
@@ -143,9 +89,6 @@ const Home = () => {
             </div>
           ))}
         </div>
-<<<<<<< HEAD
-      </div>
-=======
       </section>
       <footer>
         <div className="footer-top">
@@ -211,7 +154,6 @@ const Home = () => {
         </div>
       </div>
       </footer>
->>>>>>> 2be9d79789118cf00c75bf47ac363deff875cf3e
     </div>
   );
 };

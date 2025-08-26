@@ -12,7 +12,7 @@ function BrandPage() {
       setError(null);
       try {
         const response = await fetch(
-          `http://localhost:5000/api/laptops/brand/${brand}`
+          `http://localhost:5000/api/getLaptopsByBrand/${brand}`  
         );
         const data = await response.json();
         setLaptops(Array.isArray(data) ? data : []);

@@ -224,7 +224,7 @@ function BrandPage() {
         }
       `}</style>
 
-      <h1 className="brand-title"> Laptops by Brand</h1>
+      <h1 className="brand-title"> Laptops by Brands</h1>
 
       {/* Brand Filter Buttons */}
       <div className="brand-buttons">

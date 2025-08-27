@@ -36,6 +36,10 @@ function BrandPage() {
     "Apple",
     "MSI",
     "Samsung",
+    "Microsoft",
+    "Sony",
+    "LG",
+    "Huawei",
   ];
 
   return (

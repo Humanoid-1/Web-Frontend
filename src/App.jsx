@@ -1,4 +1,3 @@
-import React from "react";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
@@ -7,8 +6,9 @@ import ContactUs from "./pages/ContactUs";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import BrandPage from "./pages/BrandPage";
-import Footer from "./components/Footer";
 import Accessories from "./pages/Accessories";
+import Footer from "./components/Footer";
+
 
 function App() {
   return (

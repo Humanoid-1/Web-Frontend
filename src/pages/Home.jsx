@@ -16,8 +16,7 @@ import keyboard from "../../public/keyboard.jpg";
 import charger from "../../public/adapter.jpg";
 import pendrive from "../../public/pendrive.jpg";
 import harddisk from "../../public/hard-disk.jpg";
-import { Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";         
 const categories = [
   { name: "Dell", image: dell },
   { name: "HP", image: hp },
@@ -53,8 +52,6 @@ const Home = () => {
         <div className="brand-grid">
           {categories.map((category, index) => (
             <Link to={`/brand/${category.name}`} className="brand-card" key={index}>
-           
-            {/* <div className="brand-card" key={index}> */}
               <div className="brand-image-container">
                 <img
                   src={category.image}
@@ -63,8 +60,7 @@ const Home = () => {
                 />
               </div>
               <span className="brand-name">{category.name}</span>
-               </Link>
-            // </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -77,7 +73,7 @@ const Home = () => {
         </div>
         <div className="accessories-grid">
           {accessories.map((accessory, index) => (
-            <div className="accessory-card" key={index}>
+            <Link to={`/accessories/`} className="accessory-card" key={index}>
               <div className="accessory-image-container">
                 <img
                   src={accessory.image}
@@ -86,11 +82,10 @@ const Home = () => {
                 />
               </div>
               <span className="accessory-name">{accessory.name}</span>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
-     
     </div>
   );
 };

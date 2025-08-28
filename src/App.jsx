@@ -1,13 +1,15 @@
-import React from "react";
 import Home from "./pages/Home";
 import Header from "./components/Header";
-import Footer from "./pages/footer";
 import { Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import BrandPage from "./pages/BrandPage";
+import Accessories from "./pages/Accessories";
+import Footer from "./components/Footer";
+import DetailPage from "./pages/Detail";
+
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/About" element={<About />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/brand/:brandName" element={<BrandPage/>} />
+        <Route path="/accessories" element={<Accessories/>} />
+        <Route path="/Detail/:id" element={<DetailPage />} />
 
       </Routes>
       <Footer />

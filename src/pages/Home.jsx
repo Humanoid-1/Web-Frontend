@@ -16,6 +16,19 @@ import keyboard from "../../public/keyboard.jpg";
 import charger from "../../public/adapter.jpg";
 import pendrive from "../../public/pendrive.jpg";
 import harddisk from "../../public/hard-disk.jpg";
+import battery from "../../public/battery.jpg";
+import ram from "../../public/ram.jpg";
+import body from "../../public/body.jpg";
+import keyboardInternal from "../../public/keyboard-internal.jpg";
+import touchpad from "../../public/touchpad.jpg";
+import port from "../../public/port.jpg";
+import hinge from "../../public/hinge.jpg";
+import display from "../../public/display.jpg";
+import speaker from "../../public/speaker.jpg";
+import wifiCard from "../../public/wifi-card.jpg";
+import bluetoothCard from "../../public/bluetooth-card.jpg";
+import powerButton from "../../public/power-button.jpg";
+
 import { Link } from "react-router-dom";         
 const categories = [
   { name: "Dell", image: dell },
@@ -37,7 +50,21 @@ const accessories = [
   { name: "Pendrive", image: pendrive },
   { name: "HardDisk", image: harddisk }
 ];
-
+const parts =[
+  {name:"RAM" ,image:ram},
+  {name:"HardDisk" ,image:harddisk},
+  {name:"Body" ,image:body},
+  {name:"Keyboard" ,image:keyboardInternal},
+  {name:"Battery" ,image:battery},
+  {name:"Touchpad" ,image:touchpad},
+  {name:"Ports" ,image:port},
+  {name:"Hinge",image:hinge}, 
+  {name:"Display",image:display},
+  {name:"Speaker",image:speaker},
+  {name:"Wi-Fi Card",image:wifiCard},
+  {name:"Bluetooth Card",image:bluetoothCard},
+  {name:"Buttons",image:powerButton},
+]
 const Home = () => {
   return (
     <div className="home-wrapper">
@@ -82,6 +109,27 @@ const Home = () => {
                 />
               </div>
               <span className="accessory-name">{accessory.name}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+      {/* parts section  */}
+      <section  className="section-container">
+        <div className="section-header">
+          <h2>Parts</h2>
+          <p>Find the perfect parts for your devices</p>
+        </div>
+        <div className="accessories-grid">
+          {parts.map((part, index) => (
+            <Link to={`/parts/`} className="accessory-card" key={index}>
+              <div className="accessory-image-container">
+                <img
+                  src={part.image}
+                  alt={part.name}
+                  className="accessory-image"
+                />
+              </div>
+              <span className="accessory-name">{part.name}</span>
             </Link>
           ))}
         </div>

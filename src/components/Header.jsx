@@ -225,7 +225,9 @@ function Header() {
   return (
     <>
       <Nav>
+        <NavLink to="/">
         <Logo src={logo} alt="Company Logo" />
+        </NavLink>
         
         <SearchContainer>
           <SearchIcon />

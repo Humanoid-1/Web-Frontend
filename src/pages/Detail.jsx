@@ -1,40 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// src/pages/Detail.jsx
+import React from "react";
+import { useParams } from "react-router-dom";
+import laptops from "../data/laptops"; // JSON data import
+import "../pages/Detail.css"; // CSS import
 
 const Detail = () => {
+  const { id } = useParams(); // URL se id nikali
+  const laptop = laptops.find((l) => l._id === id); // sirf ek laptop find kiya
 
-  const { id } = useParams(); // URL से id लो
-  const [laptop, setLaptop] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchLaptop = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/getLaptopById/${id}`);
-        const data = await response.json();
-        setLaptop(data);
-      } catch (error) {
-        console.error("Error fetching laptop:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLaptop();
-  }, [id]);
-
-  if (loading) return <p>Loading...</p>;
-  if (!laptop) return <h2>Laptop not found</h2>;
+  if (!laptop) {
+    return <h2>Laptop not found!</h2>;
+  }
 
   return (
-    <div>
-      <img src={laptop.image_url?.[0]} alt={laptop.model} width="300" />
-      <h3>{laptop.brand} - {laptop.model}</h3>
-      <p><b>CPU:</b> {laptop.specs?.cpu}</p>
-      <p><b>RAM:</b> {laptop.specs?.ram}</p>
-      <p><b>Storage:</b> {laptop.specs?.storage}</p>
-      <p><b>GPU:</b> {laptop.specs?.gpu}</p>
-      <p><b>Price:</b> ₹{laptop.price}</p>
+    <div className="detail-page">
+      {/* Left Side Image */}
+      <div className="detail-left">
+        <img
+          src={laptop.image_url[0]}
+          alt={laptop.model}
+          className="detail-img"
+        />
+      </div>
+
+      {/* Right Side Description */}
+      <div className="detail-right">
+        <h1>{laptop.model}</h1>
+        <p className="desc">{laptop.description}</p>
+        <p><b>Brand:</b> {laptop.brand}</p>
+        
+        
+        <p><b>Price:</b> ₹{laptop.price}</p>
+      
+
+       <div>
+      
+       </div>
+
+        
+
+        <div className="buttons">
+          <button className="btn-buy">Buy Now</button>
+          
+        </div>
+      </div>
     </div>
   );
 };

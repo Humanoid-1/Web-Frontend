@@ -1,12 +1,12 @@
 
 // src/components/SliderComponent.jsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import asus from "../../public/asus slider.jpg";
 import hp from "../../public/hp-banner.jpg";
-import dell from "../../public/dell-banner.jpg";
+import dell from "../../public/dell slider.jpg";
 import acer from "../../public/acer slider.jpg";
-import lenovo from "../../public/lenovo-banner.jpg";
+import lenovo from "../../public/lenevo slider.jpg";
 import apple from "../../public/apple-banner.jpg";  
 
 const SliderComponent = () => {
@@ -22,12 +22,28 @@ const SliderComponent = () => {
 
     const slides = [
         { id: 1, image: asus },
-        { id: 2, image: hp },
-        { id: 3, image: dell },
+        { id: 2, image: dell },
+        { id: 3, image: hp },
         { id: 4, image: acer },
         { id: 5, image: lenovo },
         { id: 6, image: apple }
     ];
+
+    // Keyboard navigation
+    const sliderRef = useRef(null);
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "ArrowRight") {
+                sliderRef.current.slickNext();
+            } else if (e.key === "ArrowLeft") {
+                sliderRef.current.slickPrev();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
     return (
         <div className="slider-container">
             <style>{`
@@ -41,7 +57,7 @@ const SliderComponent = () => {
                 .slide-item {
                     position: relative;
                     width: 100%;
-                    height: 500px;
+                    height: 520px;
                     transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
                 }
 
@@ -85,7 +101,7 @@ const SliderComponent = () => {
                 }
             `}</style>
 
-            <Slider {...settings}>
+            <Slider ref={sliderRef } {...settings}>
                 {slides.map((slide) => (
                     <div key={slide.id}>
                         <div className="slide-item">

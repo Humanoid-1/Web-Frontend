@@ -12,7 +12,7 @@ function AccessoriesPage() {
   useEffect(() => {
     const fetchAccessories = async (page = 1) => {
       setLoading(true);
-      try {
+      // try {
         const res = await fetch(
           `http://localhost:5000/api/getAccessories?page=${page}&limit=${itemsPerPage}`
         );
@@ -24,12 +24,12 @@ function AccessoriesPage() {
         } else {
           setError("Invalid response from server");
         }
-      } catch (err) {
-        console.error(err);
-        setError("Failed to fetch accessories");
-      } finally {
-        setLoading(false);
-      }
+      // } catch (err) {
+      //   console.error(err);
+      //   setError("Failed to fetch accessories");
+      // } finally {
+        // }
+          setLoading(false);
     };
 
     fetchAccessories(currentPage);
@@ -132,16 +132,16 @@ function AccessoriesPage() {
                 />
               </div>
 
-              <h2
+              <h1
                 style={{
-                  fontSize: "18px",
+                  fontSize: "23px",
                   fontWeight: "600",
                   marginBottom: "5px",
                   textAlign: "center",
                 }}
               >
-                {item.model || item.type}
-              </h2>
+                {item.category || item.type}
+              </h1>
               <p style={{ color: "#555", margin: "2px 0" }}>Brand: {item.brand}</p>
               <p style={{ color: "#007BFF", fontWeight: "bold", margin: "2px 0" }}>
                 ₹{item.price}

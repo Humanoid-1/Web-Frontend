@@ -1,6 +1,6 @@
 import './Footer.css';
 import { Link } from 'react-router-dom';
-import Image from '../../public/humanoid_maker_logo_black.png';
+
 
 function Footer() {
   return (
@@ -10,7 +10,9 @@ function Footer() {
           Back To Top
         </button>
       </div>
-      <div className="footer-main">
+      <div className="footer-main" style={{ paddingLeft: '45px' }}>
+        
+
         <div className="footer-column">
           <h3>Connect with Us</h3>
           <ul>
@@ -50,7 +52,8 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <img src={Image} alt="Humanoid Maker Logo" className="footer-logo" />
+        <img src="/humanoid_maker_logo_black.jpg" alt="Humanoid Maker Logo" className="footer-logo" />
+
       <div className="copyright">
         <p>&copy; {new Date().getFullYear()} Humanoid Maker. All rights reserved.</p>
       </div>

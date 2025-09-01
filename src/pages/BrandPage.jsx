@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import DetailPage from "./Detail";
 import { Link } from 'react-router-dom';
 
-
 function BrandPage() {
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);

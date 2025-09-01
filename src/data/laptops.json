@@ -49,12 +49,12 @@
     }
   },
   {
-    "_id": "3",
-    "brand": "ASUS",
-    "model": "ASUS Vivobook 15",
+    "_id": "68b29870ca9026c9cf7a7838",
+    "brand": "DELL",
+    "description": "Dell XPS 14 9440 Thin & Light Laptop, AI Enabled Processor Intel Core Ultra 7 155H, 16GB + 1TB SSD, 14.5 (36.83cm) 3.2K OLED Touch,Backlit KB + FPR, Win 11 + MSO'24 & 15 Month McAfee, Platinum,1.68kg",
     "price": 45990,
     "image_url": [
-      "https://m.media-amazon.com/images/I/71S8U9VzLTL._SX679_.jpg"
+      "https://m.media-amazon.com/images/I/81+cm2567YL._SX679_.jpg"
     ],
     "specs": {
       "cpu": "Intel Core i3-1215U",
@@ -65,12 +65,12 @@
     }
   },
   {
-    "_id": "4",
+    "_id": "68b29870ca9026c9cf7a783f",
     "brand": "Dell",
-    "model": "Dell Inspiron 14",
+    "description":  "Dell Inspiron 14 7440, Intel Core i5-1334U, 16GB RAM, 512GB SSD, FHD+ Touch, 14/35.56cm, Windows 11, Ice Blue, 1.71KG, 2-in-1, Ideal for Students, Perfect for Learning and Productivity Laptop",
     "price": 56990,
     "image_url": [
-      "https://m.media-amazon.com/images/I/71z8sZ+P7cL._SX679_.jpg"
+      "https://m.media-amazon.com/images/I/71LV+7jT9fL._SX679_.jpg"
     ],
     "specs": {
       "cpu": "Intel Core i5-1335U",
@@ -81,12 +81,12 @@
     }
   },
   {
-    "_id": "5",
-    "brand": "Acer",
-    "model": "Acer Aspire Lite",
+    "_id": "68b29870ca9026c9cf7a7845",
+    "brand": "DELL",
+    "description":"DELL Wyse 5470 (2025) Intel Celeron Quad Core N4100 - (8 GB/256 GB SSD/16 GB EMMC Storage/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0 HD Display/Black/1.4 kg/MSO 2021",
     "price": 39990,
     "image_url": [
-      "https://m.media-amazon.com/images/I/71sPKpK+qFL._SX679_.jpg"
+      "https://m.media-amazon.com/images/I/61hbmIzMC3L._SX679_.jpg"
     ],
     "specs": {
       "cpu": "AMD Ryzen 5 5500U",

@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import laptops from "../data/laptops";
 import "../pages/Detail.css";
+import { MdModeFanOff } from "react-icons/md";
 
 const Detail = () => {
   const { id } = useParams();
@@ -51,32 +52,48 @@ const Detail = () => {
         )}
       </div>
 
-      {/* Right: Zoomed Image */}
-{showLens && (
-  <div
-    className="zoom-result"
-    style={{
-      backgroundImage: `url(${laptop.image_url[0]})`,
-      backgroundPosition: backgroundPosition,
-      backgroundSize: "300%", // Adjust zoom level
-    }}
-  ></div>
-)}
-
-
-      {/* Product Info */}
-      <div className="detail-right">
-        <h1>{laptop.model}</h1>
-        <p className="desc">{laptop.description}</p>
-        <p className="dell">
-          <a href="https://www.dell.com/en-in/shop">Visit The Dell Store</a>
-        </p>
-        <p><b>Brand:</b> {laptop.brand}</p>
-        <p><b>Price:</b> ₹{laptop.price}</p>
-        <button className="btn-buy">Buy Now</button>
-      </div>
+      {/* Right: Zoom box OR Product Info */}
+      {showLens ? (
+        <div
+          className="zoom-result"
+          style={{
+            backgroundImage: `url(${laptop.image_url[0]})`,
+            backgroundPosition: backgroundPosition,
+            backgroundSize: "150%", // zoom level
+          }}
+        ></div>
+      ) : (
+        <div className="detail-right">
+          <h1>{laptop.model}</h1>
+          <p className="desc">{laptop.description}</p>
+        
+          <p className="dell">
+            <a href="https://www.dell.com/en-in/shop">Visit The Dell Store</a>
+          </p>
+            <p className="rating"><b>4.0:</b>
+            <i class="fa-solid fa-star"></i>
+             <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+          </p>
+          <p>
+            <b>Brand:{laptop.brand}</b> 
+          </p>
+          <p>
+            <b>Price:₹{laptop.price}</b> 
+            {laptop.original_price && (
+              <span style={{ textDecoration: "line-through", marginLeft: "5px", color:"grey" }}>
+                ₹{laptop.original_price}
+              </span>
+            )}
+            <b style={{color:"darkgreen"}}> {laptop.discount} </b>
+          </p>
+        
+          <button className="btn-buy">Buy Now</button>
+        </div>
+      )}
     </div>
-  );
+  );           
 };
 
 export default Detail;

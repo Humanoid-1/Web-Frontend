@@ -1,7 +1,8 @@
 [
   {
     "_id": "68b29870ca9026c9cf7a7821",
-    "price":"37,990 (M.R.P)",
+    "price":"37,990",
+    "discount": "45% off",
     "brand": "Dell",
    "description": "Dell Inspiron 3530 13th Gen Laptop, Intel Core i3-1305U, 8GB, 512GB SSD, 15.6 (39.62cm) FHD AG 120Hz 250 nits Display, Windows 11 + MSO'21 & McAfee 15 Month, Platinum Silver, Thin & Light- 1.62kg",
     "image_url": [
@@ -20,7 +21,8 @@
     "_id": "68b29870ca9026c9cf7a7830",
     "brand": "Dell",
     "description" :"Dell New 15 Laptop, 15.6- Inches FHD 120Hz 250 Nits, AMD Ryzen R7-7730U, 16GB DDR4, 512 SSD, AMD Radeon Graphics, Standard Keyboard, Win 11+Office H&S 2024, Platinum Silver, Thin & Light- 1.63 Kg",
-    "price": "48,845(M.R.P)",
+    "price": "48,845",
+    "discount": "35% off",
     "image_url": [
       "https://m.media-amazon.com/images/I/41gAoiyUZRL._SX300_SY300_QL70_FMwebp_.jpg"
     ],
@@ -37,6 +39,8 @@
     "brand": "DELL",
     "description":  "Dell 15 Thin & Light Laptop, 13th Generation Intel Core i3-1305U Processor, 8GB DDR4 + 512GB SSD, 15.6 (39.62cm) FHD 120Hz 250 nits Display, Windows 11 + MSO'21, 12 Month McAfee, Grey, 1.69kg",
     "price": 52990,
+    "discount": "20% off",
+    "original_price": 65990,
     "image_url": [
       "https://m.media-amazon.com/images/I/614TqOFmRtL._SY450_.jpg"
     ],

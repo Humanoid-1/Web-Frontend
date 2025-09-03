@@ -1,48 +1,90 @@
-
 import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 function BrandPage() {
+  const { brand: brandParam } = useParams(); // get brand from URL
+  const navigate = useNavigate();
+
+  const [brand, setBrand] = useState(brandParam || "Dell");
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [brand, setBrand] = useState("Dell"); // Default brand
+   const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+     const itemsPerPage = 12;
 
+  const brands = [
+    "Dell", "HP", "Lenovo", "Asus", "Acer", "Apple", "MSI", "Samsung",
+    "Microsoft", "Sony", "Google", "LG", "Huawei"
+  ];
+
+  // Update brand if URL changes
   useEffect(() => {
-    const fetchLaptops = async () => {
+    if (brandParam) setBrand(brandParam);
+  }, [brandParam]);
+
+  // Fetch laptops whenever brand changes
+  useEffect(() => {
+    const fetchLaptops = async (page = 1) => {
       setLoading(true);
       setError(null);
       // try {
         const response = await fetch(
-          `http://localhost:5000/api/getLaptopsByBrand/${brand}`
+          `http://localhost:5000/api/getLaptopsByBrand/${brand}?page=${page}&limit=${itemsPerPage}`,
+          { cache: "no-store" }
         );
         const data = await response.json();
         setLaptops(Array.isArray(data.data) ? data.data : []);
+           setTotalPages(data.totalPages || 1);
       // } catch (err) {
       //   setError(err.message || "Error fetching laptops");
       //   setLaptops([]);
       // } finally {
-        // }
+        // // }
           setLoading(false);
     };
+    fetchLaptops(currentPage);
+  }, [brand,currentPage]);
+   useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [currentPage]);
+  
+    if (loading)
+      return <p style={{ textAlign: "center", marginTop: "40px" }}>Loading...</p>;
+    if (error)
+      return (
+        <p style={{ textAlign: "center", marginTop: "40px", color: "red" }}>
+          {error}
+        </p>
+      );
 
-    fetchLaptops();
-  }, [brand]);
+  // Pagination logic
+  const getPageNumbers = () => {
+    const pages = [];
+    const delta = 2; // Show current ±2 pages
+    let left = Math.max(2, currentPage - delta);
+    let right = Math.min(totalPages - 1, currentPage + delta);
 
-  const brands = [
-    "Dell",
-    "HP",
-    "Lenovo",
-    "Asus",
-    "Acer",
-    "Apple",
-    "MSI",
-    "Samsung",
-    "Microsoft",
-    "Sony",
-    "Google",
-    "LG",
-    "Huawei",
-  ];
+    // Always show first page
+    pages.push(1);
+
+    if (left > 2) pages.push("left-ellipsis");
+
+    for (let i = left; i <= right; i++) pages.push(i);
+
+    if (right < totalPages - 1) pages.push("right-ellipsis");
+
+    if (totalPages > 1) pages.push(totalPages);
+
+    return pages;
+  };
+
+
+  // Handle brand button click
+  const handleBrandClick = (b) => {
+    setBrand(b);
+    navigate(`/brand/${b}`); // update URL
+  };
 
   return (
     <div className="brand-page">
@@ -133,7 +175,7 @@ function BrandPage() {
           margin: 12px 0;
           font-size: 1.3rem;
           font-weight: 700;
-          color: fff;
+          color: #000;
         }
         .laptop-specs {
           font-size: 0.9rem;
@@ -163,13 +205,10 @@ function BrandPage() {
           box-shadow: 0 6px 18px rgba(40,167,69,0.25);
           transform: translateY(-2px);
         }
-
-        /* Animation */
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px) scale(0.95); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
-
         @media (max-width: 600px) {
           .brand-title { font-size: 1.7rem; }
           .laptop-card { padding: 14px; }
@@ -177,14 +216,14 @@ function BrandPage() {
         }
       `}</style>
 
-      <h1 className="brand-title"> Laptops by Brand</h1>
+      <h1 className="brand-title">Laptops by Brand</h1>
 
-      {/* Brand Filter Buttons */}
+      {/* Brand Buttons */}
       <div className="brand-buttons">
         {brands.map((b) => (
           <button
             key={b}
-            onClick={() => setBrand(b)}
+            onClick={() => handleBrandClick(b)}
             className={`brand-btn${brand === b ? " selected" : ""}`}
           >
             {b}
@@ -193,14 +232,8 @@ function BrandPage() {
       </div>
 
       {/* Loading / Error */}
-      {loading && (
-        <p style={{ textAlign: "center", fontSize: "1.1rem" }}>⏳ Loading...</p>
-      )}
-      {error && (
-        <p style={{ color: "#d90429", textAlign: "center", fontWeight: "bold" }}>
-          {error}
-        </p>
-      )}
+      {loading && <p style={{ textAlign: "center", fontSize: "1.1rem" }}>⏳ Loading...</p>}
+      {error && <p style={{ color: "#d90429", textAlign: "center", fontWeight: "bold" }}>{error}</p>}
       {!loading && laptops.length === 0 && (
         <p style={{ textAlign: "center", fontSize: "1.1rem" }}>
           No laptops found for <b>{brand}</b>.
@@ -210,42 +243,96 @@ function BrandPage() {
       {/* Laptop Grid */}
       <div className="laptop-grid">
         {laptops.map((laptop, index) => (
-          console.log(laptop),
           <div
-            key={laptop._id}
+            key={laptop._id || index}
             className="laptop-card"
-            style={{ animationDelay: `${index * 0.1}s` }} // staggered animation
+            style={{ animationDelay: `${index * 0.1}s` }}
           >
-            {laptop.image_url && (
-             
+            {laptop.image_url?.length > 0 && (
               <img
                 src={laptop.image_url[0]}
                 alt={laptop.model}
                 className="laptop-img"
               />
             )}
-
             <h3 className="laptop-title">{laptop.model}</h3>
             <p className="laptop-brand">
               Brand: <b>{laptop.brand}</b>
             </p>
-
             <p className="laptop-price">₹{laptop.price}</p>
-
             <div className="laptop-specs">
-              <p><b>CPU:</b> {laptop.CPU}</p>
-              <p><b>RAM:</b> {laptop.RAM}</p>
-              <p><b>Storage:</b> {laptop.Storage}</p>
-  
+              <p><b>CPU:</b> {laptop.cpu}</p>
+              <p><b>RAM:</b> {laptop.ram}</p>
+              <p><b>Storage:</b> {laptop.storage}</p>
+              
             </div>
-
             <button className="details-btn">See Details</button>
           </div>
         ))}
       </div>
-   
+       {/* Pagination */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "30px",
+          gap: "6px",
+          flexWrap: "wrap",
+        }}
+      >
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          style={{
+            padding: "6px 12px",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            background: currentPage === 1 ? "#eee" : "white",
+            cursor: currentPage === 1 ? "not-allowed" : "pointer",
+          }}
+        >
+          Prev
+        </button>
+
+        {getPageNumbers().map((page, index) =>
+          page === "left-ellipsis" || page === "right-ellipsis" ? (
+            <span key={index} style={{ padding: "6px 12px" }}>
+              ...
+            </span>
+          ) : (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(page)}
+              style={{
+                padding: "6px 12px",
+                border: "1px solid #ccc",
+                borderRadius: "6px",
+                background: currentPage === page ? "#007BFF" : "white",
+                color: currentPage === page ? "white" : "black",
+                cursor: "pointer",
+              }}
+            >
+              {page}
+            </button>
+          )
+        )}
+
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          style={{
+            padding: "6px 12px",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            background: currentPage === totalPages ? "#eee" : "white",
+            cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
 
-export default BrandPage; 
+export default BrandPage;

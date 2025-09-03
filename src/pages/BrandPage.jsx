@@ -1,52 +1,48 @@
+
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 
 function BrandPage() {
-  const { brand: brandParam } = useParams(); // get brand from URL
-  const navigate = useNavigate();
-
-  const [brand, setBrand] = useState(brandParam || "Dell");
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [brand, setBrand] = useState("Dell"); // Default brand
 
-  const brands = [
-    "Dell", "HP", "Lenovo", "Asus", "Acer", "Apple", "MSI", "Samsung",
-    "Microsoft", "Sony", "Google", "LG", "Huawei"
-  ];
-
-  // Update brand if URL changes
-  useEffect(() => {
-    if (brandParam) setBrand(brandParam);
-  }, [brandParam]);
-
-  // Fetch laptops whenever brand changes
   useEffect(() => {
     const fetchLaptops = async () => {
       setLoading(true);
       setError(null);
-      try {
+      // try {
         const response = await fetch(
-          `http://localhost:5000/api/getLaptopsByBrand/${brand}`,
-          { cache: "no-store" }
+          `http://localhost:5000/api/getLaptopsByBrand/${brand}`
         );
         const data = await response.json();
         setLaptops(Array.isArray(data.data) ? data.data : []);
-      } catch (err) {
-        setError(err.message || "Error fetching laptops");
-        setLaptops([]);
-      } finally {
-        setLoading(false);
-      }
+      // } catch (err) {
+      //   setError(err.message || "Error fetching laptops");
+      //   setLaptops([]);
+      // } finally {
+        // }
+          setLoading(false);
     };
+
     fetchLaptops();
   }, [brand]);
 
-  // Handle brand button click
-  const handleBrandClick = (b) => {
-    setBrand(b);
-    navigate(`/brand/${b}`); // update URL
-  };
+  const brands = [
+    "Dell",
+    "HP",
+    "Lenovo",
+    "Asus",
+    "Acer",
+    "Apple",
+    "MSI",
+    "Samsung",
+    "Microsoft",
+    "Sony",
+    "Google",
+    "LG",
+    "Huawei",
+  ];
 
   return (
     <div className="brand-page">
@@ -137,7 +133,7 @@ function BrandPage() {
           margin: 12px 0;
           font-size: 1.3rem;
           font-weight: 700;
-          color: #000;
+          color: fff;
         }
         .laptop-specs {
           font-size: 0.9rem;
@@ -167,10 +163,13 @@ function BrandPage() {
           box-shadow: 0 6px 18px rgba(40,167,69,0.25);
           transform: translateY(-2px);
         }
+
+        /* Animation */
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px) scale(0.95); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
+
         @media (max-width: 600px) {
           .brand-title { font-size: 1.7rem; }
           .laptop-card { padding: 14px; }
@@ -178,14 +177,14 @@ function BrandPage() {
         }
       `}</style>
 
-      <h1 className="brand-title">Laptops by Brand</h1>
+      <h1 className="brand-title"> Laptops by Brand</h1>
 
-      {/* Brand Buttons */}
+      {/* Brand Filter Buttons */}
       <div className="brand-buttons">
         {brands.map((b) => (
           <button
             key={b}
-            onClick={() => handleBrandClick(b)}
+            onClick={() => setBrand(b)}
             className={`brand-btn${brand === b ? " selected" : ""}`}
           >
             {b}
@@ -194,8 +193,14 @@ function BrandPage() {
       </div>
 
       {/* Loading / Error */}
-      {loading && <p style={{ textAlign: "center", fontSize: "1.1rem" }}>⏳ Loading...</p>}
-      {error && <p style={{ color: "#d90429", textAlign: "center", fontWeight: "bold" }}>{error}</p>}
+      {loading && (
+        <p style={{ textAlign: "center", fontSize: "1.1rem" }}>⏳ Loading...</p>
+      )}
+      {error && (
+        <p style={{ color: "#d90429", textAlign: "center", fontWeight: "bold" }}>
+          {error}
+        </p>
+      )}
       {!loading && laptops.length === 0 && (
         <p style={{ textAlign: "center", fontSize: "1.1rem" }}>
           No laptops found for <b>{brand}</b>.
@@ -205,34 +210,42 @@ function BrandPage() {
       {/* Laptop Grid */}
       <div className="laptop-grid">
         {laptops.map((laptop, index) => (
+          console.log(laptop),
           <div
-            key={laptop._id || index}
+            key={laptop._id}
             className="laptop-card"
-            style={{ animationDelay: `${index * 0.1}s` }}
+            style={{ animationDelay: `${index * 0.1}s` }} // staggered animation
           >
-            {laptop.image_url?.length > 0 && (
+            {laptop.image_url && (
+             
               <img
                 src={laptop.image_url[0]}
                 alt={laptop.model}
                 className="laptop-img"
               />
             )}
+
             <h3 className="laptop-title">{laptop.model}</h3>
             <p className="laptop-brand">
               Brand: <b>{laptop.brand}</b>
             </p>
+
             <p className="laptop-price">₹{laptop.price}</p>
+
             <div className="laptop-specs">
               <p><b>CPU:</b> {laptop.CPU}</p>
               <p><b>RAM:</b> {laptop.RAM}</p>
               <p><b>Storage:</b> {laptop.Storage}</p>
+  
             </div>
+
             <button className="details-btn">See Details</button>
           </div>
         ))}
       </div>
+   
     </div>
   );
 }
 
-export default BrandPage;
+export default BrandPage; 

@@ -6,7 +6,7 @@ function BrandPage() {
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [brand, setBrand] = useState(null); // Default brand
+  const [brand, setBrand] = useState("Dell"); // Default brand
   
   // ✅ Pagination states
   const [currentPage, setCurrentPage] = useState(1);

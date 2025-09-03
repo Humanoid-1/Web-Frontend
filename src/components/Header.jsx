@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../public/humanoid_maker_logo_white-Photoroom.png";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes, FaUser, FaShoppingCart } from "react-icons/fa";
 
 // Styled Components
@@ -23,7 +23,7 @@ const Nav = styled.nav`
   }
 `;
 
-const Logo  = styled.img`
+const Logo = styled.img`
   height: 50px;
   width: auto;
   cursor: pointer;
@@ -115,9 +115,9 @@ const NavItem = styled(NavLink)`
 
   &.active {
     color: #3498db;
-    
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -5px;
       left: 0;
@@ -143,7 +143,7 @@ const MobileMenuButton = styled.div`
 const SideMenu = styled.div`
   position: fixed;
   top: 0;
-  left: ${props => (props.open ? '0' : '-100%')};
+  left: ${(props) => (props.open ? "0" : "-100%")};
   width: 280px;
   height: 100vh;
   background-color: #ffffff;
@@ -192,7 +192,7 @@ const Overlay = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1050;
-  display: ${props => (props.$show ? 'block' : 'none')};
+  display: ${(props) => (props.$show ? "block" : "none")};
 `;
 
 const IconsContainer = styled.div`
@@ -234,20 +234,46 @@ const IconButton = styled.div`
   }
 `;
 
+// New Styled Component for Search Button
+const SearchButton = styled.button`
+  background: #3498db;
+  border: none;
+  outline: none;
+  padding: 10px 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #2980b9;
+  }
+
+  svg {
+    color: #fff;
+    font-size: 18px;
+  }
+`;
+
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartItems] = useState(0); 
+  const [cartItems] = useState(0);
 
   return (
     <>
       <Nav>
-        <LogoWrapper  to="/">
-        <Logo src={logo} alt="Company Logo" />
-        </LogoWrapper >
-        
+        <LogoWrapper to="/">
+          <Logo src={logo} alt="Company Logo" />
+        </LogoWrapper>
+
         <SearchContainer>
-          <SearchIcon />
+          
           <SearchInput type="text" placeholder="Search products..." />
+          <SearchButton>
+            <IoIosSearch />
+          </SearchButton>
         </SearchContainer>
 
         <NavLinks>
@@ -272,7 +298,6 @@ function Header() {
         </MobileMenuButton>
       </Nav>
 
-      
       <SideMenu open={menuOpen}>
         <CloseButton onClick={() => setMenuOpen(false)}>
           <FaTimes />

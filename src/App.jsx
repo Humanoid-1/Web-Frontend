@@ -9,6 +9,7 @@ import BrandPage from "./pages/BrandPage";
 import Accessories from "./pages/Accessories";
 import Footer from "./components/Footer";
 import LaptopDetail from "./pages/Detail";
+import PartsPage from "./pages/PartsPage";
 
 
 function App() {
@@ -23,8 +24,8 @@ function App() {
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/brand/:brandName" element={<BrandPage/>} />
         <Route path="/accessories" element={<Accessories/>} />
+        <Route path="/parts" element={<PartsPage/>} />
         <Route path="/Detail/:id" element={<LaptopDetail/>} />
-
       </Routes>
       <Footer />
     </div>

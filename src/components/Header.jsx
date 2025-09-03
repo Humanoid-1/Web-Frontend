@@ -23,10 +23,24 @@ const Nav = styled.nav`
   }
 `;
 
-const Logo = styled.img`
+const Logo  = styled.img`
   height: 50px;
   width: auto;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    height: 40px;
+  }
+`;
+
+const LogoWrapper = styled(NavLink)`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    order: 2; /* Second in mobile */
+    margin: 0 auto;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -48,8 +62,9 @@ const SearchContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 70%;
+    width: 68%;
     margin: 0 10px;
+    order: 3;
   }
 `;
 
@@ -115,12 +130,13 @@ const NavItem = styled(NavLink)`
 
 const MobileMenuButton = styled.div`
   display: none;
-  font-size: 24px;
+  font-size: 30px;
   color: #34495e;
   cursor: pointer;
 
   @media (max-width: 768px) {
     display: block;
+    order: 1;
   }
 `;
 
@@ -225,9 +241,9 @@ function Header() {
   return (
     <>
       <Nav>
-        <NavLink to="/">
+        <LogoWrapper  to="/">
         <Logo src={logo} alt="Company Logo" />
-        </NavLink>
+        </LogoWrapper >
         
         <SearchContainer>
           <SearchIcon />

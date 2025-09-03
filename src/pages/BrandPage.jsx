@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import DetailPage from "./Detail";
+import { Link } from 'react-router-dom';
 
 function BrandPage() {
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [brand, setBrand] = useState(null); // Default brand
-  console.log(brand);
   
   // ✅ Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -176,7 +177,8 @@ function BrandPage() {
           padding: 10px 14px;
           margin-bottom: 10px;
         }
-        .details-btn {
+        .details-btn{
+          text-align: center;
           margin-top: auto;
           padding: 10px 0;
           border: none;
@@ -276,7 +278,11 @@ function BrandPage() {
               <p><b>Storage:</b> {laptop.Storage}</p>
               <p><b>GPU:</b> {laptop.GPU}</p>
             </div>
-            <button className="details-btn">See Details</button>
+
+          <div className="details-btn">
+            <Link to={`/Detail/${laptop._id}`} style={{ color: '#fff', textDecoration: 'none' }}>View details</Link>
+              
+            </div>          
           </div>
         ))}
       </div>

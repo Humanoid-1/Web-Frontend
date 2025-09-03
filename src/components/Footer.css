@@ -11,6 +11,7 @@
 }
 
 .footer-main{
+  
   background-color: rgb(45, 42, 42);
   color: rgb(242, 230, 230);
   padding: 1rem;
@@ -87,4 +88,13 @@ li a{
   justify-content: center;
   padding: 1rem;
   
+}
+
+.footer-logo {
+  height: 40px;
+  margin-top: -8px;
+}
+
+.footer-main, .footer-bottom {
+  transition: all 0.3s ease-in-out;
 }

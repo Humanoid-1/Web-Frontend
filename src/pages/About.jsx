@@ -1,5 +1,6 @@
 import React from "react";
 import "./AboutPage.css";
+import { Link } from "react-router-dom";
 
 
 export default function AboutPage() {
@@ -78,7 +79,7 @@ export default function AboutPage() {
             </ul>
 <br />
             <div className="aside-button">
-              <a href="/ContactUs">Contact Sales</a>
+              <Link to="/ContactUs">Contact Sales</Link> 
             </div>
 
             <div className="aside-note">

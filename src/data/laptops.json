@@ -1,0 +1,103 @@
+[
+  {
+    "_id": "68b29870ca9026c9cf7a7821",
+    "price":"37,990",
+    "discount": "45% off",
+    "brand": "Dell",
+   "description": "Dell Inspiron 3530 13th Gen Laptop, Intel Core i3-1305U, 8GB, 512GB SSD, 15.6 (39.62cm) FHD AG 120Hz 250 nits Display, Windows 11 + MSO'21 & McAfee 15 Month, Platinum Silver, Thin & Light- 1.62kg",
+    "image_url": [
+      "https://m.media-amazon.com/images/I/61ooBHpaluL._SY450_.jpg"
+    ],
+    "specs": {
+      "cpu": "Intel Core i5",
+      "ram": "8GB",
+      "storage": "512GB SSD",
+      "gpu": "Intel Iris Xe Graphics",
+      "display": "15.6 inch FHD"
+    }
+  },
+
+  {
+    "_id": "68b29870ca9026c9cf7a7830",
+    "brand": "Dell",
+    "description" :"Dell New 15 Laptop, 15.6- Inches FHD 120Hz 250 Nits, AMD Ryzen R7-7730U, 16GB DDR4, 512 SSD, AMD Radeon Graphics, Standard Keyboard, Win 11+Office H&S 2024, Platinum Silver, Thin & Light- 1.63 Kg",
+    "price": "48,845",
+    "discount": "35% off",
+    "image_url": [
+      "https://m.media-amazon.com/images/I/41gAoiyUZRL._SX300_SY300_QL70_FMwebp_.jpg"
+    ],
+    "specs": {
+      "cpu": "Intel Core i5-12450H",
+      "ram": "16GB DDR4",
+      "storage": "512GB SSD",
+      "gpu": "Intel Iris Xe Graphics",
+      "display": "15.6 inch FHD"
+    }
+  },
+  {
+    "_id": "68b29870ca9026c9cf7a7836",
+    "brand": "DELL",
+    "description":  "Dell 15 Thin & Light Laptop, 13th Generation Intel Core i3-1305U Processor, 8GB DDR4 + 512GB SSD, 15.6 (39.62cm) FHD 120Hz 250 nits Display, Windows 11 + MSO'21, 12 Month McAfee, Grey, 1.69kg",
+    "price": 52990,
+    "discount": "20% off",
+    "original_price": 65990,
+    "image_url": [
+      "https://m.media-amazon.com/images/I/614TqOFmRtL._SY450_.jpg"
+    ],
+    "specs": {
+      "cpu": "Intel Core i5-1235U",
+      "ram": "16GB DDR4",
+      "storage": "512GB SSD",
+      "gpu": "Intel Iris Xe Graphics",
+      "display": "15.6 inch FHD"
+    }
+  },
+  {
+    "_id": "68b29870ca9026c9cf7a7838",
+    "brand": "DELL",
+    "description": "Dell XPS 14 9440 Thin & Light Laptop, AI Enabled Processor Intel Core Ultra 7 155H, 16GB + 1TB SSD, 14.5 (36.83cm) 3.2K OLED Touch,Backlit KB + FPR, Win 11 + MSO'24 & 15 Month McAfee, Platinum,1.68kg",
+    "price": 45990,
+    "image_url": [
+      "https://m.media-amazon.com/images/I/81+cm2567YL._SX679_.jpg"
+    ],
+    "specs": {
+      "cpu": "Intel Core i3-1215U",
+      "ram": "8GB DDR4",
+      "storage": "512GB SSD",
+      "gpu": "Intel UHD Graphics",
+      "display": "15.6 inch FHD"
+    }
+  },
+  {
+    "_id": "68b29870ca9026c9cf7a783f",
+    "brand": "Dell",
+    "description":  "Dell Inspiron 14 7440, Intel Core i5-1334U, 16GB RAM, 512GB SSD, FHD+ Touch, 14/35.56cm, Windows 11, Ice Blue, 1.71KG, 2-in-1, Ideal for Students, Perfect for Learning and Productivity Laptop",
+    "price": 56990,
+    "image_url": [
+      "https://m.media-amazon.com/images/I/71LV+7jT9fL._SX679_.jpg"
+    ],
+    "specs": {
+      "cpu": "Intel Core i5-1335U",
+      "ram": "16GB DDR4",
+      "storage": "512GB SSD",
+      "gpu": "Intel Iris Xe Graphics",
+      "display": "14 inch FHD"
+    }
+  },
+  {
+    "_id": "68b29870ca9026c9cf7a7845",
+    "brand": "DELL",
+    "description":"DELL Wyse 5470 (2025) Intel Celeron Quad Core N4100 - (8 GB/256 GB SSD/16 GB EMMC Storage/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0 HD Display/Black/1.4 kg/MSO 2021",
+    "price": 39990,
+    "image_url": [
+      "https://m.media-amazon.com/images/I/61hbmIzMC3L._SX679_.jpg"
+    ],
+    "specs": {
+      "cpu": "AMD Ryzen 5 5500U",
+      "ram": "8GB DDR4",
+      "storage": "512GB SSD",
+      "gpu": "AMD Radeon Graphics",
+      "display": "15.6 inch FHD"
+    }
+  }
+]

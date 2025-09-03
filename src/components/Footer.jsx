@@ -1,5 +1,7 @@
 import './Footer.css';
 import { Link } from 'react-router-dom';
+import logo from "../../public/humanoid_maker_logo_white-Photoroom.png";
+
 
 function Footer() {
   return (
@@ -9,7 +11,9 @@ function Footer() {
           Back To Top
         </button>
       </div>
-      <div className="footer-main">
+      <div className="footer-main" style={{ paddingLeft: '45px' }}>
+        
+
         <div className="footer-column">
           <h3>Connect with Us</h3>
           <ul>
@@ -22,9 +26,8 @@ function Footer() {
           <h3>Get to Know Us</h3>
           <ul>
             <li><Link to="/About">About humanoid maker</Link></li>
-            <li><Link to="/ContactUs">ContactUs</Link></li>
+            <li><Link to="/ContactUs">Help</Link></li>
             <li>Recalls and Product Safety Alerts</li>
-            <li>100% Purchase Protection</li>
             <li>Privacy Policy</li>
             <li>Terms of Use</li>
           </ul>
@@ -36,7 +39,6 @@ function Footer() {
             <li>Join the Humanoid Partner Program</li>
             <li>Become a Reseller</li>
             <li>Advertise with Humanoid</li>
-            <li>Refer & Earn</li>
           </ul>
         </div>
         <div className="footer-column">
@@ -46,13 +48,13 @@ function Footer() {
             <li>Returns Centre</li>
             <li>Recalls and Product Safety Alerts</li>
             <li>100% Purchase Protection</li>
-            <li>Help</li>
             <li>Payment Options</li>
           </ul>
         </div>
       </div>
       <div className="footer-bottom">
-        <img src="/humanoid_maker_logo_black.png" style={{height:"40px",marginTop:"-8px"}} alt="Humanoid Maker Logo" />
+        <img src={logo} alt="Humanoid Maker Logo" className="footer-logo" />
+
       <div className="copyright">
         <p>&copy; {new Date().getFullYear()} Humanoid Maker. All rights reserved.</p>
       </div>

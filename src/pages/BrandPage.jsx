@@ -4,8 +4,9 @@ function BrandPage() {
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [brand, setBrand] = useState("Dell"); // Default brand
-
+  const [brand, setBrand] = useState(null); // Default brand
+  console.log(brand);
+  
   // ✅ Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12; // ek page me kitne laptops dikhane hain
@@ -19,7 +20,7 @@ function BrandPage() {
           `http://localhost:5000/api/getLaptopsByBrand/${brand}`
         );
         const data = await response.json();
-        setLaptops(Array.isArray(data) ? data : []);
+        setLaptops(Array.isArray(data.data) ? data.data : []);
         setCurrentPage(1); // ✅ brand change hone par hamesha first page pe le aao
       } catch (err) {
         setError(err.message || "Error fetching laptops");
@@ -45,6 +46,7 @@ function BrandPage() {
     "Sony",
     "LG",
     "Huawei",
+    "Google"
   ];
 
   // ✅ Pagination Logic
@@ -269,10 +271,10 @@ function BrandPage() {
             <p className="laptop-brand">Brand: <b>{laptop.brand}</b></p>
             <p className="laptop-price">₹{laptop.price}</p>
             <div className="laptop-specs">
-              <p><b>CPU:</b> {laptop.specs?.cpu}</p>
-              <p><b>RAM:</b> {laptop.specs?.ram}</p>
-              <p><b>Storage:</b> {laptop.specs?.storage}</p>
-              <p><b>GPU:</b> {laptop.specs?.gpu}</p>
+              <p><b>CPU:</b> {laptop.CPU}</p>
+              <p><b>RAM:</b> {laptop.RAM}</p>
+              <p><b>Storage:</b> {laptop.Storage}</p>
+              <p><b>GPU:</b> {laptop.GPU}</p>
             </div>
             <button className="details-btn">See Details</button>
           </div>

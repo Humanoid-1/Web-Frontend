@@ -6,7 +6,11 @@
     "brand": "Dell",
    "description": "Dell Inspiron 3530 13th Gen Laptop, Intel Core i3-1305U, 8GB, 512GB SSD, 15.6 (39.62cm) FHD AG 120Hz 250 nits Display, Windows 11 + MSO'21 & McAfee 15 Month, Platinum Silver, Thin & Light- 1.62kg",
     "image_url": [
-      "https://m.media-amazon.com/images/I/61ooBHpaluL._SY450_.jpg"
+      "https://m.media-amazon.com/images/I/61ooBHpaluL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/51Nl8DoafOL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/71yUwrqQbfL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/51x1PynIiyL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/51PlduUB3bL._SY450_.jpg"
     ],
     "specs": {
       "cpu": "Intel Core i5",
@@ -24,7 +28,12 @@
     "price": "48,845",
     "discount": "35% off",
     "image_url": [
-      "https://m.media-amazon.com/images/I/41gAoiyUZRL._SX300_SY300_QL70_FMwebp_.jpg"
+      "https://m.media-amazon.com/images/I/41gAoiyUZRL._SX300_SY300_QL70_FMwebp_.jpg",
+      "https://m.media-amazon.com/images/I/81BgMKrwjLL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/81yIzqcWrfL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/71WFNcW7xPL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/718Ey9rIQNL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/71mPs3lpYUL._SY450_.jpg"
     ],
     "specs": {
       "cpu": "Intel Core i5-12450H",

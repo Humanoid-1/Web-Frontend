@@ -13,8 +13,10 @@
 }
 
 .detail-img {
-  width: 350px;
-  height: 320px;
+  width: 400px;
+  height: 298px;
+
+  
 
   
   
@@ -64,7 +66,7 @@
 
 @media (max-width: 768px) {
   .detail-page {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
 
@@ -153,4 +155,24 @@
 .rating i{
   color: #ffa41c;
   margin-left: 5px;
+}
+
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 15px;
+}
+
+.thumb-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.thumb-img.active {
+  border: 2px solid #2874f0; /* Flipkart blue */
 }

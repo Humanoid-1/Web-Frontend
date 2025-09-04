@@ -11,6 +11,7 @@ const Detail = () => {
   const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
   const [showLens, setShowLens] = useState(false);
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
+  const [selectedImage, setSelectedImage] = useState(laptop.image_url[0]);
 
   if (!laptop) return <h2>Laptop not found</h2>;
 
@@ -37,7 +38,7 @@ const Detail = () => {
       >
         <img
           ref={imageRef}
-          src={laptop.image_url[0]}
+          src={selectedImage}
           alt={laptop.model}
           className="detail-img"
         />
@@ -51,15 +52,27 @@ const Detail = () => {
           ></div>
         )}
       </div>
+      <div className="thumbnails">
+  {laptop.image_url.map((img, index) => (
+    <img
+      key={index}
+      src={img}
+      alt="thumbnail"
+      className={`thumb-img ${selectedImage === img ? "active" : ""}`}
+      onClick={() => setSelectedImage(img)}
+    />
+  ))}
+</div>
+
 
       {/* Right: Zoom box OR Product Info */}
       {showLens ? (
         <div
           className="zoom-result"
           style={{
-            backgroundImage: `url(${laptop.image_url[0]})`,
+            backgroundImage: `url(${selectedImage})`,
             backgroundPosition: backgroundPosition,
-            backgroundSize: "150%", // zoom level
+            backgroundSize: "350%", // zoom level
           }}
         ></div>
       ) : (
@@ -88,6 +101,8 @@ const Detail = () => {
             )}
             <b style={{color:"darkgreen"}}> {laptop.discount} </b>
           </p>
+
+
         
           <button className="btn-buy">Buy Now</button>
         </div>

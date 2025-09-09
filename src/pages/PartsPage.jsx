@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function AccessoriesPage() {
+function PartsPage() {
   const [accessories, setAccessories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ function AccessoriesPage() {
       setLoading(true);
       // try {
         const res = await fetch(
-          `http://localhost:5000/api/getAccessories?page=${page}&limit=${itemsPerPage}`
+          `http://localhost:5000/api/getParts?page=${page}&limit=${itemsPerPage}`
         );
         const data = await res.json();
 
@@ -24,12 +24,12 @@ function AccessoriesPage() {
         } else {
           setError("Invalid response from server");
         }
-      // } catch (err) {
+      // // } catch (err) {
       //   console.error(err);
       //   setError("Failed to fetch accessories");
       // } finally {
-        // }
-          setLoading(false);
+      // }
+      setLoading(false);
     };
 
     fetchAccessories(currentPage);
@@ -79,7 +79,7 @@ function AccessoriesPage() {
           margin: "30px 0",
         }}
       >
-        Accessories
+        Parts
       </h1>
 
       {/* Accessories Grid */}
@@ -117,7 +117,7 @@ function AccessoriesPage() {
                   overflow: "hidden",
                 }}
               >
-                <img
+                {/* <img
                   src={item.image_url || "https://placekitten.com/300/200"}
                   alt={item.model || item.type}
                   style={{
@@ -129,19 +129,19 @@ function AccessoriesPage() {
                     e.target.onerror = null;
                     e.target.src = "https://placekitten.com/300/200";
                   }}
-                />
+                /> */}
               </div>
 
-              <h1
+              <h2
                 style={{
-                  fontSize: "23px",
+                  fontSize: "18px",
                   fontWeight: "600",
                   marginBottom: "5px",
                   textAlign: "center",
                 }}
               >
-                {item.category || item.type}
-              </h1>
+                {item.model || item.type}
+              </h2>
               <p style={{ color: "#555", margin: "2px 0" }}>Brand: {item.brand}</p>
               <p style={{ color: "#007BFF", fontWeight: "bold", margin: "2px 0" }}>
                 ₹{item.price}
@@ -247,4 +247,4 @@ function AccessoriesPage() {
   );
 }
 
-export default AccessoriesPage;
+export default PartsPage;

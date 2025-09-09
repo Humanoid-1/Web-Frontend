@@ -1,21 +1,34 @@
 import React from "react";
 import "./Home.css";
 import SliderComponent from "../components/SliderComponent";
-import dell from "../../public/Dell.jpg";
-import hp from "../../public/hp.jpg";
-import asur from "../../public/Asus.jpg";
-import lenovo from "../../public/Lenovo.jpg";
-import acer from "../../public/Acer.jpg";
-import msi from "../../public/Msi.jpg";
-import samsung from "../../public/Samsung.jpg";
-import apple from "../../public/Apple.jpg";
-import lg from "../../public/lg.jpg";
-import huawei from "../../public/Huawei.jpg";
-import mouse from "../../public/mouse.jpg";
-import keyboard from "../../public/keyboard.jpg";
-import charger from "../../public/adapter.jpg";
-import pendrive from "../../public/pendrive.jpg";
-import harddisk from "../../public/hard-disk.jpg";
+import dell from "/Dell.jpg";
+import hp from "/hp.jpg";
+import asur from "/Asus.jpg";
+import lenovo from "/Lenovo.jpg";
+import acer from "/Acer.jpg";
+import msi from "/Msi.jpg";
+import samsung from "/Samsung.jpg";
+import apple from "/Apple.jpg";
+import lg from "/lg.jpg";
+import huawei from "/Huawei.jpg";
+import mouse from "/mouse.jpg";
+import keyboard from "/keyboard.jpg";
+import charger from "/adapter.jpg";
+import pendrive from "/pendrive.jpg";
+import harddisk from "/hard-disk.jpg";
+import battery from "/battery.jpg";
+import ram from "/ram.jpg";
+import body from "/body.jpg";
+import keyboardInternal from "/keyboard-internal.jpg";
+import touchpad from "/touchpad.jpg";
+import port from "/port.jpg";
+import hinge from "/hinge.jpg";
+import display from "/display.jpg";
+import speaker from "/speaker.jpg";
+import wifiCard from "/wifi-card.jpg";
+import bluetoothCard from "/bluetooth-card.jpg";
+import powerButton from "/power-button.jpg";
+
 import { Link } from "react-router-dom";         
 const categories = [
   { name: "Dell", image: dell },
@@ -37,7 +50,21 @@ const accessories = [
   { name: "Pendrive", image: pendrive },
   { name: "HardDisk", image: harddisk }
 ];
-
+const parts =[
+  {name:"RAM" ,image:ram},
+  {name:"HardDisk" ,image:harddisk},
+  {name:"Body" ,image:body},
+  {name:"Keyboard" ,image:keyboardInternal},
+  {name:"Battery" ,image:battery},
+  {name:"Touchpad" ,image:touchpad},
+  {name:"Ports" ,image:port},
+  {name:"Hinge",image:hinge}, 
+  {name:"Display",image:display},
+  {name:"Speaker",image:speaker},
+  {name:"Wi-Fi Card",image:wifiCard},
+  {name:"Bluetooth Card",image:bluetoothCard},
+  {name:"Buttons",image:powerButton},
+]
 const Home = () => {
   return (
     <div className="home-wrapper">
@@ -82,6 +109,27 @@ const Home = () => {
                 />
               </div>
               <span className="accessory-name">{accessory.name}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+      {/* parts section  */}
+      <section  className="section-container">
+        <div className="section-header">
+          <h2>Parts</h2>
+          <p>Find the perfect parts for your devices</p>
+        </div>
+        <div className="accessories-grid">
+          {parts.map((part, index) => (
+            <Link to={`/parts/`} className="accessory-card" key={index}>
+              <div className="accessory-image-container">
+                <img
+                  src={part.image}
+                  alt={part.name}
+                  className="accessory-image"
+                />
+              </div>
+              <span className="accessory-name">{part.name}</span>
             </Link>
           ))}
         </div>

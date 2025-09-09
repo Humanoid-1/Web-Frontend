@@ -8,7 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 import BrandPage from "./pages/BrandPage";
 import Accessories from "./pages/Accessories";
 import Footer from "./components/Footer";
-import LaptopDetail from "./pages/Detail";
+import Detail from "./pages/Detail";
+import PartsPage from "./pages/PartsPage";
 
 
 function App() {
@@ -23,8 +24,8 @@ function App() {
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/brand/:brandName" element={<BrandPage/>} />
         <Route path="/accessories" element={<Accessories/>} />
-        <Route path="/Detail/:id" element={<LaptopDetail/>} />
-
+        <Route path="/parts" element={<PartsPage/>} />
+        <Route path="/details/:id" element={<Detail/>} />
       </Routes>
       <Footer />
     </div>

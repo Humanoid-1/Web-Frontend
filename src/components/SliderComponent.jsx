@@ -1,15 +1,11 @@
-
 // src/components/SliderComponent.jsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import asus from "../../public/asus slider.jpg";
-import hp from "../../public/hp-banner.jpg";
-import dell from "../../public/dell slider.jpg";
-import acer from "../../public/acer slider.jpg";
-import lenovo from "../../public/lenevo slider.jpg";
-import apple from "../../public/apple-banner.jpg";  
 
 const SliderComponent = () => {
+    const [slides, setSlides] = useState([]);
+    const sliderRef = useRef(null);
+
     const settings = {
         dots: true,
         infinite: true,
@@ -17,26 +13,30 @@ const SliderComponent = () => {
         autoplay: true,
         autoplaySpeed: 4000,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
     };
 
-    const slides = [
-        { id: 1, image: asus },
-        { id: 2, image: dell },
-        { id: 3, image: hp },
-        { id: 4, image: acer },
-        { id: 5, image: lenovo },
-        { id: 6, image: apple }
-    ];
+    // ✅ API call using fetch
+    useEffect(() => {
+        const fetchSlides = async () => {
+            // try {
+                const res = await fetch("http://localhost:5000/api/slider/");
+                const data = await res.json();
+                setSlides(data);
+            // } catch (err) {
+            //     console.error("Error fetching slides:", err);
+            // }
+        };
+        fetchSlides();
+    }, []);
 
-    // Keyboard navigation
-    const sliderRef = useRef(null);
+    // ✅ Keyboard navigation
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === "ArrowRight") {
-                sliderRef.current.slickNext();
+                sliderRef.current?.slickNext();
             } else if (e.key === "ArrowLeft") {
-                sliderRef.current.slickPrev();
+                sliderRef.current?.slickPrev();
             }
         };
 
@@ -51,7 +51,7 @@ const SliderComponent = () => {
                     width: 100%;
                     max-width: 100%;
                     overflow: hidden;
-                    margin-bottom: 2rem; /* Space between slider and content */
+                    margin-bottom: 2rem;
                 }
 
                 .slide-item {
@@ -61,19 +61,11 @@ const SliderComponent = () => {
                     transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
                 }
 
-                .slick-active .slide-item {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-
                 .slide-image {
                     width: 100%;
                     height: 100%;
                     display: block;
-                }
-
-                .slide-overlay {
-                    position: absolute;
+                    object-fit: cover;
                 }
 
                 .slick-dots {
@@ -88,29 +80,30 @@ const SliderComponent = () => {
                 }
 
                 .slick-dots li.slick-active button:before {
-                    color: #0850afff; /* Active dot color */
+                    color: #0850afff;
                 }
 
                 @media (max-width: 768px) {
                     .slide-item {
-                        height: 190px; /* Adjust height for smaller screens */
+                        height: 190px;
                     }
                     .slick-dots {
-                        display: none !important; /* Hide dots on smaller screens */
+                        display: none !important;
                     }
                 }
             `}</style>
 
-            <Slider ref={sliderRef } {...settings}>
-                {slides.map((slide) => (
-                    <div key={slide.id}>
+            <Slider ref={sliderRef} {...settings}>
+                {slides.map((slide, index) => (
+                    <div key={index}>
                         <div className="slide-item">
-                            <img
-                                src={slide.image}
-                                alt={`Slide ${slide.id}`}
-                                className="slide-image"
-                            />
-                            <div className="slide-overlay"></div>
+                            <a href={slide.link} target="_blank" rel="noopener noreferrer">
+                                <img
+                                    src={slide.imageUrl}
+                                    alt={slide.title || `Slide ${index}`}
+                                    className="slide-image"
+                                />
+                            </a>
                         </div>
                     </div>
                 ))}

@@ -1,6 +1,6 @@
 import './Footer.css';
 import { Link } from 'react-router-dom';
-import logo from "../../public/humanoid_maker_logo_white-Photoroom.png";
+import logo from "../../public/humanoid_maker_logo_black.jpg";
 
 
 function Footer() {

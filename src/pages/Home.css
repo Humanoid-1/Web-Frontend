@@ -15,12 +15,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-decoration: none;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: var(--secondary);
+
 }
 
 .home-wrapper {
@@ -91,7 +93,7 @@ body {
 .brand-image-container,
 .accessory-image-container {
   width: 100%;
-  height: 120px;
+  height: 130px;
   display: flex;
   align-items: center;
   justify-content: center;

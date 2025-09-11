@@ -3,11 +3,11 @@
 import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import asus from "../../public/asus slider.jpg";
-import hp from "../../public/hp-banner.jpg";
-import dell from "../../public/dell slider.jpg";
+import hp from "../../public/hp_slider.png";
+import dell from "../../public/dell slider.png";
 import acer from "../../public/acer slider.jpg";
+import apple from "../../public/apple slider.png";  
 import lenovo from "../../public/lenevo slider.jpg";
-import apple from "../../public/apple-banner.jpg";  
 
 const SliderComponent = () => {
     const settings = {
@@ -22,11 +22,11 @@ const SliderComponent = () => {
 
     const slides = [
         { id: 1, image: asus },
+        { id: 6, image: apple },
         { id: 2, image: dell },
-        { id: 3, image: hp },
         { id: 4, image: acer },
-        { id: 5, image: lenovo },
-        { id: 6, image: apple }
+        { id: 3, image: hp },
+        { id: 5, image: lenovo }
     ];
 
     // Keyboard navigation

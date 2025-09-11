@@ -15,17 +15,15 @@ import PartsPage from "./pages/PartsPage";
 function App() {
   return (
     <div>
-      <Header />
-      
-      
+      <Header />      
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/ContactUs" element={<ContactUs />} />
-        <Route path="/brand/:brandName" element={<BrandPage/>} />
-        <Route path="/accessories" element={<Accessories/>} />
-        <Route path="/parts" element={<PartsPage/>} />
-        <Route path="/Detail/:id" element={<LaptopDetail/>} />
+     <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/brand/:brand" element={<BrandPage />} />
+        <Route path="/accessories" element={<Accessories />} />
+        <Route path="/parts" element={<PartsPage />} />
+        <Route path="/detail/:id" element={<LaptopDetail />} />
       </Routes>
       <Footer />
     </div>

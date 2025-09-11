@@ -131,6 +131,9 @@ function PartsPage() {
                   }}
                 /> */}
               </div>
+              <h1 style={{ fontSize: "24px", fontWeight: "bold", textAlign: "center" }}>
+                {item.category}
+              </h1>
 
               <h2
                 style={{
@@ -142,6 +145,12 @@ function PartsPage() {
               >
                 {item.model || item.type}
               </h2>
+              <h3  style={{
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  marginBottom: "5px",
+                  textAlign: "center",
+                }}>Specs: {item.name}</h3>
               <p style={{ color: "#555", margin: "2px 0" }}>Brand: {item.brand}</p>
               <p style={{ color: "#007BFF", fontWeight: "bold", margin: "2px 0" }}>
                 ₹{item.price}
@@ -248,3 +257,4 @@ function PartsPage() {
 }
 
 export default PartsPage;
+

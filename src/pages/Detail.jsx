@@ -56,13 +56,16 @@ return (
     <div className="detail-info">
       <h3><strong>{laptop.description}</strong></h3>
       
-      <p><strong>Ratings:</strong> {laptop.ratings} ⭐</p>
+      <p><strong>Ratings:</strong>{laptop.ratings } ⭐</p>
       <p><strong>model:</strong> {laptop.model}</p>
+      <p><strong>warranty:</strong> {laptop.warranty}</p>
       <p><strong>Price:</strong> ₹{laptop.price}</p>
+      
       
     </div>
     <div>
       <button className="btn">Buy Now</button>
+      
     </div>
    
   </div>

@@ -22,12 +22,15 @@
   font-size: 1.1rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
-  color: #3b3636;
+  color: #423f3f;
 }
+
+
 
 .detail-info p {
   margin: 0.5rem 0;
   line-height: 1rem;
+  
 }
 
 /* Image */

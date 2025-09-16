@@ -33,16 +33,16 @@ useEffect(() => {
 }, [id]);
 
 
+
   if (loading) return <h2>Loading...</h2>;
   if (!laptop) return <h2>Laptop not found</h2>;
 
   return (
     <div>
-      <h2>{laptop.brand} {laptop.model}</h2>
-      <p>Price: ₹{laptop.price}</p>
-      <p>Ratings: {laptop.ratings} ⭐</p>
-      <p>Storage:{laptop.storage}</p>
-      <img src={selectedImage} alt={laptop.model} width="300" />
+     <Link to={`/details/${laptop._id}`}>
+  {laptop.brand} {laptop.model}
+</Link>
+
     </div>
   );
 };

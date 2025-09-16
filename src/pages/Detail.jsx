@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../pages/Detail.css";
+import axios from "axios";
 import { MdModeFanOff } from "react-icons/md";
 
 const Detail = () => {
@@ -37,14 +38,40 @@ useEffect(() => {
   if (loading) return <h2>Loading...</h2>;
   if (!laptop) return <h2>Laptop not found</h2>;
 
-  return (
-    <div>
-     <Link to={`/details/${laptop._id}`}>
-  {laptop.brand} {laptop.model}
-</Link>
+return (
+   
 
+  <div className="detail-container">
+     
+     
+    <div className="detail-image-container">
+      <img 
+        src={selectedImage} 
+        alt={laptop.model} 
+        className="detail-image" 
+      />
     </div>
-  );
+
+   
+    
+    <div className="detail-info">
+      <h3><strong>{laptop.description}</strong></h3>
+      
+      <p><strong>Ratings:</strong>{laptop.ratings } ⭐</p>
+      <p><strong>model:</strong> {laptop.model}</p>
+      <p><strong>warranty:</strong> {laptop.warranty}</p>
+      <p><strong>Price:</strong> ₹{laptop.price}</p>
+      
+      
+    </div>
+    <div>
+      <button className="btn">Buy Now</button>
+      
+    </div>
+   
+  </div>
+);
+
 };
 
 export default Detail;

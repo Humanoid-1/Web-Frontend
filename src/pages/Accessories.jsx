@@ -1,43 +1,109 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function AccessoriesPage() {
+  // category from URL like /accessories/mouse
+  const { accessories: categoryParam } = useParams();
+  const navigate = useNavigate();
+
+  // UI category (capitalised)
+  const [category, setCategory] = useState(categoryParam || "Mouse");
   const [accessories, setAccessories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 12;
 
-  // Fetch data from API
+  // hardcoded brand for now
+  const brand = "Dell";
+
+  const categories = [
+    "Mouse",
+    "Keyboard",
+    "Charger",
+    "Headphone",
+    "Speaker",
+    "Webcam",
+    "Microphone",
+    "Monitor",
+    "Printer",
+    "Scanner",
+    "USB Drive",
+    "External Hard Drive",
+  ];
+
+  // update category when URL param changes
+
+useEffect(() => {
+  if (categoryParam) {
+    const decoded = decodeURIComponent(categoryParam);
+    setCategory(decoded.charAt(0).toUpperCase() + decoded.slice(1));
+    setCurrentPage(1);
+  } else {
+    // default when no param
+    setCategory("Mouse");
+  }
+}, [categoryParam]);
+
+
+  // fetch accessories whenever category or page changes
   useEffect(() => {
-    const fetchAccessories = async (page = 1) => {
+    const fetchAccessories = async () => {
       setLoading(true);
-      // try {
+      setError(null);
+      try {
+        // lowercase + encode for API
+        const apiCategory = encodeURIComponent(category.toLowerCase());
         const res = await fetch(
-          `http://localhost:5000/api/getAccessories?page=${page}&limit=${itemsPerPage}`
+          `http://localhost:5000/api/getAccessories?brand=${encodeURIComponent(
+            brand
+          )}&category=${apiCategory}&page=${currentPage}&limit=${itemsPerPage}`
         );
         const data = await res.json();
-
         if (data && Array.isArray(data.data)) {
           setAccessories(data.data);
           setTotalPages(data.totalPages || 1);
         } else {
+          setAccessories([]);
           setError("Invalid response from server");
         }
-      // } catch (err) {
-      //   console.error(err);
-      //   setError("Failed to fetch accessories");
-      // } finally {
-        // }
-          setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch accessories");
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchAccessories(currentPage);
-  }, [currentPage]);
+    fetchAccessories();
+  }, [brand, category, currentPage]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
+
+  // category button click
+ const handleCategoryClick = (cat) => {
+  navigate(`/accessories/${encodeURIComponent(cat.toLowerCase())}`);
+};
+
+
+  const getPageNumbers = () => {
+    const pages = [];
+    const delta = 2;
+    let left = Math.max(2, currentPage - delta);
+    let right = Math.min(totalPages - 1, currentPage + delta);
+
+    pages.push(1);
+    if (left > 2) pages.push("left-ellipsis");
+    for (let i = left; i <= right; i++) pages.push(i);
+    if (right < totalPages - 1) pages.push("right-ellipsis");
+    if (totalPages > 1) pages.push(totalPages);
+
+    return pages;
+  };
 
   if (loading)
     return <p style={{ textAlign: "center", marginTop: "40px" }}>Loading...</p>;
@@ -48,39 +114,49 @@ function AccessoriesPage() {
       </p>
     );
 
-  // Pagination logic
-  const getPageNumbers = () => {
-    const pages = [];
-    const delta = 2; // Show current ±2 pages
-    let left = Math.max(2, currentPage - delta);
-    let right = Math.min(totalPages - 1, currentPage + delta);
-
-    // Always show first page
-    pages.push(1);
-
-    if (left > 2) pages.push("left-ellipsis");
-
-    for (let i = left; i <= right; i++) pages.push(i);
-
-    if (right < totalPages - 1) pages.push("right-ellipsis");
-
-    if (totalPages > 1) pages.push(totalPages);
-
-    return pages;
-  };
-
   return (
     <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px" }}>
       <h1
         style={{
-          fontSize: "28px",
-          fontWeight: "bold",
+          marginBottom: "32px",
+          fontSize: "2.5rem",
+          fontWeight: "700",
+          color: "#22223b",
           textAlign: "center",
-          margin: "30px 0",
         }}
       >
         Accessories
       </h1>
+
+      {/* Category buttons */}
+      <div
+        style={{
+          marginBottom: 32,
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 14,
+          justifyContent: "center",
+        }}
+      >
+        {categories.map((c) => (
+          <button
+            key={c}
+            onClick={() => handleCategoryClick(c)}
+            className={`brand-btn${category === c ? " selected" : ""}`}
+            style={{
+              padding: "10px 22px",
+              border: "none",
+              borderRadius: "20px",
+              background: category === c ? "#007BFF" : "#f0f0f0",
+              color: category === c ? "#fff" : "#333",
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
 
       {/* Accessories Grid */}
       <div
@@ -142,8 +218,16 @@ function AccessoriesPage() {
               >
                 {item.category || item.type}
               </h1>
-              <p style={{ color: "#555", margin: "2px 0" }}>Brand: {item.brand}</p>
-              <p style={{ color: "#007BFF", fontWeight: "bold", margin: "2px 0" }}>
+              <p style={{ color: "#555", margin: "2px 0" }}>
+                Brand: {item.brand}
+              </p>
+              <p
+                style={{
+                  color: "#007BFF",
+                  fontWeight: "bold",
+                  margin: "2px 0",
+                }}
+              >
                 ₹{item.price}
               </p>
               <p style={{ color: "#555", margin: "2px 0" }}>
@@ -230,7 +314,9 @@ function AccessoriesPage() {
         )}
 
         <button
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
           disabled={currentPage === totalPages}
           style={{
             padding: "6px 12px",

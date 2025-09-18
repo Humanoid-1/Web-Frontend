@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import { data, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../pages/Detail.css";
+import logo from "../../public/Dell-logo.png";
 
 const Detail = () => {
   const { id } = useParams();
@@ -8,13 +9,13 @@ const Detail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
 
-  // Zoom states
+  // Zoom lens states
   const imageRef = useRef(null);
   const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
   const [showLens, setShowLens] = useState(false);
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
 
-  // Fetch laptop data by ID
+  // Fetch data
   useEffect(() => {
     fetch(`http://localhost:5000/api/getLaptop/${id}`)
       .then((res) => {
@@ -32,83 +33,128 @@ const Detail = () => {
       });
   }, [id]);
 
-  // Zoom handler
+  // ✅ Zoom Lens Move Handler
   const handleMouseMove = (e) => {
-    const rect = imageRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const imageRect = imageRef.current?.getBoundingClientRect();
+    const descRect = document.querySelector(".detail-right")?.getBoundingClientRect();
 
-    const percentX = (x / rect.width) * 100;
-    const percentY = (y / rect.height) * 100;
+    if (!imageRect || !descRect) return;
+
+    // ✅ Description area me gaya toh lens & zoom chhupa do
+    const isInDescription =
+      e.clientX >= descRect.left &&
+      e.clientX <= descRect.right &&
+      e.clientY >= descRect.top &&
+      e.clientY <= descRect.bottom;
+
+    if (isInDescription) {
+      setShowLens(false);
+      return;
+    }
+
+    // ✅ Mouse image ke andar hai, toh lens move kare
+    const x = e.clientX - imageRect.left;
+    const y = e.clientY - imageRect.top;
+
+    const percentX = (x / imageRect.width) * 100;
+    const percentY = (y / imageRect.height) * 100;
+
+    // Optional safety check
+
 
     setLensPosition({ x, y });
     setBackgroundPosition(`${percentX}% ${percentY}%`);
     setShowLens(true);
   };
 
+  
+
+  // ✅ Mouse leave kar gaya image se
+  const handleMouseLeave = () => {
+    setShowLens(false);
+  };
+
   if (loading) return <h2>Loading...</h2>;
   if (!laptop) return <h2>Laptop not found</h2>;
 
   return (
-    <div className="detail-page" >
-      {/* Left Side - Image with zoom */}
-      
-     <div className="detail-left"
+    <div className="detail-page">
+      {/* ---------------- Left Side (Image + Thumbnails) ---------------- */}
+      <div
+        className="detail-left"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setShowLens(true)}
-        onMouseLeave={() => setShowLense(false)}
-        >
-  <img
-    ref={imageRef}
-    src={selectedImage}
-    alt={laptop.model}
-    className="detail-img"
-  />
-  {showLens && (
-    <div
-      className="lens"
-      style={{
-        left: `${lensPosition.x - 50}px`,
-        top: `${lensPosition.y - 50}px`,
-      }}
-    ></div>
-  )}
+        onMouseLeave={handleMouseLeave}
+      >
+        <img
+          ref={imageRef}
+          src={selectedImage}
+          alt={laptop.model}
+          className="detail-img"
+        />
 
-  {/* Thumbnails */}
-  <div className="thumbnail-row">
-    {laptop.image_url.map((img, index) => (
-      <img
-        key={index}
-        src={img}
-        alt={`Thumbnail ${index}`}
-        className={`thumbnail-img ${selectedImage === img ? "selected" : ""}`}
-        onClick={() => setSelectedImage(img)}
-      />
-    ))}
-  </div>
-</div>
+        {/* ✅ Lens Glass */}
+        {showLens && (
+          <div
+            className="lens"
+            style={{
+              left: `${lensPosition.x - 50}px`,
+              top: `${lensPosition.y - 50}px`,
+            }}
+          ></div>
+        )}
 
+        {/* ✅ Thumbnail images */}
+        <div className="thumbnail-row">
+          {laptop.image_url.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Thumbnail ${index}`}
+              className={`thumbnail-img ${
+                selectedImage === img ? "selected" : ""
+              }`}
+              onClick={() => setSelectedImage(img)}
+            />
+          ))}
+        </div>
+      </div>
 
-      {/* Right Side - Zoom or Product Info */}
+      {/* ---------------- Right Side (Zoomed Image OR Info) ---------------- */}
       {showLens ? (
         <div
           className="zoom-result"
-          
           style={{
             backgroundImage: `url(${selectedImage})`,
             backgroundPosition: backgroundPosition,
             backgroundSize: "200%",
-
           }}
         ></div>
       ) : (
-        <div className="detail-right" >
-        
-          <h2 className="desc" >{laptop.description}</h2>
-
-          <p className="dell">
-            <a href="http://localhost:5173/#/brand/Dell">Visit The Dell Store</a>
+        <div className="detail-right">
+          <h2 className="desc">{laptop.model}</h2>
+          <div  className="dell">
+         <img src={logo} alt="Dell Logo" style={{ width: '45px', height: '30px' }} />
+            <p>
+               <a style={{color:"green"}} href="http://localhost:5173/#/brand/Dell">
+                explore all dell laptops</a>
           </p>
+         <div className="unit">
+  <h2>Select Cpu</h2>
+
+  <div className="cpu-options">
+    <div className="ram">
+      <button>{laptop.cpu} Price:{laptop.price}</button>
+    </div>
+
+    <div className="ram">
+      <button>{laptop.cpu} Price:{laptop.price}</button>
+    </div>
+  </div>
+</div>
+
+          </div>
+       
 
           <p className="rating">
             <b>{laptop.ratings}:</b>
@@ -117,9 +163,7 @@ const Detail = () => {
 
           <p><b>Warranty:</b> {laptop.warranty}</p>
 
-          <p>
-            <b>Brand:</b> {laptop.brand}
-          </p>
+          <p><b>Brand:</b> {laptop.brand}</p>
 
           <p>
             <b>Price: ₹{laptop.price}</b>
@@ -128,7 +172,6 @@ const Detail = () => {
                 ₹{laptop.original_price}
               </span>
             )}
-           
           </p>
 
           <button className="btn-buy">Buy Now</button>

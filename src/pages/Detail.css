@@ -2,12 +2,12 @@
   display: flex;
   padding: 20px;
   gap: 30px;
-  margin-left: 50px;
+  margin-left: 250px;
 }
 
 .detail-left {
   position: relative;
-  width: 400px; 
+
 }
 
 .thumbnail-row {
@@ -18,8 +18,8 @@
 }
 
 .thumbnail-img {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border: 2px solid transparent;
   cursor: pointer;
@@ -27,36 +27,53 @@
 }
 
 .thumbnail-img:hover {
-  border: 2px solid #007bff;
+  border: 2px solid #197a05;
 }
 
 
 
 .detail-img {
-  width: 100%;
-  height: 250px;
+  width: 120%;
+  height: 350px;
   margin-top: 15px;
+
 }
 
 .lens {
   position: absolute;
   width: 100px;
   height: 100px;
-  border: 1px solid #000;
+  border: 2px solid #999;
   background-color: rgba(255, 255, 255, 0.3);
-  pointer-events: none;
+  pointer-events: none; /* Prevent mouse events on lens */
 }
+
 
 .zoom-result {
-  width: 800px;
+  width: 400px;
   height: 400px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   background-repeat: no-repeat;
+  margin-left: 20px;
 }
 
-.detail-right {
-  max-width: 800px;
 
+.detail-right {
+  max-width: 500px;
+  
+  padding: 40px;
+  margin-left: 170px;
+  font-size: 25px;
+}
+
+.dell{
+  font-size: 12px;
+  color: black;
+  
+}
+
+.laps a{
+  color: green;
 }
 
 .rating i {
@@ -64,16 +81,17 @@
 }
 
 .btn-buy {
-  background-color: #1e53c5;
+  background-color: rgb(7, 108, 7);
   color: white;
   padding: 7px 15px;
+  font-size: 20px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   margin-top: 3px;
 }
 .btn-buy:hover {
-  background-color: #003cb3;
+  background-color: #186906;
 }
 .dell a{
   color: rgb(75, 124, 230);
@@ -94,10 +112,52 @@
   .detail-right {
     max-width: 100%;
     padding: 0 10px;
+    
   }
 }
 .desc{
   color: black;
   font-weight: bold;
   
+  
+}
+/* .unit h2{
+  font-weight: 500;
+}
+.ram{
+  border: 1px solid green;
+ 
+  display: flex;
+
+  margin-top: 10px;
+  border-radius: 5px;
+  height: 100px;
+  width: 150px;
+}
+
+.ram h3{
+  color: black;
+  font-weight: 500;
+  text-align: center;
+  padding-top: 25px;
+} */
+
+.cpu-options {
+  display: flex;
+  gap: 10px; /* Space between the boxes */
+  flex-wrap: wrap; /* Optional: wrap on smaller screens */
+   
+
+}
+.ram button{
+  width: 130px;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid green;
+   background-color: #eaf7e9;
+   border-radius: 5px;
 }

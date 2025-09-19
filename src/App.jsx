@@ -21,9 +21,12 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/brand/:brand" element={<BrandPage />} />
-        <Route path="/accessories" element={<Accessories />} />
+        <Route path="/accessories/" element={<Accessories />} />
+        <Route path="/accessories/:accessories?" element={<Accessories />} />
+
         <Route path="/parts" element={<PartsPage />} />
         <Route path="/detail/:id" element={<LaptopDetail />} />
+        
       </Routes>
       <Footer />
     </div>

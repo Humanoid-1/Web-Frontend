@@ -93,7 +93,7 @@ body {
 .brand-image-container,
 .accessory-image-container {
   width: 100%;
-  height: 130px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,14 +103,10 @@ body {
   padding: 1rem;
 }
 
-.accessory-image-container {
-  height: 140px;
-}
-
 .brand-image,
 .accessory-image {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 140%;
   object-fit: contain;
 }
 

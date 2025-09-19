@@ -1,5 +1,5 @@
 // src/pages/AccessoriesPage.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function AccessoriesPage() {
@@ -67,12 +67,13 @@ function AccessoriesPage() {
           setAccessories([]);
           setError("Invalid response from server");
         }
-      // } catch (err) {
-      //   console.error(err);
-      //   setError("Failed to fetch accessories");
-      // } finally {
-        // }
-          setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setAccessories([]);
+        setError("Failed to fetch accessories");
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchAccessories();

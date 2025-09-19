@@ -20,9 +20,10 @@ const SliderComponent = () => {
     useEffect(() => {
         const fetchSlides = async () => {
             // try {
-                const res = await fetch("http://localhost:5000/api/slider/");
+                const res = await fetch("http://localhost:5000/api/slider");
                 const data = await res.json();
                 setSlides(data);
+                console.log("Fetched slides:", data);
             // } catch (err) {
             //     console.error("Error fetching slides:", err);
             // }
@@ -102,6 +103,7 @@ const SliderComponent = () => {
                                     src={slide.imageUrl}
                                     alt={slide.title || `Slide ${index}`}
                                     className="slide-image"
+            
                                 />
                             </a>
                         </div>

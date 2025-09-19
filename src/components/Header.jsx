@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../public/humanoid_maker_logo_white-Photoroom.png";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes, FaUser, FaShoppingCart } from "react-icons/fa";
 
 // Styled Components
@@ -27,6 +27,20 @@ const Logo = styled.img`
   height: 50px;
   width: auto;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    height: 40px;
+  }
+`;
+
+const LogoWrapper = styled(NavLink)`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    order: 2; /* Second in mobile */
+    margin: 0 auto;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -48,8 +62,9 @@ const SearchContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 70%;
+    width: 68%;
     margin: 0 10px;
+    order: 3;
   }
 `;
 
@@ -100,9 +115,9 @@ const NavItem = styled(NavLink)`
 
   &.active {
     color: #3498db;
-    
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -5px;
       left: 0;
@@ -115,19 +130,20 @@ const NavItem = styled(NavLink)`
 
 const MobileMenuButton = styled.div`
   display: none;
-  font-size: 24px;
+  font-size: 30px;
   color: #34495e;
   cursor: pointer;
 
   @media (max-width: 768px) {
     display: block;
+    order: 1;
   }
 `;
 
 const SideMenu = styled.div`
   position: fixed;
   top: 0;
-  left: ${props => (props.open ? '0' : '-100%')};
+  left: ${(props) => (props.open ? "0" : "-100%")};
   width: 280px;
   height: 100vh;
   background-color: #ffffff;
@@ -176,7 +192,7 @@ const Overlay = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1050;
-  display: ${props => (props.$show ? 'block' : 'none')};
+  display: ${(props) => (props.$show ? "block" : "none")};
 `;
 
 const IconsContainer = styled.div`
@@ -218,20 +234,46 @@ const IconButton = styled.div`
   }
 `;
 
+// New Styled Component for Search Button
+const SearchButton = styled.button`
+  background: #3498db;
+  border: none;
+  outline: none;
+  padding: 10px 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #2980b9;
+  }
+
+  svg {
+    color: #fff;
+    font-size: 18px;
+  }
+`;
+
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartItems] = useState(0); 
+  const [cartItems] = useState(0);
 
   return (
     <>
       <Nav>
-        <NavLink to="/">
-        <Logo src={logo} alt="Company Logo" />
-        </NavLink>
-        
+        <LogoWrapper to="/">
+          <Logo src={logo} alt="Company Logo" />
+        </LogoWrapper>
+
         <SearchContainer>
-          <SearchIcon />
+          
           <SearchInput type="text" placeholder="Search products..." />
+          <SearchButton>
+            <IoIosSearch />
+          </SearchButton>
         </SearchContainer>
 
         <NavLinks>
@@ -256,7 +298,6 @@ function Header() {
         </MobileMenuButton>
       </Nav>
 
-      
       <SideMenu open={menuOpen}>
         <CloseButton onClick={() => setMenuOpen(false)}>
           <FaTimes />

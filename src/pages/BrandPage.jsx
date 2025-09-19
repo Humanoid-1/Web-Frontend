@@ -1,59 +1,65 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function BrandPage() {
+  const { brand: brandParam } = useParams(); // get brand from URL
+  const navigate = useNavigate();
+
+  const [brand, setBrand] = useState(brandParam || "Dell");
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [brand, setBrand] = useState("Dell"); // Default brand
-
-  // ✅ Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12; // ek page me kitne laptops dikhane hain
-
-  useEffect(() => {
-    const fetchLaptops = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(
-          `http://localhost:5000/api/getLaptopsByBrand/${brand}`
-        );
-        const data = await response.json();
-        setLaptops(Array.isArray(data) ? data : []);
-        setCurrentPage(1); // ✅ brand change hone par hamesha first page pe le aao
-      } catch (err) {
-        setError(err.message || "Error fetching laptops");
-        setLaptops([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLaptops();
-  }, [brand]);
+   const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+     const itemsPerPage = 12;
 
   const brands = [
-    "Dell",
-    "HP",
-    "Lenovo",
-    "Asus",
-    "Acer",
-    "Apple",
-    "MSI",
-    "Samsung",
-    "Microsoft",
-    "Sony",
-    "LG",
-    "Huawei",
+    "Dell", "HP", "Lenovo", "Asus", "Acer", "Apple", "MSI", "Samsung",
+    "Microsoft", "Sony", "Google", "LG", "Huawei"
   ];
 
-  // ✅ Pagination Logic
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentLaptops = laptops.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(laptops.length / itemsPerPage);
+  // Update brand if URL changes
+  useEffect(() => {
+    if (brandParam) setBrand(brandParam);
+  }, [brandParam]);
 
-  // ✅ AccessoriesPage wali Pagination logic (with ellipses)
+  // Fetch laptops whenever brand changes
+  useEffect(() => {
+    const fetchLaptops = async (page = 1) => {
+      setLoading(true);
+      setError(null);
+      // try {
+        const response = await fetch(
+          `http://localhost:5000/api/getLaptopsByBrand/${brand}?page=${page}&limit=${itemsPerPage}`,
+          { cache: "no-store" }
+        );
+        const data = await response.json();
+        setLaptops(Array.isArray(data.data) ? data.data : []);
+           setTotalPages(data.totalPages || 1);
+      // } catch (err) {
+      //   setError(err.message || "Error fetching laptops");
+      //   setLaptops([]);
+      // } finally {
+        // // }
+          setLoading(false);
+    };
+    fetchLaptops(currentPage);
+  }, [brand,currentPage]);
+   useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [currentPage]);
+  
+    if (loading)
+      return <p style={{ textAlign: "center", marginTop: "40px" }}>Loading...</p>;
+    if (error)
+      return (
+        <p style={{ textAlign: "center", marginTop: "40px", color: "red" }}>
+          {error}
+        </p>
+      );
+
+  // Pagination logic
   const getPageNumbers = () => {
     const pages = [];
     const delta = 2; // Show current ±2 pages
@@ -72,6 +78,13 @@ function BrandPage() {
     if (totalPages > 1) pages.push(totalPages);
 
     return pages;
+  };
+
+
+  // Handle brand button click
+  const handleBrandClick = (b) => {
+    setBrand(b);
+    navigate(`/brand/${b}`); // update URL
   };
 
   return (
@@ -163,7 +176,7 @@ function BrandPage() {
           margin: 12px 0;
           font-size: 1.3rem;
           font-weight: 700;
-          color: #333;
+          color: #000;
         }
         .laptop-specs {
           font-size: 0.9rem;
@@ -184,6 +197,8 @@ function BrandPage() {
           font-weight: 600;
           cursor: pointer;
           width: 100%;
+          text-align: center;
+          text-decoration: none;
           font-size: 1rem;
           transition: all 0.25s ease;
           box-shadow: 0 3px 10px rgba(40,167,69,0.2);
@@ -193,45 +208,25 @@ function BrandPage() {
           box-shadow: 0 6px 18px rgba(40,167,69,0.25);
           transform: translateY(-2px);
         }
-        /* Pagination */
-        .pagination {
-          display: flex;
-          justify-content: center;
-          margin-top: 24px;
-          gap: 6px;
-          flex-wrap: wrap;
-        }
-        .pagination button {
-          padding: 6px 12px;
-          border: 1px solid #ccc;
-          border-radius: 6px;
-          background: white;
-          cursor: pointer;
-          font-weight: 600;
-          transition: all 0.2s ease-in-out;
-        }
-        .pagination button.active {
-          background: #007BFF;
-          color: white;
-        }
-        .pagination button:disabled {
-          background: #eee;
-          cursor: not-allowed;
-        }
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px) scale(0.95); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
+        @media (max-width: 600px) {
+          .brand-title { font-size: 1.7rem; }
+          .laptop-card { padding: 14px; }
+          .laptop-img { max-width: 140px; height: 90px; }
+        }
       `}</style>
 
-      <h1 className="brand-title"> Laptops by Brands</h1>
+      <h1 className="brand-title">Laptops by Brand</h1>
 
-      {/* Brand Filter Buttons */}
+      {/* Brand Buttons */}
       <div className="brand-buttons">
         {brands.map((b) => (
           <button
             key={b}
-            onClick={() => setBrand(b)}
+            onClick={() => handleBrandClick(b)}
             className={`brand-btn${brand === b ? " selected" : ""}`}
           >
             {b}
@@ -240,10 +235,8 @@ function BrandPage() {
       </div>
 
       {/* Loading / Error */}
-      {loading && <p style={{ textAlign: "center" }}>⏳ Loading...</p>}
-      {error && (
-        <p style={{ color: "red", textAlign: "center" }}>{error}</p>
-      )}
+      {loading && <p style={{ textAlign: "center", fontSize: "1.1rem" }}>⏳ Loading...</p>}
+      {error && <p style={{ color: "#d90429", textAlign: "center", fontWeight: "bold" }}>{error}</p>}
       {!loading && laptops.length === 0 && (
         <p style={{ textAlign: "center" }}>
           No laptops found for <b>{brand}</b>.
@@ -252,13 +245,13 @@ function BrandPage() {
 
       {/* Laptop Grid */}
       <div className="laptop-grid">
-        {currentLaptops.map((laptop, index) => (
+        {laptops.map((laptop, index) => (
           <div
-            key={laptop._id}
+            key={laptop._id || index}
             className="laptop-card"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            {laptop.image_url && (
+            {laptop.image_url?.length > 0 && (
               <img
                 src={laptop.image_url[0]}
                 alt={laptop.model}
@@ -266,51 +259,84 @@ function BrandPage() {
               />
             )}
             <h3 className="laptop-title">{laptop.model}</h3>
-            <p className="laptop-brand">Brand: <b>{laptop.brand}</b></p>
+            <p className="laptop-brand">
+              Brand: <b>{laptop.brand}</b>
+            </p>
             <p className="laptop-price">₹{laptop.price}</p>
             <div className="laptop-specs">
-              <p><b>CPU:</b> {laptop.specs?.cpu}</p>
-              <p><b>RAM:</b> {laptop.specs?.ram}</p>
-              <p><b>Storage:</b> {laptop.specs?.storage}</p>
-              <p><b>GPU:</b> {laptop.specs?.gpu}</p>
+              <p><b>CPU:</b> {laptop.cpu}</p>
+              <p><b>RAM:</b> {laptop.ram}</p>
+              <p><b>Storage:</b> {laptop.storage}</p>
+              
             </div>
-            <button className="details-btn">See Details</button>
+  <Link to={`/details/${laptop._id}`} className="details-btn">
+  See Details
+</Link>
+
           </div>
         ))}
       </div>
+       {/* Pagination */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "30px",
+          gap: "6px",
+          flexWrap: "wrap",
+        }}
+      >
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          style={{
+            padding: "6px 12px",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            background: currentPage === 1 ? "#eee" : "white",
+            cursor: currentPage === 1 ? "not-allowed" : "pointer",
+          }}
+        >
+          Prev
+        </button>
 
-      {/* ✅ AccessoriesPage wali Pagination */}
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          >
-            Prev
-          </button>
+        {getPageNumbers().map((page, index) =>
+          page === "left-ellipsis" || page === "right-ellipsis" ? (
+            <span key={index} style={{ padding: "6px 12px" }}>
+              ...
+            </span>
+          ) : (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(page)}
+              style={{
+                padding: "6px 12px",
+                border: "1px solid #ccc",
+                borderRadius: "6px",
+                background: currentPage === page ? "#007BFF" : "white",
+                color: currentPage === page ? "white" : "black",
+                cursor: "pointer",
+              }}
+            >
+              {page}
+            </button>
+          )
+        )}
 
-          {getPageNumbers().map((page, index) =>
-            page === "left-ellipsis" || page === "right-ellipsis" ? (
-              <span key={index} style={{ padding: "6px 12px" }}>...</span>
-            ) : (
-              <button
-                key={index}
-                onClick={() => setCurrentPage(page)}
-                className={currentPage === page ? "active" : ""}
-              >
-                {page}
-              </button>
-            )
-          )}
-
-          <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      )}
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          style={{
+            padding: "6px 12px",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            background: currentPage === totalPages ? "#eee" : "white",
+            cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }

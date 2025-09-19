@@ -1,3 +1,4 @@
+// src/pages/AccessoriesPage.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -6,8 +7,8 @@ function AccessoriesPage() {
   const { accessories: categoryParam } = useParams();
   const navigate = useNavigate();
 
-  // UI category (capitalised)
   const [category, setCategory] = useState(categoryParam || "Mouse");
+  const [brand, setBrand] = useState("All"); // brand filter state
   const [accessories, setAccessories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,51 +17,48 @@ function AccessoriesPage() {
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 12;
 
-  // hardcoded brand for now
-  const brand = "Dell";
-
   const categories = [
     "Mouse",
     "Keyboard",
     "Charger",
-    "Headphone",
-    "Speaker",
+    "Docking Station",
+    "Headphones",
+    "Speakers",
+    "Pen Drive",
     "Webcam",
+    "USB Flash Drive",
+    "Cooling Pad",
     "Microphone",
-    "Monitor",
-    "Printer",
-    "Scanner",
-    "USB Drive",
     "External Hard Drive",
   ];
 
+  const brands = ["All", "Dell", "HP", "Lenovo", "Logitech","Corsair","Razer"]; // adjust to your brands
+
   // update category when URL param changes
+  useEffect(() => {
+    if (categoryParam) {
+      const decoded = decodeURIComponent(categoryParam);
+      setCategory(decoded.charAt(0).toUpperCase() + decoded.slice(1));
+      setCurrentPage(1);
+    } else {
+      setCategory("Mouse");
+    }
+  }, [categoryParam]);
 
-useEffect(() => {
-  if (categoryParam) {
-    const decoded = decodeURIComponent(categoryParam);
-    setCategory(decoded.charAt(0).toUpperCase() + decoded.slice(1));
-    setCurrentPage(1);
-  } else {
-    // default when no param
-    setCategory("Mouse");
-  }
-}, [categoryParam]);
-
-
-  // fetch accessories whenever category or page changes
+  // fetch accessories whenever category, brand or page changes
   useEffect(() => {
     const fetchAccessories = async () => {
       setLoading(true);
       setError(null);
       try {
-        // lowercase + encode for API
         const apiCategory = encodeURIComponent(category.toLowerCase());
+        const brandPart =
+          brand !== "All" ? `&brand=${encodeURIComponent(brand)}` : "";
+
         const res = await fetch(
-          `http://localhost:5000/api/getAccessories?brand=${encodeURIComponent(
-            brand
-          )}&category=${apiCategory}&page=${currentPage}&limit=${itemsPerPage}`
+          `http://localhost:5000/api/getAccessories?category=${apiCategory}${brandPart}&page=${currentPage}&limit=${itemsPerPage}`
         );
+
         const data = await res.json();
         if (data && Array.isArray(data.data)) {
           setAccessories(data.data);
@@ -84,11 +82,9 @@ useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  // category button click
- const handleCategoryClick = (cat) => {
-  navigate(`/accessories/${encodeURIComponent(cat.toLowerCase())}`);
-};
-
+  const handleCategoryClick = (cat) => {
+    navigate(`/accessories/${encodeURIComponent(cat.toLowerCase())}`);
+  };
 
   const getPageNumbers = () => {
     const pages = [];
@@ -127,6 +123,35 @@ useEffect(() => {
       >
         Accessories
       </h1>
+
+      {/* Brand dropdown */}
+      <div style={{ marginBottom: "20px", textAlign: "center" }}>
+        <label
+          htmlFor="brand"
+          style={{ marginRight: "10px", fontWeight: "600" }}
+        >
+          Filter by Brand:
+        </label>
+        <select
+          id="brand"
+          value={brand}
+          onChange={(e) => {
+            setBrand(e.target.value);
+            setCurrentPage(1);
+          }}
+          style={{
+            padding: "8px 14px",
+            borderRadius: "6px",
+            border: "1px solid #ccc",
+          }}
+        >
+          {brands.map((b) => (
+            <option key={b} value={b}>
+              {b}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {/* Category buttons */}
       <div
@@ -260,7 +285,9 @@ useEffect(() => {
             </div>
           ))
         ) : (
-          <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#777" }}>
+          <p
+            style={{ gridColumn: "1 / -1", textAlign: "center", color: "#777" }}
+          >
             No accessories found.
           </p>
         )}

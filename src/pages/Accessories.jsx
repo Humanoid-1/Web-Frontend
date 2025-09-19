@@ -67,12 +67,12 @@ function AccessoriesPage() {
           setAccessories([]);
           setError("Invalid response from server");
         }
-      } catch (err) {
-        console.error(err);
-        setError("Failed to fetch accessories");
-      } finally {
-        setLoading(false);
-      }
+      // } catch (err) {
+      //   console.error(err);
+      //   setError("Failed to fetch accessories");
+      // } finally {
+        // }
+          setLoading(false);
     };
 
     fetchAccessories();

@@ -188,6 +188,8 @@ function BrandPage() {
           font-weight: 600;
           cursor: pointer;
           width: 100%;
+          text-align: center;
+          text-decoration: none;
           font-size: 1rem;
           transition: all 0.25s ease;
           box-shadow: 0 3px 10px rgba(40,167,69,0.2);
@@ -215,7 +217,7 @@ function BrandPage() {
         {brands.map((b) => (
           <button
             key={b}
-            onClick={() => handleBrandClick(b,)}
+            onClick={() => handleBrandClick(b)}
             className={`brand-btn${brand === b ? " selected" : ""}`}
           >
             {b}

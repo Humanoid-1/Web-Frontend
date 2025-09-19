@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import logo from "../../public/humanoid_maker_logo_white-Photoroom.png";
 import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes, FaUser, FaShoppingCart } from "react-icons/fa";

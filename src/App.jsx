@@ -8,24 +8,26 @@ import "slick-carousel/slick/slick-theme.css";
 import BrandPage from "./pages/BrandPage";
 import Accessories from "./pages/Accessories";
 import Footer from "./components/Footer";
-import Detail from "./pages/Detail";
 import PartsPage from "./pages/PartsPage";
+import Detail from "./pages/Detail";
 
 
 function App() {
   return (
     <div>
-      <Header />
-      
-      
+      <Header />      
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/ContactUs" element={<ContactUs />} />
-        <Route path="/brand/:brandName" element={<BrandPage/>} />
-        <Route path="/accessories" element={<Accessories/>} />
-        <Route path="/parts" element={<PartsPage/>} />
-        <Route path="/details/:id" element={<Detail/>} />
+     <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/brand/:brand" element={<BrandPage />} />
+        {/* <Route path="/accessories/" element={<Accessories />} /> */}
+        <Route path="/accessories/:accessories?" element={<Accessories />} />
+     
+        <Route path="/parts" element={<PartsPage />} />
+        <Route path="/detail/:id" element={<Detail/>} />
+        
+        
       </Routes>
       <Footer />
     </div>

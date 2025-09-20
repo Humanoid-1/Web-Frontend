@@ -11,6 +11,9 @@ import samsung from "/Samsung.jpg";
 import apple from "/Apple.jpg";
 import lg from "/lg.jpg";
 import huawei from "/Huawei.jpg";
+import google from "/Google2.jpg";
+import microsoft from "/Microsoft3.jpg";
+import sony from '/Sony3.jpg';
 import mouse from "/mouse.jpg";
 import keyboard from "/keyboard.jpg";
 import charger from "/adapter.jpg";
@@ -40,7 +43,11 @@ const categories = [
   { name: "MSI", image: msi },
   { name: "Samsung", image: samsung },
   { name: "LG", image: lg },
-  { name: "Huawei", image: huawei }
+  { name: "Huawei", image: huawei },
+  {name:"Google",image:google},
+  { name: "Microsoft", image: microsoft },
+  { name: "Sony", image: sony }
+
 ];
 
 const accessories = [

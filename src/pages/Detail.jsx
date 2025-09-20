@@ -81,6 +81,7 @@ const Detail = () => {
               style={{
                 left: `${lensPosition.x - 50}px`,
                 top: `${lensPosition.y - 50}px`,
+                
               }}
             ></div>
           )}
@@ -100,27 +101,53 @@ const Detail = () => {
             />
           ))}
         </div>
+       
       </div>
+    
 
       {/* ---------------- Right Side ---------------- */}
       <div className="detail-right">
-        <h2>{laptop.model}<p className="rating">
-          <b>{laptop.ratings} ✰</b> 
-        </p></h2>
+        
+        <h2><b>{laptop.brand} {laptop.model}</b>
+          <p className="rating"><b>{laptop.ratings} ✰</b> 
+        </p>
+        
+        </h2>
+        <ul>
+          <li className="highlight">CPU: {laptop.cpu}</li>
+          <li className="highlight">RAM: {laptop.ram}</li>
+          <li className="highlight">Category: {laptop.category}</li>
+          <li style={{listStyle:"none",color:"Blue",fontWeight:"bold"}}>{laptop.availability}</li>
+        </ul>
+       <div>
+  <p style={{ fontSize: "15px", fontWeight: "bold", color: "green", marginTop: "5px" }}>
+  {laptop.brand}{" "}
+  <a href={`http://localhost:5173/explore/dell-laptops#/brand/${laptop.brand}`} style={{ color: "green", textDecoration: "none", fontWeight: "bold", fontSize: "15px",display: "inline-block"}}>
+    Explore all products
+  </a>
+</p>
 
-        {/* Price Section */}
-        <div className="price-section">
-          <span className="price">₹{laptop.price}</span>
-          {laptop.original_price && (
-            <span className="original-price">₹{laptop.original_price}</span>
-          )}
+</div>
+        <div>
+            <button className="btn-buy">Buy Now</button>
+            
         </div>
+           <div className="detail-header">
+            <br />
+        <h3>Product Details</h3>
+         {/* View More Details Button */}
+        <button
+          className="btn-more"
+          onClick={() => setShowDescription(!showDescription)}
+        >
+          {showDescription ? "Hide details" : "View more details"}
+        </button>
 
-    <button className="btn-buy">Buy Now</button>
-
-        {/* Highlights */}
-        <h3>Specifications:</h3>
-        <ul className="highlights">
+        {/* Description Toggle */}
+        {showDescription && (
+          <div className="description">
+               <h3>Specifications:</h3>
+               <ul className="highlights">
           <li>CPU: {laptop.cpu}</li>
           <li>RAM: {laptop.ram}</li>  
           <li>Brand: {laptop.brand}</li>
@@ -128,32 +155,27 @@ const Detail = () => {
           <li>Storage: {laptop.warranty}</li>
           
         </ul>
-
-          {/* View More Details Button */}
-        <button
-          className="btn-more"
-          onClick={() => setShowDescription(!showDescription)}
-        >
-          {showDescription ? "Hide Details" : "More Details"}
-        </button>
-
-        {/* Description Toggle */}
-        {showDescription && (
-          <div className="description">
             <h4>Description</h4>
             <p>{laptop.description}</p>
           </div>
         )}
       </div>
 
-      {/* ---------------- Zoom Result (Blinkit style) ---------------- */}
+  
+
+    
+     
+
+         
+      </div>
+
       {showLens && (
         <div
           className="zoom-result"
           style={{
             backgroundImage: `url(${selectedImage})`,
             backgroundPosition: backgroundPosition,
-            backgroundSize: "300%",
+            backgroundSize: "500%",
           }}
         ></div>
       )}

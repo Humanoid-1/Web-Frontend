@@ -3,89 +3,81 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function BrandPage() {
-  const { brand: brandParam } = useParams(); // get brand from URL
+  const { brand: brandParam } = useParams();   // <-- brand from /brand/:brand
   const navigate = useNavigate();
 
   const [brand, setBrand] = useState(brandParam || "Dell");
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-   const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-     const itemsPerPage = 12;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 12;
 
   const brands = [
     "Dell", "HP", "Lenovo", "Asus", "Acer", "Apple", "MSI", "Samsung",
     "Microsoft", "Sony", "Google", "LG", "Huawei"
   ];
 
-  // Update brand if URL changes
+  // 🔹 Whenever the URL param changes, update our state and reset page
   useEffect(() => {
-    if (brandParam) setBrand(brandParam);
+    if (brandParam) {
+      setBrand(brandParam);
+      setCurrentPage(1);
+    }
   }, [brandParam]);
 
-  // Fetch laptops whenever brand changes
+  // 🔹 Fetch laptops whenever brand OR page changes
   useEffect(() => {
-    const fetchLaptops = async (page = 1) => {
+    const fetchLaptops = async () => {
       setLoading(true);
       setError(null);
-      // try {
+      try {
         const response = await fetch(
-          `http://localhost:5000/api/getLaptopsByBrand/${brand}?page=${page}&limit=${itemsPerPage}`,
-          { cache: "no-store" }
+          `http://localhost:5000/api/getLaptopsByBrand/${brand}?page=${currentPage}&limit=${itemsPerPage}`
         );
         const data = await response.json();
         setLaptops(Array.isArray(data.data) ? data.data : []);
-           setTotalPages(data.totalPages || 1);
-      // } catch (err) {
-      //   setError(err.message || "Error fetching laptops");
-      //   setLaptops([]);
-      // } finally {
-        // // }
-          setLoading(false);
+        setTotalPages(data.totalPages || 1);
+      } catch (err) {
+        setError(err.message || "Error fetching laptops");
+      } finally {
+        setLoading(false);
+      }
     };
-    fetchLaptops(currentPage);
-  }, [brand,currentPage]);
-   useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [currentPage]);
-  
-    if (loading)
-      return <p style={{ textAlign: "center", marginTop: "40px" }}>Loading...</p>;
-    if (error)
-      return (
-        <p style={{ textAlign: "center", marginTop: "40px", color: "red" }}>
-          {error}
-        </p>
-      );
+    fetchLaptops();
+  }, [brand, currentPage]);
 
-  // Pagination logic
-  const getPageNumbers = () => {
-    const pages = [];
-    const delta = 2; // Show current ±2 pages
-    let left = Math.max(2, currentPage - delta);
-    let right = Math.min(totalPages - 1, currentPage + delta);
+  // 🔹 Scroll top when page changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
-    // Always show first page
-    pages.push(1);
-
-    if (left > 2) pages.push("left-ellipsis");
-
-    for (let i = left; i <= right; i++) pages.push(i);
-
-    if (right < totalPages - 1) pages.push("right-ellipsis");
-
-    if (totalPages > 1) pages.push(totalPages);
-
-    return pages;
-  };
-
-
-  // Handle brand button click
+  // brand button click
   const handleBrandClick = (b) => {
-    setBrand(b);
-    navigate(`/brand/${b}`); // update URL
+    navigate(`/brand/${b}`); // this will update brandParam automatically
   };
+
+   // Pagination logic
+      const getPageNumbers = () => {
+        const pages = [];
+        const delta = 2; // Show current ±2 pages
+        let left = Math.max(2, currentPage - delta);
+        let right = Math.min(totalPages - 1, currentPage + delta);
+    
+        // Always show first page
+        pages.push(1);
+    
+        if (left > 2) pages.push("left-ellipsis");
+    
+        for (let i = left; i <= right; i++) pages.push(i);
+    
+        if (right < totalPages - 1) pages.push("right-ellipsis");
+    
+        if (totalPages > 1) pages.push(totalPages);
+    
+        return pages;
+      };
 
   return (
     <div className="brand-page">
@@ -245,7 +237,9 @@ function BrandPage() {
 
       {/* Laptop Grid */}
       <div className="laptop-grid">
+        
         {laptops.map((laptop, index) => (
+          <Link to={`/Detail/${laptop._id}`}>
           <div
             key={laptop._id || index}
             className="laptop-card"
@@ -269,11 +263,12 @@ function BrandPage() {
               <p><b>Storage:</b> {laptop.storage}</p>
               
             </div>
-  <Link to={`/details/${laptop._id}`} className="details-btn">
-  See Details
-</Link>
+            
+            <button className="details-btn">See Details</button>
 
+           
           </div>
+         </Link>
         ))}
       </div>
        {/* Pagination */}

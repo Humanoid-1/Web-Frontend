@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../pages/Detail.css";
 
@@ -7,21 +7,11 @@ const Detail = () => {
   const [laptop, setLaptop] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
-  const [showDescription, setShowDescription] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
-  // Zoom lens states
-  const imageRef = useRef(null);
-  const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
-  const [showLens, setShowLens] = useState(false);
-  const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
-
-  // Fetch data
   useEffect(() => {
     fetch(`http://localhost:5000/api/getLaptop/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`Server error: ${res.status}`);
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         setLaptop(data);
         setSelectedImage(data.image_url[0]);
@@ -33,152 +23,82 @@ const Detail = () => {
       });
   }, [id]);
 
-  // ✅ Zoom Lens Move Handler
-  const handleMouseMove = (e) => {
-    const imageRect = imageRef.current?.getBoundingClientRect();
-    if (!imageRect) return;
-
-    const x = e.clientX - imageRect.left;
-    const y = e.clientY - imageRect.top;
-
-    const percentX = (x / imageRect.width) * 100;
-    const percentY = (y / imageRect.height) * 100;
-
-    setLensPosition({ x, y });
-    setBackgroundPosition(`${percentX}% ${percentY}%`);
-    setShowLens(true);
-  };
-
-  // ✅ Mouse leave kar gaya image se
-  const handleMouseLeave = () => {
-    setShowLens(false);
-  };
-
   if (loading) return <h2>Loading...</h2>;
   if (!laptop) return <h2>Laptop not found</h2>;
 
   return (
-    <div className="detail-page">
-      {/* ---------------- Left Side (Image + Thumbnails) ---------------- */}
-      <div
-        className="detail-left"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setShowLens(true)}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="main-img-wrapper">
-          <img
-            ref={imageRef}
-            src={selectedImage}
-            alt={laptop.model}
-            className="detail-img"
-          />
-
-          {/* ✅ Lens Glass */}
-          {showLens && (
-            <div
-              className="lens"
-              style={{
-                left: `${lensPosition.x - 50}px`,
-                top: `${lensPosition.y - 50}px`,
-                
-              }}
-            ></div>
-          )}
-        </div>
-
-        {/* ✅ Thumbnail images */}
+    <div className="container">
+      {/* Left: Image Section */}
+      <div className="page-left">
+        <img src={selectedImage} alt={laptop.model} className="main-image" />
         <div className="thumbnail-row">
           {laptop.image_url.map((img, index) => (
             <img
               key={index}
               src={img}
-              alt={`Thumbnail ${index}`}
-              className={`thumbnail-img ${
-                selectedImage === img ? "selected" : ""
-              }`}
+              alt={`Thumb ${index}`}
+              className={`thumb ${selectedImage === img ? "selected" : ""}`}
               onClick={() => setSelectedImage(img)}
             />
           ))}
         </div>
-       
-      </div>
-    
 
-      {/* ---------------- Right Side ---------------- */}
-      <div className="detail-right">
-        
-        <h2><b>{laptop.brand} {laptop.model}</b>
-          <p className="rating"><b>{laptop.ratings} ✰</b> 
-        </p>
-        
-        </h2>
-        <ul>
-          <li className="highlight">CPU: {laptop.cpu}</li>
-          <li className="highlight">RAM: {laptop.ram}</li>
-          <li className="highlight">Category: {laptop.category}</li>
-          <li style={{listStyle:"none",color:"Blue",fontWeight:"bold"}}>{laptop.availability}</li>
-        </ul>
-       <div>
-  <p style={{ fontSize: "15px", fontWeight: "bold", color: "green", marginTop: "5px" }}>
-  {laptop.brand}{" "}
-  <a href={`http://localhost:5173/explore/dell-laptops#/brand/${laptop.brand}`} style={{ color: "green", textDecoration: "none", fontWeight: "bold", fontSize: "15px",display: "inline-block"}}>
-    Explore all products
-  </a>
-</p>
-
-</div>
-        <div>
-            <button className="btn-buy">Buy Now</button>
-            
-        </div>
-           <div className="detail-header">
-            <br />
-        <h3>Product Details</h3>
-         {/* View More Details Button */}
-        <button
-          className="btn-more"
-          onClick={() => setShowDescription(!showDescription)}
-        >
-          {showDescription ? "Hide details" : "View more details"}
-        </button>
-
-        {/* Description Toggle */}
-        {showDescription && (
-          <div className="description">
-               <h3>Specifications:</h3>
-               <ul className="highlights">
-          <li>CPU: {laptop.cpu}</li>
-          <li>RAM: {laptop.ram}</li>  
-          <li>Brand: {laptop.brand}</li>
-          <li>Warranty: {laptop.storage}</li>
-          <li>Storage: {laptop.warranty}</li>
+        {/* Product Details below image (like macOS shown below images) */}
+        <div className="product-meta">
+          <strong>Product Details</strong>
           
-        </ul>
-            <h4>Description</h4>
-            <p>{laptop.description}</p>
-          </div>
-        )}
+            <div className="meta-details">
+              <p><strong>CPU:</strong> {laptop.cpu}</p>
+              <p><strong>RAM:</strong> {laptop.ram}</p>
+              <p><strong>Storage:</strong> {laptop.storage}</p>
+              <p><strong>Warranty:</strong> {laptop.warranty}</p>
+              <p><strong>Description:</strong> {laptop.description}</p>
+            </div>
+          
+        </div>
       </div>
 
-  
+      {/* Right: Info Panel */}
+      <div className="page-right" style={{fontSize: '34px'}}>
+        <nav className="breadcrumb">Home / Appliances / {laptop.brand} {laptop.model}</nav>
+        <h1 className="product-title">
+          {laptop.brand}  {laptop.model} ({laptop.cpu},{laptop.connectivity}{laptop.ram}, {laptop.storage})
+        </h1>
+        <p className="sponsored">Sponsored</p>
 
-    
-     
+        <div className="brand-info">
+          
+          <p className="brand-para">{laptop.brand}</p>
+          
+          <a href={`http://localhost:5173/#/brand/${laptop.brand}`} className="green-link">Explore all products</a>
+        </div>
 
-         
+        <div className="price-section">
+          <span className="discounted">₹{laptop.price}</span>
+          <span className="mrp">{laptop.discount_price}</span>
+          <span className="badge">5% OFF</span>
+        </div>
+
+        <button className="buy-btn">Buy Now</button>
+
+        <div className="why-shop">
+          <h4>Why shop from humanoid maker ?</h4>
+          <ul>
+            
+            <li><strong>Trusted Quality</strong> 
+           <div> <p>Every product is checked for performance and durability.</p></div>
+            </li>
+            <li> <strong>Fair Prices</strong>
+               <div> <p>Transparent pricing — no hidden fees.</p></div></li>
+            <li>  <strong>Expert Support</strong>
+               <div><p>Tech specialists ready to help you pick or repair.</p></div></li>
+                <li>
+                   <strong>Eco-Friendly</strong>
+               <div> <p>We refurbish and recycle to cut down e‑waste.</p></div>
+                </li>
+          </ul>
+        </div>
       </div>
-
-      {showLens && (
-        <div
-          className="zoom-result"
-          style={{
-            backgroundImage: `url(${selectedImage})`,
-            backgroundPosition: backgroundPosition,
-            backgroundSize: "500%",
-          }}
-        ></div>
-      )}
     </div>
   );
 };

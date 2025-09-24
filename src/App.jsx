@@ -24,7 +24,7 @@ function App() {
         {/* <Route path="/accessories/" element={<Accessories />} /> */}
         <Route path="/accessories/:accessories?" element={<Accessories />} />
 
-        <Route path="/parts" element={<PartsPage />} />
+        <Route path="/parts/:category?" element={<PartsPage />} />
         <Route path="/detail/:id" element={<LaptopDetail />} />
         
       </Routes>

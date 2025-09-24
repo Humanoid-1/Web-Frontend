@@ -91,6 +91,11 @@ const SliderComponent = () => {
                     .slick-dots {
                         display: none !important;
                     }
+                    @media (max-width: 1024px) {
+                        .slide-item {
+                            height: 600px;
+                        }
+                    }
                 }
             `}</style>
 

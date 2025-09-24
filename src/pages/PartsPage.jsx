@@ -231,9 +231,13 @@ function PartsPage() {
                   />
                 )}
               </div>
+<<<<<<< HEAD
               <h1
                 style={{ fontSize: "24px", fontWeight: "bold", textAlign: "center" }}
               >
+=======
+              <h1 style={{ fontSize: "24px", fontWeight: "bold", textAlign: "center" }}>
+>>>>>>> a29321732f799b6ecf6d3d1e176b8b4c307ee127
                 {item.category}
               </h1>
 
@@ -247,12 +251,17 @@ function PartsPage() {
               >
                 {item.model || item.type}
               </h2>
+<<<<<<< HEAD
               <h3
                 style={{
+=======
+              <h3  style={{
+>>>>>>> a29321732f799b6ecf6d3d1e176b8b4c307ee127
                   fontSize: "18px",
                   fontWeight: "600",
                   marginBottom: "5px",
                   textAlign: "center",
+<<<<<<< HEAD
                 }}
               >
                 Specs: {item.name}
@@ -263,6 +272,11 @@ function PartsPage() {
               <p
                 style={{ color: "#007BFF", fontWeight: "bold", margin: "2px 0" }}
               >
+=======
+                }}>Specs: {item.name}</h3>
+              <p style={{ color: "#555", margin: "2px 0" }}>Brand: {item.brand}</p>
+              <p style={{ color: "#007BFF", fontWeight: "bold", margin: "2px 0" }}>
+>>>>>>> a29321732f799b6ecf6d3d1e176b8b4c307ee127
                 ₹{item.price}
               </p>
               <p style={{ color: "#555", margin: "2px 0" }}>

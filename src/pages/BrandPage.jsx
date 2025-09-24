@@ -236,7 +236,9 @@ function BrandPage() {
 
       {/* Laptop Grid */}
       <div className="laptop-grid">
+        
         {laptops.map((laptop, index) => (
+          <Link to={`/Detail/${laptop._id}`}>
           <div
             key={laptop._id || index}
             className="laptop-card"
@@ -260,8 +262,12 @@ function BrandPage() {
               <p><b>Storage:</b> {laptop.storage}</p>
               
             </div>
+            
             <button className="details-btn">See Details</button>
+
+           
           </div>
+         </Link>
         ))}
       </div>
        {/* Pagination */}

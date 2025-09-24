@@ -8,8 +8,12 @@ import "slick-carousel/slick/slick-theme.css";
 import BrandPage from "./pages/BrandPage";
 import Accessories from "./pages/Accessories";
 import Footer from "./components/Footer";
+<<<<<<< HEAD
 import LaptopDetail from "./pages/Detail";
+=======
+>>>>>>> a29321732f799b6ecf6d3d1e176b8b4c307ee127
 import PartsPage from "./pages/PartsPage";
+import Detail from "./pages/Detail";
 
 
 function App() {
@@ -23,9 +27,16 @@ function App() {
         <Route path="/brand/:brand" element={<BrandPage />} />
         {/* <Route path="/accessories/" element={<Accessories />} /> */}
         <Route path="/accessories/:accessories?" element={<Accessories />} />
+<<<<<<< HEAD
 
         <Route path="/parts/:category?" element={<PartsPage />} />
         <Route path="/detail/:id" element={<LaptopDetail />} />
+=======
+     
+        <Route path="/parts" element={<PartsPage />} />
+        <Route path="/detail/:id" element={<Detail/>} />
+        
+>>>>>>> a29321732f799b6ecf6d3d1e176b8b4c307ee127
         
       </Routes>
       <Footer />

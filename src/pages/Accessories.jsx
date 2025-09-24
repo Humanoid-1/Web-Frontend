@@ -24,15 +24,26 @@ function AccessoriesPage() {
     "Docking Station",
     "Headphones",
     "Speakers",
+<<<<<<< HEAD
     "Pendrive",
+=======
+    "Pen Drive",
+>>>>>>> a29321732f799b6ecf6d3d1e176b8b4c307ee127
     "Webcam",
     "USB Flash Drive",
     "Cooling Pad",
     "Microphone",
+<<<<<<< HEAD
     "External Harddrive",
   ];
 
   const brands = ["All", "Dell", "HP", "Lenovo","Asus","Acer","Apple","MSI","Samsung","LG","Huawei","Google","Microsoft","Sony","Logitech","Corsair","Razer"]; // adjust to your brands
+=======
+    "External Hard Drive",
+  ];
+
+  const brands = ["All", "Dell", "HP", "Lenovo", "Logitech","Corsair","Razer"]; // adjust to your brands
+>>>>>>> a29321732f799b6ecf6d3d1e176b8b4c307ee127
 
   // update category when URL param changes
   useEffect(() => {

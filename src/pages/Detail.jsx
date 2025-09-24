@@ -60,7 +60,7 @@ const Detail = () => {
 
       {/* Right: Info Panel */}
       <div className="page-right" style={{fontSize: '34px'}}>
-        <nav className="breadcrumb">Home / Appliances / {laptop.brand} {laptop.model}</nav>
+        <nav className="breadcrumb"><a href="http://localhost:5173/#/">Home</a> / <a href="http://localhost:5173/#/brand/Dell">Laptops</a> / {laptop.brand} {laptop.model}</nav>
         <h1 className="product-title">
           {laptop.brand}  {laptop.model} ({laptop.cpu},{laptop.connectivity}{laptop.ram}, {laptop.storage})
         </h1>
@@ -76,7 +76,7 @@ const Detail = () => {
         <div className="price-section">
           <span className="discounted">₹{laptop.price}</span>
           <span className="mrp">{laptop.discount_price}</span>
-          <span className="badge">5% OFF</span>
+          <span className="badge">58% OFF</span>
         </div>
 
         <button className="buy-btn">Buy Now</button>

@@ -1,6 +1,6 @@
 // src/pages/AccessoriesPage.jsx
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function AccessoriesPage() {
   // category from URL like /accessories/mouse
@@ -262,10 +262,11 @@ function AccessoriesPage() {
               <p style={{ color: "#555", margin: "2px 0" }}>
                 Warranty: {item.warranty || "N/A"}
               </p>
-
+            
               <div style={{ fontSize: "14px", color: "#666", marginTop: "8px" }}>
                 <p>Type: {item.type || "N/A"}</p>
               </div>
+              <Link to={`/accessoriesdetail/${item._id}`} style={{ textDecoration: 'none', width: '100%' }}>
 
               <button
                 style={{
@@ -283,7 +284,9 @@ function AccessoriesPage() {
               >
                 See Details
               </button>
+              </Link>   
             </div>
+           
           ))
         ) : (
           <p

@@ -266,7 +266,7 @@ function AccessoriesPage() {
               <div style={{ fontSize: "14px", color: "#666", marginTop: "8px" }}>
                 <p>Type: {item.type || "N/A"}</p>
               </div>
-              <Link to={`/accessoriesdetail/${item._id}`} style={{ textDecoration: 'none', width: '100%' }}>
+              
 
               <button
                 style={{
@@ -284,7 +284,7 @@ function AccessoriesPage() {
               >
                 See Details
               </button>
-              </Link>   
+            
             </div>
            
           ))

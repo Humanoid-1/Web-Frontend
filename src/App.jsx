@@ -26,6 +26,7 @@ function App() {
         <Route path="/accessories/:accessories?" element={<Accessories />} />
      
         <Route path="/parts" element={<PartsPage />} />
+        <Route path="/parts/:category" element={<PartsPage />} />
         <Route path="/detail/:id" element={<Detail/>} />
         <Route path="/accessoriesdetail/:id" element={<AccessoriesDetail/>} />
         

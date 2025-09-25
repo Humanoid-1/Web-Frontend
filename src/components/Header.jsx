@@ -207,7 +207,7 @@ function Header() {
           <NavItem to="/">Home</NavItem>
           <NavItem to="/About">About</NavItem>
           <NavItem to="/ContactUs">Contact</NavItem>
-          <NavItem to="/products">Policy</NavItem>
+          <NavItem to="/policy">Policy</NavItem>
         </NavLinks>
 
         <IconsContainer>

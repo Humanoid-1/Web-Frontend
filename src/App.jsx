@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import PartsPage from "./pages/PartsPage";
 import Detail from "./pages/Detail";
 import AccessoriesDetail from "./pages/accessoriesdetail";
+import PartsDetail from "./pages/partsDetail";
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/parts/:category" element={<PartsPage />} />
         <Route path="/detail/:id" element={<Detail/>} />
         <Route path="/accessoriesdetail/:id" element={<AccessoriesDetail/>} />
+        <Route path="/parts/:category/:id" element={<PartsDetail />} />
         
         
       </Routes>

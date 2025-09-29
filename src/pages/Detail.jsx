@@ -135,7 +135,7 @@ const Detail = () => {
           {laptop.brand} {laptop.model} ({laptop.cpu}, {laptop.ram},{" "}
           {laptop.storage})
         </h1>
-        <p className="sponsored">Sponsored</p>
+        <p className="sponsored" >Sponsored</p>
 
         <div className="brand-info">
           <p className="brand-para">{laptop.brand}</p>
@@ -149,8 +149,8 @@ const Detail = () => {
 
         <div className="price-section">
           <span className="discounted">₹{laptop.price}</span>
-          <span className="mrp">₹{laptop.discount_price}</span>
-          <span className="badge">58% OFF</span>
+          <span className="mrp">₹{Math.round(laptop.price * 1.2)}</span>
+          <span className="badge">20% OFF</span>
         </div>
 
         <button className="buy-btn">Buy Now</button>

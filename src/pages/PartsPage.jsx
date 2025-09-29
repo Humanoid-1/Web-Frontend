@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 function PartsPage() {
   const { category } = useParams(); // category from URL
@@ -190,7 +190,9 @@ function PartsPage() {
       >
         {parts.length > 0 ? (
           parts.map((item) => (
+            <Link to={`/parts/${item.category}/${item._id}`} style={{ textDecoration: "none" }}>
             <div
+        
               key={item._id}
               style={{
                 background: "white",
@@ -202,6 +204,7 @@ function PartsPage() {
                 alignItems: "center",
               }}
             >
+              
               <div
                 style={{
                   width: "100%",
@@ -214,6 +217,7 @@ function PartsPage() {
                   marginBottom: "12px",
                   overflow: "hidden",
                 }}
+                
               >
                 {item.image_url && (
                   <img
@@ -265,7 +269,7 @@ function PartsPage() {
               <div style={{ fontSize: "14px", color: "#666", marginTop: "8px" }}>
                 <p>Type: {item.type || "N/A"}</p>
               </div>
-
+           
               <button
                 style={{
                   marginTop: "12px",
@@ -283,6 +287,7 @@ function PartsPage() {
                 See Details
               </button>
             </div>
+            </Link>
           ))
         ) : (
           <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#777" }}>

@@ -53,29 +53,32 @@ function PartsDetail() {
         />
 
         {/* Thumbnail row - if you have multiple images later */}
-        <div className="thumbnail-row">
-          <img
-            src={items.image_url}
-            alt="Thumb"
-            className={`thumb ${selectedImage === items.image_url ? "selected" : ""}`}
-            onClick={() => setSelectedImage(items.image_url)}
-          />
-          {/* Add more thumbnails if needed */}
+      <div className="thumbnail-row">
+              {[items.image_url, items.image_url, items.image_url, items.image_url].map((img, i) => (
+                <img
+                  key={i}
+                  src={img || "https://placekitten.com/100/100"}
+                  alt={`thumb-${i}`}
+                  className={`thumb ${selectedImage === img ? "selected" : ""}`}
+                  onClick={() => setMainImage(img)}
+                />
+              ))}
+            </div>
+
+         <div className="product-meta">
+            <h3>Product Details</h3>
+          <p>Warranty: {items.warranty || "N/A"}</p>
+          <p>Stock: {items.stock || "Available"}</p>
+          <p>Category: {items.category}</p>
+          <p>Brand: {items.brand}</p>
+          
         </div>
 
-        <div className="why-shop">
-          <h4>Why shop with us?</h4>
-          <ul>
-            <li>✅ 100% Original & Verified Parts</li>
-            <li>✅ Easy Returns & Warranty Support</li>
-            <li>✅ Fast Delivery</li>
-            <li>✅ Secure Payments</li>
-          </ul>
-        </div>
       </div>
 
       <div className="page-right">
         <div className="breadcrumb">
+            <a href="http://localhost:5173/#/">Home</a> /{" "}
           <a href="#" onClick={() => navigate(-1)}>
             Parts
           </a>{" "}
@@ -85,13 +88,14 @@ function PartsDetail() {
         <h1 className="product-title">{items.name}</h1>
         <p className="sponsored">Sponsored</p>
 
-        <div className="brand-info">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/69/69906.png"
-            alt="brand"
-            className="brand-icon"
-          />
-          <span className="brand-para">Brand: {items.brand}</span>
+       <div className="brand-info">
+          <p className="brand-para">{items.brand}</p>
+          <a
+            href={`http://localhost:5173/#/parts/${items.category}`}
+            className="green-link"
+          >
+            Explore all products
+          </a>
         </div>
 
         <div className="price-section">
@@ -102,13 +106,15 @@ function PartsDetail() {
 
         <button className="buy-btn">Buy Now</button>
 
-        <div className="product-meta">
-            <h3>Product Details</h3>
-          <p>Warranty: {items.warranty || "N/A"}</p>
-          <p>Stock: {items.stock || "Available"}</p>
-          <p>Category: {items.category}</p>
-          <p>Brand: {items.brand}</p>
-          
+       
+         <div className="why-shop">
+          <h4>Why shop from humanoid maker?</h4>
+          <ul>
+            <li><strong>Trusted Quality</strong> – Every product is checked.</li>
+            <li><strong>Fair Prices</strong> – No hidden fees.</li>
+            <li><strong>Expert Support</strong> – Tech specialists ready.</li>
+            <li><strong>Eco-Friendly</strong> – We recycle to cut e-waste.</li>
+          </ul>
         </div>
 
         {items.description && (

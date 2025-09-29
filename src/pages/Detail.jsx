@@ -96,17 +96,17 @@ const Detail = () => {
         </div>
 
         {/* ✅ Thumbnails */}
-        <div className="thumbnail-row">
-          {laptop.image_url.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Thumb ${index}`}
-              className={`thumb ${selectedImage === img ? "selected" : ""}`}
-              onClick={() => setSelectedImage(img)}
-            />
-          ))}
-        </div>
+      <div className="thumbnail-row">
+              {[laptop.image_url, laptop.image_url, laptop.image_url,laptop.image_url].map((img, i) => (
+                <img
+                  key={i}
+                  src={img || "https://placekitten.com/100/100"}
+                  alt={`thumb-${i}`}
+                  className={`thumb ${selectedImage === img ? "selected" : ""}`}
+                  onClick={() => setMainImage(img)}
+                />
+              ))}
+            </div>
 
         {/* ✅ Product Meta */}
         <div className="product-meta">

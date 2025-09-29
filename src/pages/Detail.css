@@ -32,7 +32,7 @@
   cursor: pointer;
   transition: 0.3s ease;
 }
-.thumb.selected {
+.thumb:hover {
   border: 2px solid  #3498db;
 }
 

@@ -1,7 +1,6 @@
 // src/pages/AccessoriesPage.jsx
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-
 function AccessoriesPage() {
   // category from URL like /accessories/mouse
   const { accessories: categoryParam } = useParams();
@@ -194,6 +193,7 @@ function AccessoriesPage() {
       >
         {accessories.length > 0 ? (
           accessories.map((item) => (
+            <Link to={`/accessories/${category}/${item._id}`}>
             <div
               key={item._id}
               style={{
@@ -286,6 +286,7 @@ function AccessoriesPage() {
               </button>
             </Link>
             </div>
+                </Link>
            
           ))
         ) : (

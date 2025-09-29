@@ -10,7 +10,9 @@ import Accessories from "./pages/Accessories";
 import Footer from "./components/Footer";
 import PartsPage from "./pages/PartsPage";
 import Detail from "./pages/Detail";
-import AccessoriesDetail from "./pages/accessoriesdetail";
+import AccessoryDetailPage from "./pages/AccessoriesDetailPage";
+// import AccessoriesDetail from "./pages/accessoriesdetail";
+// import AccessoryDetailPage from "./pages/AccessoryDetailPage";
 
 
 
@@ -28,7 +30,10 @@ function App() {
         <Route path="/parts" element={<PartsPage />} />
         <Route path="/parts/:category" element={<PartsPage />} />
         <Route path="/detail/:id" element={<Detail/>} />
-        <Route path="/accessoriesdetail/:id" element={<AccessoriesDetail/>} />
+        {/* <Route path="/accessoriesdetail/:id" element={<AccessoriesDetail/>} /> */}
+        {/* <Route path="/accessory/:id" element={<AccessoryDetailPage />} /> */}
+        <Route path="/accessories/:category/:id" element={<AccessoryDetailPage />} />
+
         
         
       </Routes>

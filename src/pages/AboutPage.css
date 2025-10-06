@@ -2,25 +2,25 @@
 
 .about-container {
   padding: 2rem;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+   background: linear-gradient(120deg, #f9fafc 0%, #eef1f6 100%);
   color: #333;
 }
 
 .about-section {
   max-width: 1200px;
-  margin: auto;
 }
 
 .about-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: #0072c6;
+  font-size: 2rem;
+  font-weight: 600;
+   color: #2c3e50;
+  text-align: center;
 }
 
 .about-header p {
   font-size: 1.1rem;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .about-grid {
@@ -31,7 +31,8 @@
 .about-main h2,
 .about-main h3 {
   margin-top: 1.5rem;
-  color: #004b8d;
+  color: #2c3e50;
+  font-weight: 600;
 }
 
 .about-main ul {
@@ -43,15 +44,24 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
+  font-weight: 500;
   margin-top: 1.5rem;
 }
 
 .why-card {
   background-color: white;
   padding: 1rem;
-  border-left: 5px solid #0072c6;
+  border-left: 5px solid skyblue;
   border-radius: 4px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  transform: scale(2s);
+ animation: fadeInUp 0.6s forwards;
+}
+
+.why-card:hover{
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+  
 }
 
 .about-promise {
@@ -60,14 +70,47 @@
   margin-top: 2rem;
   border-radius: 5px;
   font-size: 1rem;
+  font-weight: 600;
+}
+
+.highlight {
+  background-color: #e6f4ff;
+  color: #007acc;
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 .about-aside {
-  margin-top: 3rem;
   padding: 1rem;
   background-color: #fff;
   border-top: 1px solid #ddd;
   font-size: 1rem;
+}
+
+.logo{
+  height: 60px;
+  width: 95px;
+  display: inline;
+  margin-top: 25px;
+  align-items: center;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  padding: 6px;
+}
+.logo:hover {
+  transform: scale(1.1);
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+}
+
+.brand-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 .about-aside ul {
@@ -79,7 +122,7 @@
   display: inline-block;
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
-  background-color: #0072c6;
+  background-color: #3498db;
   color: white;
   text-decoration: none;
   border-radius: 4px;
@@ -87,7 +130,8 @@
 }
 
 .aside-button a:hover {
-  background-color: #005999;
+  background-color: #197dc0;
+  
 }
 
 .aside-note {

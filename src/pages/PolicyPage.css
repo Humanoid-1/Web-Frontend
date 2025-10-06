@@ -1,0 +1,126 @@
+/* Base Styles */
+.policy-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.policy-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.policy-header h1 {
+  font-size: 2rem;
+  color: #222;
+}
+
+.policy-header p {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.policy-section {
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1.5rem;
+  border-left: 5px solid #0078D4;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.policy-section h2 {
+  margin-bottom: 1rem;
+  color: #0078D4;
+  font-size: 1.4rem;
+}
+
+.policy-section ul,
+.policy-section ol {
+  padding-left: 1.5rem;
+}
+
+.policy-section li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.policy-footer {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #444;
+  text-align: center;
+  padding: 1rem;
+}
+
+.policy-footer a {
+  color: #0078D4;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.policy-footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* ✅ Responsive Styles */
+@media (max-width: 768px) {
+  .policy-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .policy-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .policy-header p {
+    font-size: 1rem;
+  }
+
+  .policy-section {
+    padding: 1rem;
+  }
+
+  .policy-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .policy-section li {
+    font-size: 0.95rem;
+  }
+
+  .policy-footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .policy-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .policy-header p {
+    font-size: 0.95rem;
+  }
+
+  .policy-section h2 {
+    font-size: 1.1rem;
+  }
+
+  .policy-section li {
+    font-size: 0.9rem;
+  }
+
+  .policy-footer {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}

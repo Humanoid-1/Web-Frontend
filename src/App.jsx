@@ -12,6 +12,7 @@ import PartsPage from "./pages/PartsPage";
 import Detail from "./pages/Detail";
 import AccessoryDetailPage from "./pages/AccessoriesDetailPage";
 import PartsDetail from "./pages/partsDetail";
+import PolicyPage from "./pages/PolicyPage";
 // import AccessoriesDetail from "./pages/accessoriesdetail";
 // import AccessoryDetailPage from "./pages/AccessoryDetailPage";
 
@@ -27,7 +28,7 @@ function App() {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/brand/:brand" element={<BrandPage />} />
         <Route path="/accessories/:accessories?" element={<Accessories />} />
-     
+        <Route path="/policy" element={<PolicyPage />} />
         <Route path="/parts" element={<PartsPage />} />
         <Route path="/parts/:category" element={<PartsPage />} />
         <Route path="/detail/:id" element={<Detail/>} />

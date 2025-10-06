@@ -22,7 +22,13 @@ function AccessoryDetailPage() {
           const found = data.data.find((acc) => acc._id === id);
           if (found) {
             setItem(found);
-            setMainImage(found.image_url || "https://placekitten.com/600/400");
+
+            // Fix mainImage URL
+            if (Array.isArray(found.image_url)) {
+              setMainImage(`http://localhost:5000/${found.image_url[0]}`);
+            } else {
+              setMainImage(`http://localhost:5000/${found.image_url}`);
+            }
           } else {
             setError("Accessory not found");
           }
@@ -45,7 +51,6 @@ function AccessoryDetailPage() {
 
   return (
     <div className="container">
-      
       {item && (
         <>
           {/* Left Section */}
@@ -57,17 +62,19 @@ function AccessoryDetailPage() {
             />
 
             <div className="thumbnail-row">
-              {[item.image_url, item.image_url, item.image_url,item.image_url].map((img, i) => (
+              {(Array.isArray(item.image_url) ? item.image_url : [item.image_url]).map((img, i) => (
                 <img
                   key={i}
-                  src={img || "https://placekitten.com/100/100"}
+                  src={`http://localhost:5000/${img}`}
                   alt={`thumb-${i}`}
-                  className={`thumb ${mainImage === img ? 'selected' : ''}`}
-                  onClick={() => setMainImage(img)}
+                  className={`thumb ${mainImage === `http://localhost:5000/${img}` ? 'selected' : ''}`}
+                  onClick={() => setMainImage(`http://localhost:5000/${img}`)}
+                  onError={(e) => { e.target.onerror = null; e.target.src = "https://placekitten.com/100/100"; }}
                 />
               ))}
             </div>
-             <div className="product-meta">
+
+            <div className="product-meta">
               <h4>Product Details</h4>
               <div className="meta-details">
                 <p><strong>Type:</strong> {item.type}</p>
@@ -78,7 +85,6 @@ function AccessoryDetailPage() {
               <h4 style={{ marginTop: "20px" }}>Description</h4>
               <p className="gray">{item.description || "No description available."}</p>
             </div>
-
           </div>
 
           {/* Right Section */}
@@ -92,14 +98,14 @@ function AccessoryDetailPage() {
             <p className="sponsored">Sponsored</p>
 
             <div className="brand-info">
-          <p className="brand-para">{item.brand}</p>
-          <a
-            href={`http://localhost:5173/accessories#/accessories/${item.category}`}
-            className="green-link"
-          >
-            Explore all products
-          </a>
-        </div>
+              <p className="brand-para">{item.brand}</p>
+              <a
+                href={`http://localhost:5173/accessories#/accessories/${item.category}`}
+                className="green-link"
+              >
+                Explore all products
+              </a>
+            </div>
 
             <div className="price-section">
               <span className="discounted">₹{item.price}</span>
@@ -109,15 +115,15 @@ function AccessoryDetailPage() {
 
             <button className="buy-btn">Buy Now</button>
 
-              <div className="why-shop">
-          <h4>Why shop from humanoid maker?</h4>
-          <ul>
-            <li><strong>Trusted Quality</strong> – Every product is checked.</li>
-            <li><strong>Fair Prices</strong> – No hidden fees.</li>
-            <li><strong>Expert Support</strong> – Tech specialists ready.</li>
-            <li><strong>Eco-Friendly</strong> – We recycle to cut e-waste.</li>
-          </ul>
-        </div>
+            <div className="why-shop">
+              <h4>Why shop from humanoid maker?</h4>
+              <ul>
+                <li><strong>Trusted Quality</strong> – Every product is checked.</li>
+                <li><strong>Fair Prices</strong> – No hidden fees.</li>
+                <li><strong>Expert Support</strong> – Tech specialists ready.</li>
+                <li><strong>Eco-Friendly</strong> – We recycle to cut e-waste.</li>
+              </ul>
+            </div>
           </div>
         </>
       )}

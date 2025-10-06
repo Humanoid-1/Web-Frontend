@@ -1,37 +1,44 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../pages/Detail.css";
+import "./detail.css"; // ✅ Importing CSS
 
-function PartsDetail() {
+function PartsDetailPage() {
   const { id, category } = useParams();
   const navigate = useNavigate();
 
-  const [items, setItems] = useState(null);
+  const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null); // for image switch
+  const [mainImage, setMainImage] = useState("");
 
   useEffect(() => {
     const fetchPart = async () => {
       try {
-        const response = await fetch(
+        const res = await fetch(
           `http://localhost:5000/api/getParts?category=${category}&page=1&limit=1000`
         );
-        const data = await response.json();
+        const data = await res.json();
 
         if (data && Array.isArray(data.data)) {
-          const foundPart = data.data.find((part) => part._id === id);
-          if (foundPart) {
-            setItems(foundPart);
-            setSelectedImage(foundPart.image_url); // set main image
+          const found = data.data.find((part) => part._id === id);
+          if (found) {
+            setItem(found);
+
+            // ✅ Fix main image URL
+            if (Array.isArray(found.image_url)) {
+              setMainImage(`http://localhost:5000/${found.image_url[0]}`);
+            } else {
+              setMainImage(`http://localhost:5000/${found.image_url}`);
+            }
           } else {
             setError("Part not found");
           }
         } else {
-          setError("Invalid data format received from server");
+          setError("Invalid response from server");
         }
-      } catch (error) {
-        setError("Error fetching part data");
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch part data");
       } finally {
         setLoading(false);
       }
@@ -40,92 +47,108 @@ function PartsDetail() {
     fetchPart();
   }, [id, category]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
+  if (error) return <p style={{ textAlign: "center", color: "red" }}>{error}</p>;
 
   return (
     <div className="container">
-      <div className="page-left">
-        <img
-          src={selectedImage}
-          alt={items.model}
-          className="main-image"
-        />
+      {item && (
+        <>
+          {/* Left Section */}
+          <div className="page-left">
+            <img
+              src={mainImage}
+              alt={item.name || item.model}
+              className="main-image"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://placekitten.com/400/400";
+              }}
+            />
 
-        {/* Thumbnail row - if you have multiple images later */}
-      <div className="thumbnail-row">
-              {[items.image_url, items.image_url, items.image_url, items.image_url].map((img, i) => (
-                <img
-                  key={i}
-                  src={img || "https://placekitten.com/100/100"}
-                  alt={`thumb-${i}`}
-                  className={`thumb ${selectedImage === img ? "selected" : ""}`}
-                  onClick={() => setMainImage(img)}
-                />
-              ))}
+            {/* Thumbnail Row */}
+            <div className="thumbnail-row">
+              {(Array.isArray(item.image_url) ? item.image_url : [item.image_url]).map(
+                (img, i) => (
+                  <img
+                    key={i}
+                    src={`http://localhost:5000/${img}`}
+                    alt={`thumb-${i}`}
+                    className={`thumb ${
+                      mainImage === `http://localhost:5000/${img}` ? "selected" : ""
+                    }`}
+                    onClick={() => setMainImage(`http://localhost:5000/${img}`)}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://placekitten.com/100/100";
+                    }}
+                  />
+                )
+              )}
             </div>
 
-         <div className="product-meta">
-            <h3>Product Details</h3>
-          <p>Warranty: {items.warranty || "N/A"}</p>
-          <p>Stock: {items.stock || "Available"}</p>
-          <p>Category: {items.category}</p>
-          <p>Brand: {items.brand}</p>
-          
-        </div>
+            {/* Product Meta Info */}
+            <div className="product-meta">
+              <h4>Product Details</h4>
+              <div className="meta-details">
+                <p><strong>Category:</strong> {item.category}</p>
+                <p><strong>Brand:</strong> {item.brand}</p>
+                <p><strong>Stock:</strong> {item.stock || "Available"}</p>
+                <p><strong>Warranty:</strong> {item.warranty || "N/A"}</p>
+              </div>
 
-      </div>
-
-      <div className="page-right">
-        <div className="breadcrumb">
-            <a href="http://localhost:5173/#/">Home</a> /{" "}
-          <a href="#" onClick={() => navigate(-1)}>
-            Parts
-          </a>{" "}
-          / {items.category}
-        </div>
-
-        <h1 className="product-title">{items.name}</h1>
-        <p className="sponsored">Sponsored</p>
-
-       <div className="brand-info">
-          <p className="brand-para">{items.brand}</p>
-          <a
-            href={`http://localhost:5173/#/parts/${items.category}`}
-            className="green-link"
-          >
-            Explore all products
-          </a>
-        </div>
-
-        <div className="price-section">
-          <span className="discounted">₹{items.price}</span>
-          <span className="mrp">₹{Math.round(items.price * 1.2)}</span>
-          <span className="badge">20% OFF</span>
-        </div>
-
-        <button className="buy-btn">Buy Now</button>
-
-       
-         <div className="why-shop">
-          <h4>Why shop from humanoid maker?</h4>
-          <ul>
-            <li><strong>Trusted Quality</strong> – Every product is checked.</li>
-            <li><strong>Fair Prices</strong> – No hidden fees.</li>
-            <li><strong>Expert Support</strong> – Tech specialists ready.</li>
-            <li><strong>Eco-Friendly</strong> – We recycle to cut e-waste.</li>
-          </ul>
-        </div>
-
-        {items.description && (
-          <div className="meta-details">
-            <h4>Description</h4>
-            <p>{items.description}</p>
+              <h4 style={{ marginTop: "20px" }}>Description</h4>
+              <p className="gray">{item.description || "No description available."}</p>
+            </div>
           </div>
-        )}
-      </div>
+
+          {/* Right Section */}
+          <div className="page-right">
+            <div className="breadcrumb">
+              <a href="http://localhost:5173/#/">Home</a> /{" "}
+              <a href="#" onClick={() => navigate(-1)}>
+                Parts
+              </a>{" "}
+              / <span>{category}</span>
+            </div>
+
+            <h1 className="product-title">
+              {item.brand} {item.name || item.category}
+            </h1>
+            <p className="sponsored">Sponsored</p>
+
+            <div className="brand-info">
+              <p className="brand-para">{item.brand}</p>
+              <a
+                href={`http://localhost:5173/#/parts/${item.category}`}
+                className="green-link"
+              >
+                Explore all products
+              </a>
+            </div>
+
+            <div className="price-section">
+              <span className="discounted">₹{item.price}</span>
+              <span className="mrp">₹{Math.round(item.price * 1.2)}</span>
+              <span className="badge">20% OFF</span>
+            </div>
+
+            <button className="buy-btn">Buy Now</button>
+
+            <div className="why-shop">
+              <h4>Why shop from humanoid maker?</h4>
+              <ul>
+                <li><strong>Trusted Quality</strong> – Every product is checked.</li>
+                <li><strong>Fair Prices</strong> – No hidden fees.</li>
+                <li><strong>Expert Support</strong> – Tech specialists ready.</li>
+                <li><strong>Eco-Friendly</strong> – We recycle to cut e-waste.</li>
+              </ul>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
 
-export default PartsDetail;
+export default PartsDetailPage;

@@ -96,17 +96,17 @@ const Detail = () => {
         </div>
 
         {/* ✅ Thumbnails */}
-      <div className="thumbnail-row">
-              {[laptop.image_url, laptop.image_url, laptop.image_url,laptop.image_url].map((img, i) => (
-                <img
-                  key={i}
-                  src={img || "https://placekitten.com/100/100"}
-                  alt={`thumb-${i}`}
-                  className={`thumb ${selectedImage === img ? "selected" : ""}`}
-                  onClick={() => setMainImage(img)}
-                />
-              ))}
-            </div>
+        <div className="thumbnail-row">
+          {laptop.image_url.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Thumb ${index}`}
+              className={`thumb ${selectedImage === img ? "selected" : ""}`}
+              onClick={() => setSelectedImage(img)}
+            />
+          ))}
+        </div>
 
         {/* ✅ Product Meta */}
         <div className="product-meta">
@@ -135,7 +135,7 @@ const Detail = () => {
           {laptop.brand} {laptop.model} ({laptop.cpu}, {laptop.ram},{" "}
           {laptop.storage})
         </h1>
-        <p className="sponsored" >Sponsored</p>
+        <p className="sponsored">Sponsored</p>
 
         <div className="brand-info">
           <p className="brand-para">{laptop.brand}</p>
@@ -149,8 +149,8 @@ const Detail = () => {
 
         <div className="price-section">
           <span className="discounted">₹{laptop.price}</span>
-          <span className="mrp">₹{Math.round(laptop.price * 1.2)}</span>
-          <span className="badge">20% OFF</span>
+          <span className="mrp">₹{laptop.discount_price}</span>
+          <span className="badge">58% OFF</span>
         </div>
 
         <button className="buy-btn">Buy Now</button>

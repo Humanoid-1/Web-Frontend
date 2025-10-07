@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 function BrandPage() {
   const { brand: brandParam } = useParams();   // <-- brand from /brand/:brand
@@ -239,7 +238,7 @@ function BrandPage() {
       <div className="laptop-grid">
         
         {laptops.map((laptop, index) => (
-          <Link to={`/Detail/${laptop._id}`}>
+          <Link to={`/Detail/${laptop._id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={laptop._id || index}>
           <div
             key={laptop._id || index}
             className="laptop-card"

@@ -11,7 +11,11 @@ import Footer from "./components/Footer";
 import PartsPage from "./pages/PartsPage";
 import PartDetail from "./pages/PartDetail";
 import Detail from "./pages/Detail";
-import AccessoriesDetail from "./pages/accessoriesdetail";
+import AccessoryDetailPage from "./pages/AccessoriesDetailPage";
+import PartsDetail from "./pages/partsDetail";
+import PolicyPage from "./pages/PolicyPage";
+// import AccessoriesDetail from "./pages/accessoriesdetail";
+// import AccessoryDetailPage from "./pages/AccessoryDetailPage";
 
 
 
@@ -25,10 +29,16 @@ function App() {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/brand/:brand" element={<BrandPage />} />
         <Route path="/accessories/:accessories?" element={<Accessories />} />
+        <Route path="/policy" element={<PolicyPage />} />
         <Route path="/parts" element={<PartsPage />} />
-        <Route path="/parts/partdetail/:id/:category" element={<PartDetail />} />
+        <Route path="/parts/:category" element={<PartsPage />} />
         <Route path="/detail/:id" element={<Detail/>} />
-        <Route path="/accessoriesdetail/:id" element={<AccessoriesDetail/>} />
+        
+        <Route path="/parts/:category/:id" element={<PartsDetail />} />
+        {/* <Route path="/accessoriesdetail/:id" element={<AccessoriesDetail/>} /> */}
+        <Route path="/accessory/:id" element={<AccessoryDetailPage />} />
+        <Route path="/accessories/:category/:id" element={<AccessoryDetailPage />} />
+
         
         
       </Routes>

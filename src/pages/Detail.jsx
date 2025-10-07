@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import "../pages/Detail.css";
 
 const Detail = () => {
-  const { id } = useParams();
+  const { id,brand } = useParams();
   const [laptop, setLaptop] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
@@ -52,19 +52,21 @@ const Detail = () => {
   return (
     <div className="container">
       {/* -------- Left Side (Images + Lens + Meta) -------- */}
-      <div
-        className="page-left"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setShowLens(true)}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="main-img-wrapper" style={{ position: "relative" }}>
-          <img
-            ref={imageRef}
-            src={selectedImage}
-            alt={laptop.model}
-            className="main-image"
-          />
+     <div className="page-left">
+  <div
+    className="main-img-wrapper"
+    style={{ position: "relative" }}
+    onMouseMove={handleMouseMove}
+    onMouseEnter={() => setShowLens(true)}
+    onMouseLeave={handleMouseLeave}
+  >
+    <img
+      ref={imageRef}
+      src={selectedImage}
+      alt={laptop.model}
+      className="main-image"
+    />
+
           {/* ✅ Lens */}
           {showLens && (
             <div
@@ -73,10 +75,11 @@ const Detail = () => {
                 position: "absolute",
                 width: "100px",
                 height: "100px",
-                border: "2px solid #007bff",
+                border: "1px solid #a89e9eff",
                 borderRadius: "50%",
                 left: `${lensPosition.x - 50}px`,
                 top: `${lensPosition.y - 50}px`,
+                 
                 background: "rgba(255,255,255,0.2)",
                 pointerEvents: "none",
                 display: "flex",
@@ -87,7 +90,7 @@ const Detail = () => {
                 color: "#007bff",
               }}
             >
-              +
+              
             </div>
           )}
         </div>
@@ -113,6 +116,7 @@ const Detail = () => {
             <p><strong>RAM:</strong> {laptop.ram}</p>
             <p><strong>Storage:</strong> {laptop.storage}</p>
             <p><strong>Warranty:</strong> {laptop.warranty}</p>
+            <p><strong>Description:</strong> {laptop.description}</p> 
           </div>
         </div>
       </div>
@@ -169,14 +173,16 @@ const Detail = () => {
           className="zoom-result"
           style={{
             position: "absolute",
-            left: "40px",
-            top: "100px",
+            left: "60px",
+            top: "120px",
             width: "150px",
             height: "150px",
+            pointerEvents: "none",
             border: "1px solid #ddd",
             backgroundImage: `url(${selectedImage})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: backgroundPosition,
+            
             backgroundSize: "300%",
             borderRadius: "10px",
             boxShadow: "0 2px 8px rgba(0,0,0,0.15)",

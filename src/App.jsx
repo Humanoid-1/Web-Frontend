@@ -9,6 +9,7 @@ import BrandPage from "./pages/BrandPage";
 import Accessories from "./pages/Accessories";
 import Footer from "./components/Footer";
 import PartsPage from "./pages/PartsPage";
+import PartDetail from "./pages/PartDetail";
 import Detail from "./pages/Detail";
 import AccessoriesDetail from "./pages/accessoriesdetail";
 
@@ -24,8 +25,8 @@ function App() {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/brand/:brand" element={<BrandPage />} />
         <Route path="/accessories/:accessories?" element={<Accessories />} />
-     
         <Route path="/parts" element={<PartsPage />} />
+        <Route path="/parts/partdetail/:id/:category" element={<PartDetail />} />
         <Route path="/detail/:id" element={<Detail/>} />
         <Route path="/accessoriesdetail/:id" element={<AccessoriesDetail/>} />
         

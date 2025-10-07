@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
 
 function PartsPage() {
   const [accessories, setAccessories] = useState([]);
@@ -92,6 +93,9 @@ function PartsPage() {
       >
         {accessories.length > 0 ? (
           accessories.map((item) => (
+           <Link to={`/parts/partdetail/${item._id}/${item.category}`}>
+
+
             <div
               key={item._id}
               style={{
@@ -183,6 +187,7 @@ function PartsPage() {
                 See Details
               </button>
             </div>
+            </Link>
           ))
         ) : (
           <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#777" }}>

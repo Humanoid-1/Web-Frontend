@@ -84,37 +84,57 @@ const SliderComponent = () => {
                     color: #0850afff;
                 }
 
-                @media (max-width: 768px) {
-                    .slide-item {
-                        height: 190px;
-                    }
-                    .slick-dots {
-                        display: none !important;
-                    }
-                    @media (max-width: 1024px) {
-                        .slide-item {
-                            height: 600px;
-                        }
-                    }
+              /* Tablet screens (up to 1024px) */
+@media (max-width: 1024px) {
+  .slide-item {
+    height: 600px;
+  }
+}
+
+/* Mobile screens (up to 768px) */
+@media (max-width: 768px) {
+  .slide-item {
+    height: 190px;
+  }
+  .slick-dots {
+    display: none !important;
+  }
+}
+
+/* Small mobile screens (up to 480px) */
+@media (max-width: 480px) {
+  .slide-item {
+    height: 160px;
+  }
+}
+
                 }
             `}</style>
 
-            <Slider ref={sliderRef} {...settings}>
-                {slides.map((slide, index) => (
-                    <div key={index}>
-                        <div className="slide-item">
-                            <a href={slide.link} target="_blank" rel="noopener noreferrer">
-                                <img
-                                    src={slide.imageUrl}
-                                    alt={slide.title || `Slide ${index}`}
-                                    className="slide-image"
-            
-                                />
-                            </a>
-                        </div>
-                    </div>
-                ))}
-            </Slider>
+<Slider ref={sliderRef} {...settings}>
+  {(slides.length > 0 ? slides : [
+    {
+      imageUrl: "/newBanner.png",
+      title: "Default Banner",
+      link: "#"
+    }
+  ]).map((slide, index) => (
+    <div key={index}>
+      <div className="slide-item">
+        <a href={slide.link} target="_blank" rel="noopener noreferrer">
+          <img
+            src={slide.imageUrl}
+            alt={slide.title || `Slide ${index}`}
+            className="slide-image"
+            loading="lazy"
+          />
+        </a>
+      </div>
+    </div>
+  ))}
+</Slider>
+
+
         </div>
     );
 };

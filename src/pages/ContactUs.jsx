@@ -18,42 +18,51 @@ function ContactUs() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // Here you can handle form submission, e.g., send data to an API
-    console.log("Form Data Submitted:", formData);
+  // try {
+    const res = await fetch("http://localhost:5000/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-    // Success toast with green tick
-    toast.success("Thank you for contacting us!", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
+    const result = await res.json();
+
+    if (res.status === 201) {
+      toast.success(result.message, {
+        position: "top-right",
+        autoClose: 3000,
         style: {
-    backgroundColor: "#007bff",
-    color: "#fff",
-    fontWeight: "bold"
-  }
-    });
+          backgroundColor: "#007bff",
+          color: "#fff",
+          fontWeight: "bold",
+        },
+      });
 
-    // Form reset
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
-  };
+      setFormData({ name: "", email: "", message: "" });
+    } else if (res.status === 409) {
+      toast.error(result.error || "This email has already been used.");
+    } else {
+      toast.error(result.error || "Something went wrong.");
+    }
+  // } catch (error) {
+  //   console.error("Frontend error:", error);
+  //   toast.error("Server error. Please try again later.");
+  // }
+};
+
+
+  
 
   return (
     <div className="contact-container">
-      <h1>Contact Us - Humanoid Maker</h1>
+      <h1>Contact Us</h1>
       <p>
-        Have questions about buying or selling laptops? Or need help with
-        accessories? Fill out the form below and our team will reach out to you.
+        "Need help? We’re just a form away!"
       </p>
 
       <form className="contact-form" onSubmit={handleSubmit}>

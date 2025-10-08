@@ -238,8 +238,8 @@ function Header() {
         <MobileNavItem to="/about" onClick={() => setMenuOpen(false)}>
           About Us
         </MobileNavItem>
-        <MobileNavItem to="/contact" onClick={() => setMenuOpen(false)}>
-          Contact
+        <MobileNavItem to="/ContactUs" onClick={() => setMenuOpen(false)}>
+          Contact Us
         </MobileNavItem>
         <MobileNavItem to="/account" onClick={() => setMenuOpen(false)}>
           <FaUser /> My Account

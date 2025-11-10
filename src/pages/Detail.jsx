@@ -3,32 +3,59 @@ import { useParams } from "react-router-dom";
 import "../pages/Detail.css";
 
 const Detail = () => {
-  const { id,brand } = useParams();
+  const { id, brand } = useParams();
   const [laptop, setLaptop] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
 
-  // Lens + Zoom states
   const imageRef = useRef(null);
   const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
   const [showLens, setShowLens] = useState(false);
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/getLaptop/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLaptop(data);
-        setSelectedImage(data.image_url[0]);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Fetch error:", err);
-        setLoading(false);
-      });
-  }, [id]);
+  // ✅ Default fallback image (can be any local or hosted image)
+  const DEFAULT_IMAGE = "https://via.placeholder.com/400x300?text=No+Image";
 
-  // ✅ Zoom Handler
+  useEffect(() => {
+    const fetchLaptop = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5000/api/getLaptopsByBrand/${brand}?page=1&limit=1000`
+        );
+        const data = await res.json();
+
+        if (data && Array.isArray(data.data)) {
+          const found = data.data.find((lap) => lap._id === id);
+          if (found) {
+            setLaptop(found);
+
+            // ✅ Fix: don't prepend localhost again; use directly
+            if (Array.isArray(found.image_url) && found.image_url.length > 0) {
+              setSelectedImage(found.image_url[0]);
+            } else if (found.image_url) {
+              setSelectedImage(found.image_url);
+            } else {
+              // ✅ Fallback if no image
+              setSelectedImage(DEFAULT_IMAGE);
+            }
+          } else {
+            setError("Laptop not found");
+          }
+        } else {
+          setError("Invalid response from server");
+        }
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch laptop");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLaptop();
+  }, [id, brand]);
+
   const handleMouseMove = (e) => {
     const rect = imageRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -46,29 +73,28 @@ const Detail = () => {
 
   const handleMouseLeave = () => setShowLens(false);
 
-  if (loading) return <h2>Loading...</h2>;
-  if (!laptop) return <h2>Laptop not found</h2>;
+  if (loading) return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+  if (error) return <h2 style={{ textAlign: "center", color: "red" }}>{error}</h2>;
+  if (!laptop) return <h2 style={{ textAlign: "center" }}>Laptop not found</h2>;
 
   return (
     <div className="container">
-      {/* -------- Left Side (Images + Lens + Meta) -------- */}
-     <div className="page-left">
-  <div
-    className="main-img-wrapper"
-    style={{ position: "relative" }}
-    onMouseMove={handleMouseMove}
-    onMouseEnter={() => setShowLens(true)}
-    onMouseLeave={handleMouseLeave}
-  >
-    <img
-      ref={imageRef}
-      src={selectedImage}
-      alt={laptop.model}
-      className="main-image"
-    />
+      <div className="page-left">
+        <div
+          className="main-img-wrapper"
+          style={{ position: "relative" }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setShowLens(true)}
+          onMouseLeave={handleMouseLeave}
+        >
+          <img
+            ref={imageRef}
+            src={selectedImage || DEFAULT_IMAGE} // ✅ Safe fallback
+            alt={laptop.model || "Laptop"}
+            className="main-image"
+          />
 
-          {/* ✅ Lens */}
-          {showLens && (
+          {showLens && selectedImage && selectedImage !== DEFAULT_IMAGE && (
             <div
               className="lens"
               style={{
@@ -79,36 +105,28 @@ const Detail = () => {
                 borderRadius: "50%",
                 left: `${lensPosition.x - 50}px`,
                 top: `${lensPosition.y - 50}px`,
-                 
                 background: "rgba(255,255,255,0.2)",
                 pointerEvents: "none",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "28px",
-                fontWeight: "bold",
-                color: "#007bff",
               }}
-            >
-              
-            </div>
+            />
           )}
         </div>
 
-        {/* ✅ Thumbnails */}
         <div className="thumbnail-row">
-          {laptop.image_url.map((img, index) => (
+          {(Array.isArray(laptop.image_url)
+            ? laptop.image_url
+            : [laptop.image_url]
+          ).map((img, index) => (
             <img
               key={index}
-              src={img}
+              src={img || DEFAULT_IMAGE} // ✅ Default image for missing URLs
               alt={`Thumb ${index}`}
               className={`thumb ${selectedImage === img ? "selected" : ""}`}
-              onClick={() => setSelectedImage(img)}
+              onClick={() => setSelectedImage(img || DEFAULT_IMAGE)}
             />
           ))}
         </div>
 
-        {/* ✅ Product Meta */}
         <div className="product-meta">
           <strong>Product Details</strong>
           <div className="meta-details">
@@ -116,19 +134,16 @@ const Detail = () => {
             <p><strong>RAM:</strong> {laptop.ram}</p>
             <p><strong>Storage:</strong> {laptop.storage}</p>
             <p><strong>Warranty:</strong> {laptop.warranty}</p>
-            <p><strong>Description:</strong> {laptop.description}</p> 
+            <p><strong>Description:</strong> {laptop.description}</p>
           </div>
         </div>
       </div>
 
-      {/* -------- Right Side -------- */}
       <div className="page-right">
         <nav className="breadcrumb">
-          <a href="http://localhost:5173/#/">Home</a> /{" "}
-          <a href={`http://localhost:5173/#/brand/${laptop.brand}`}>
-            Laptops
-          </a>{" "}
-          / {laptop.brand} {laptop.model}
+          <a href="/">Home</a> /{" "}
+          <a href={`/brand/${laptop.brand}`}>Laptops</a> /{" "}
+          {laptop.brand} {laptop.model}
         </nav>
 
         <h1 className="product-title">
@@ -149,13 +164,12 @@ const Detail = () => {
 
         <div className="price-section">
           <span className="discounted">₹{laptop.price}</span>
-          <span className="mrp">₹{laptop.discount_price}</span>
-          <span className="badge">58% OFF</span>
+          <span className="mrp">₹{Math.round(laptop.price * 1.2)}</span>
+          <span className="badge">20% OFF</span>
         </div>
 
         <button className="buy-btn">Buy Now</button>
 
-        {/* Why Shop Section */}
         <div className="why-shop">
           <h4>Why shop from humanoid maker?</h4>
           <ul>
@@ -167,8 +181,7 @@ const Detail = () => {
         </div>
       </div>
 
-      {/* -------- Zoom Result -------- */}
-      {showLens && (
+      {showLens && selectedImage && selectedImage !== DEFAULT_IMAGE && (
         <div
           className="zoom-result"
           style={{
@@ -182,7 +195,6 @@ const Detail = () => {
             backgroundImage: `url(${selectedImage})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: backgroundPosition,
-            
             backgroundSize: "300%",
             borderRadius: "10px",
             boxShadow: "0 2px 8px rgba(0,0,0,0.15)",

@@ -91,7 +91,13 @@ function PartsDetailPage() {
                 ref={imageRef}
                 src={mainImage}
                 alt={item.name || item.model}
-                className="main-image"
+                  style={{
+                  width: "90%",
+                  borderRadius: "8px",
+                  objectFit: "fill",
+                  border: "1px solid #eee",
+                  height: "350px",
+                }}
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "https://placekitten.com/400/400";
@@ -213,7 +219,7 @@ function PartsDetailPage() {
                 backgroundImage: `url(${mainImage})`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: backgroundPosition,
-                backgroundSize: "300%",
+                backgroundSize: "650%",
                 borderRadius: "10px",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
               }}

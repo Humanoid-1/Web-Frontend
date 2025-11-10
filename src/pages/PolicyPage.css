@@ -4,7 +4,7 @@
   margin: 0 auto;
   padding: 2rem 1rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
+  color: #2c3e50;
   background-color: #f9f9f9;
   box-sizing: border-box;
 }
@@ -16,7 +16,7 @@
 
 .policy-header h1 {
   font-size: 2rem;
-  color: #222;
+  color: #2c3e50;
 }
 
 .policy-header p {
@@ -37,7 +37,7 @@
 
 .policy-section h2 {
   margin-bottom: 1rem;
-  color: #0078D4;
+  color: #2c3e50;
   font-size: 1.4rem;
 }
 

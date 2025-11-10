@@ -8,6 +8,7 @@ import logo3 from "../../public/Apple-Logo.png"
 import logo4 from "../../public/Acer-Logo.png"
 import logo5 from "../../public/Asus-Logo.png"
 import logo6 from "../../public/Msi-Logo.png"
+import logo7 from "../../public/Google-Logo.png"
 
 
 export default function AboutPage() {
@@ -84,28 +85,29 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="brand-logos">
-              <a href="http://localhost:5173/#/brand/Dell">
-              <img src={logo} alt="Dell" className="logo" />
-              </a>
-              <a href="http://localhost:5173/#/brand/Lenovo">
-              <img src={logo1} alt="Lenovo" className="logo" />
-              </a>
-              <a href="http://localhost:5173/#/brand/HP">
-              <img src={logo2} alt="HP" className="logo" />
-              </a>
-              <a href="http://localhost:5173/#/brand/Apple">
-              <img src={logo3} alt="Apple" className="logo" />
-              </a>
-              <a href="http://localhost:5173/#/brand/Acer">
-              <img src={logo4} alt="Acer" className="logo" />
-              </a>
-              <a href="http://localhost:5173/#/brand/Asus">
-              <img src={logo5} alt="Asus" className="logo" />
-              </a>
-              <a href="http://localhost:5173/#/brand/msi">
-              <img src={logo6} alt="MSI" className="logo" />
-              </a>
-            </div>
+  <a href="http://localhost:5173/#/brand/Dell">
+    <img src={logo} alt="Dell" className="logo" />
+  </a>
+  <a href="http://localhost:5173/#/brand/Lenovo">
+    <img src={logo1} alt="Lenovo" className="logo" style={{ height: "45px", width: "100px" }} />
+  </a>
+  <a href="http://localhost:5173/#/brand/HP">
+    <img src={logo2} alt="HP" className="logo" />
+  </a>
+  <a href="http://localhost:5173/#/brand/Apple">
+    <img src={logo3} alt="Apple" className="logo" />
+  </a>
+  <a href="http://localhost:5173/#/brand/Acer">
+    <img src={logo4} alt="Acer" className="logo" />
+  </a>
+  <a href="http://localhost:5173/#/brand/Asus">
+    <img src={logo5} alt="Asus" className="logo" style={{ height: "120px", width: "120px" }} />
+  </a>
+  <a href="http://localhost:5173/#/brand/msi">
+    <img src={logo6} alt="MSI" className="logo" />
+  </a>
+</div>
+
 
             <div className="about-promise">
               <h3>Our Promise</h3>
@@ -127,7 +129,7 @@ export default function AboutPage() {
 
           <br />
           <div className="aside-button">
-            <Link to="/contact-us">Contact Sales</Link>
+            <Link to="/ContactUs">Contact</Link>
           </div>
 
           <div className="aside-note">

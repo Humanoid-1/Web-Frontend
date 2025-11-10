@@ -114,7 +114,7 @@ const SliderComponent = () => {
 <Slider ref={sliderRef} {...settings}>
   {(slides.length > 0 ? slides : [
     {
-      imageUrl: "/newBanner.png",
+      image_url: "/newBanner.jpg",
       title: "Default Banner",
       link: "#"
     }
@@ -123,7 +123,7 @@ const SliderComponent = () => {
       <div className="slide-item">
         <a href={slide.link} target="_blank" rel="noopener noreferrer">
           <img
-            src={slide.imageUrl}
+            src={slide.image_url}
             alt={slide.title || `Slide ${index}`}
             className="slide-image"
             loading="lazy"

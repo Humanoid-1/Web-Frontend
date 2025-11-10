@@ -51,7 +51,7 @@ function AccessoryDetailPage() {
     fetchAccessory();
   }, [id, category]);
 
-  // 🧭 Lens Movement Handler (same as Laptop)
+  // Lens Movement Handler (same as Laptop)
   const handleMouseMove = (e) => {
     const rect = imageRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -89,7 +89,13 @@ function AccessoryDetailPage() {
                 ref={imageRef}
                 src={mainImage}
                 alt={item.model || item.type}
-                className="main-image"
+                style={{
+                  width: "90%",
+                  borderRadius: "8px",
+                  objectFit: "fill",
+                  border: "1px solid #eee",
+                  height: "350px",
+                }}
               />
 
               {/* 🔍 Lens Effect */}
@@ -121,9 +127,8 @@ function AccessoryDetailPage() {
                   key={i}
                   src={`http://localhost:5000/${img}`}
                   alt={`thumb-${i}`}
-                  className={`thumb ${
-                    mainImage === `http://localhost:5000/${img}` ? "selected" : ""
-                  }`}
+                  className={`thumb ${mainImage === `http://localhost:5000/${img}` ? "selected" : ""
+                    }`}
                   onClick={() => setMainImage(`http://localhost:5000/${img}`)}
                   onError={(e) => {
                     e.target.onerror = null;
@@ -202,7 +207,7 @@ function AccessoryDetailPage() {
                 backgroundImage: `url(${mainImage})`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: backgroundPosition,
-                backgroundSize: "300%",
+                backgroundSize: "650%",
                 borderRadius: "10px",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
               }}

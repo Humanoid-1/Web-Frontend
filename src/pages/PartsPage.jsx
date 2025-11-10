@@ -280,7 +280,7 @@ function PartsPage() {
                     <p>Type: {item.type || "N/A"}</p>
                   </div>
 
-                  <Link to={`/partdetail/${item._id}`}>
+                  <Link to={`/parts/${category}/${item._id}`} style={{ width: "100%" }}>
                     <button
                       style={{
                         marginTop: "12px",

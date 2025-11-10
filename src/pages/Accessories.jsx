@@ -221,7 +221,7 @@ function AccessoriesPage() {
               <p>Type: {item.type || "N/A"}</p>
             </div>
 
-            <Link to={`/accessoriesdetail/${item._id}`}>
+            <Link  to={`/accessories/${category}/${item._id}`}>
               <button
                 style={{
                   marginTop: "12px",

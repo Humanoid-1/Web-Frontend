@@ -13,6 +13,7 @@
 
 .about-header h1 {
   font-size: 2rem;
+  margin-bottom: 1rem;
   font-weight: 600;
    color: #2c3e50;
   text-align: center;
@@ -54,7 +55,7 @@
   border-left: 5px solid skyblue;
   border-radius: 4px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-  transform: scale(2s);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
  animation: fadeInUp 0.6s forwards;
 }
 
@@ -88,30 +89,34 @@
   font-size: 1rem;
 }
 
-.logo{
+/* ✅ Updated logo styles - clean, no border/shadow, hover-only effect */
+.logo {
   height: 60px;
-  width: 95px;
-  display: inline;
-  margin-top: 25px;
-  align-items: center;
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-  padding: 6px;
-}
-.logo:hover {
-  transform: scale(1.1);
-  box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+  width: auto; /* Keep original logo aspect ratio */
+  transition: transform 0.2s ease;
+  cursor: pointer; /* Optional: shows pointer on hover */
+  
 }
 
+.logo:hover {
+  transform: scale(1.1);
+}
+
+/* ✅ Logo container styles */
 .brand-logos {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 40px;
   margin-top: 40px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
+
+/* ✅ Optional: clean up anchor wrapper */
+.brand-logos a {
+  display: inline-block;
+}
+
 
 .about-aside ul {
   list-style-type: disc;
@@ -161,6 +166,16 @@
   .about-container {
     padding: 1rem;
   }
+
+  .brand-logos {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+
 
   .about-header p {
     font-size: 1rem;

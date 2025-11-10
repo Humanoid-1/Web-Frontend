@@ -63,18 +63,18 @@ function BrandPage() {
         const delta = 2; // Show current ±2 pages
         let left = Math.max(2, currentPage - delta);
         let right = Math.min(totalPages - 1, currentPage + delta);
-    
+
         // Always show first page
         pages.push(1);
-    
+
         if (left > 2) pages.push("left-ellipsis");
-    
+
         for (let i = left; i <= right; i++) pages.push(i);
-    
+
         if (right < totalPages - 1) pages.push("right-ellipsis");
-    
+
         if (totalPages > 1) pages.push(totalPages);
-    
+
         return pages;
       };
 
@@ -236,9 +236,9 @@ function BrandPage() {
 
       {/* Laptop Grid */}
       <div className="laptop-grid">
-        
+
         {laptops.map((laptop, index) => (
-          <Link to={`/Detail/${laptop._id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={laptop._id || index}>
+          <Link to={`/brand/${laptop.brand}/${laptop._id}`} key={laptop._id || index}>
           <div
             key={laptop._id || index}
             className="laptop-card"
@@ -260,12 +260,12 @@ function BrandPage() {
               <p><b>CPU:</b> {laptop.cpu}</p>
               <p><b>RAM:</b> {laptop.ram}</p>
               <p><b>Storage:</b> {laptop.storage}</p>
-              
+
             </div>
-            
+
             <button className="details-btn">See Details</button>
 
-           
+
           </div>
          </Link>
         ))}

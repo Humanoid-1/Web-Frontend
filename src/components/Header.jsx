@@ -193,6 +193,7 @@ const Overlay = styled.div`
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartItems] = useState(0);
+  const token = localStorage.getItem("token");
 
   return (
     <>
@@ -201,7 +202,7 @@ function Header() {
           <Logo src={logo} alt="Company Logo" />
         </LogoWrapper>
 
-       <SearchBar/>
+        <SearchBar />
 
         <NavLinks>
           <NavItem to="/">Home</NavItem>
@@ -211,9 +212,15 @@ function Header() {
         </NavLinks>
 
         <IconsContainer>
-          <IconButton>
-            <FaUser />
-          </IconButton>
+
+          <NavLink to="/auth">
+            <IconButton>
+              <FaUser />
+            </IconButton>
+          </NavLink>
+
+
+
           <IconButton>
             <FaShoppingCart />
             <span>{cartItems}</span>
@@ -239,11 +246,14 @@ function Header() {
           About Us
         </MobileNavItem>
         <MobileNavItem to="/ContactUs" onClick={() => setMenuOpen(false)}>
-          Contact Us
+          Contact
         </MobileNavItem>
-        <MobileNavItem to="/account" onClick={() => setMenuOpen(false)}>
+
+        <MobileNavItem to={token ? "/dashboard" : "/login"} onClick={() => setMenuOpen(false)}>
           <FaUser /> My Account
         </MobileNavItem>
+
+
         <MobileNavItem to="/cart" onClick={() => setMenuOpen(false)}>
           <FaShoppingCart /> Cart ({cartItems})
         </MobileNavItem>

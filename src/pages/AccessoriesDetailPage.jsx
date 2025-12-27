@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./detail.css";
+import "../pages/"
 
 function AccessoryDetailPage() {
   const { id, category } = useParams();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./detail.css"; // ✅ Importing CSS
+import "../pages/Detail.css"; // ✅ Importing CSS
 
 function PartsDetailPage() {
   const { id, category } = useParams();

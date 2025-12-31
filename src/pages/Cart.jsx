@@ -55,20 +55,19 @@ const Cart = ({ onClose }) => {
       name: "Humanoid Maker",
       description: "Order Payment",
 
-      handler: async (response) => {
-        try {
-         await axios.post(
-`${import.meta.env.VITE_API_URL}/api/save`
-
-  {
-   products: cart.map((item) => ({
-  productId: item._id,
-  name: item.brand + " " + item.model,
-  model: item.model,
-  category: item.category,
-  quantity: item.qty,
-  price: item.price,
-})),
+handler: async (response) => {
+  try {
+    await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/save`,
+      {
+        products: cart.map((item) => ({
+          productId: item._id,
+          name: item.brand + " " + item.model,
+          model: item.model,
+          category: item.category,
+          quantity: item.qty,
+          price: item.price,
+        })),
 
     shippingAddress: selectedAddress,
     itemsPrice,

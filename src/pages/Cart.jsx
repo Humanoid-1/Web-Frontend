@@ -58,41 +58,40 @@ const Cart = ({ onClose }) => {
 handler: async (response) => {
   try {
     await axios.post(
-       `${import.meta.env.VITE_API_URL}/api/save`, // <-- COMMA here
-  {
-    products: cart.map((item) => ({
-      productId: item._id,
-      name: item.brand + " " + item.model,
-      model: item.model,
-      category: item.category,
-      quantity: item.qty,
-      price: item.price,
-    })),
+      `${import.meta.env.VITE_API_URL}/api/save`, // <-- COMMA added here
+      {
+        products: cart.map((item) => ({
+          productId: item._id,
+          name: item.brand + " " + item.model,
+          model: item.model,
+          category: item.category,
+          quantity: item.qty,
+          price: item.price,
+        })),
 
-    shippingAddress: selectedAddress,
-    itemsPrice,
-    shippingPrice,
-    totalAmount,
-    paymentMethod: "Razorpay",
-    paymentId: response.razorpay_payment_id,
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  }
-);
-
-
-          localStorage.removeItem("cart");
-          window.dispatchEvent(new Event("cartUpdated"));
-          alert("✅ Order placed successfully!");
-          onClose();
-        } catch (err) {
-          console.error("Save order error:", err.response?.data || err);
-          alert("❌ Payment succeeded but order saving failed!");
-        }
+        shippingAddress: selectedAddress,
+        itemsPrice,
+        shippingPrice,
+        totalAmount,
+        paymentMethod: "Razorpay",
+        paymentId: response.razorpay_payment_id,
       },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    localStorage.removeItem("cart");
+    window.dispatchEvent(new Event("cartUpdated"));
+    alert("✅ Order placed successfully!");
+    onClose();
+  } catch (err) {
+    console.error("Save order error:", err.response?.data || err);
+    alert("❌ Payment succeeded but order saving failed!");
+  }
+},
     };
 
     new window.Razorpay(options).open();

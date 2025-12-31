@@ -125,15 +125,16 @@ function Auth() {
     };
 
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-          isLogin
-            ? { email: trimmed.email, password: trimmed.password }
-            : payload
-        )
-      });
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/${endpoint}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(
+      isLogin
+        ? { email: trimmed.email, password: trimmed.password }
+        : payload
+    )
+  });
+
 
       const result = await res.json();
       console.log("Backend response:", result);

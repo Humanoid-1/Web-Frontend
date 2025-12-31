@@ -16,20 +16,24 @@ const AddAddress = ({ onClose }) => {
 
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/address/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        type,
-        flat,
-        street,
-        name,
-        postalCode,
-      }),
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/address/add`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          type,
+          flat,
+          street,
+          name,
+          postalCode,
+        }),
+      }
+    );
+
 
     const data = await res.json();
 

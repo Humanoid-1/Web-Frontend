@@ -112,14 +112,17 @@ const SearchBar = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    const debounce = setTimeout(async () => {
-      if (query.trim().length > 1) {
-        try {
-          const urls = [
-            `http://localhost:5000/api/laptops/Search?q=${encodeURIComponent(query)}&limit=5`,
-            `http://localhost:5000/api/accessories/Search?q=${encodeURIComponent(query)}&limit=5`,
-            `http://localhost:5000/api/parts/Search?q=${encodeURIComponent(query)}&limit=5`,
-          ];
+   const debounce = setTimeout(async () => {
+  if (query.trim().length > 1) {
+    try {
+      const baseURL = import.meta.env.VITE_API_URL;
+
+      const urls = [
+        `${baseURL}/api/laptops/Search?q=${encodeURIComponent(query)}&limit=5`,
+        `${baseURL}/api/accessories/Search?q=${encodeURIComponent(query)}&limit=5`,
+        `${baseURL}/api/parts/Search?q=${encodeURIComponent(query)}&limit=5`,
+      ];
+
 
           const fetched = await Promise.all(
             urls.map((url) =>

@@ -25,7 +25,7 @@ function PartsPage() {
   const [brandOpen, setBrandOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/getPartCategories")
+   fetch(`${import.meta.env.VITE_API_URL}/api/getPartCategories`) 
       .then(res => res.json())
       .then(data => {
         if (data.success && Array.isArray(data.categories)) {
@@ -35,7 +35,7 @@ function PartsPage() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/getPartBrands")
+    fetch(`${import.meta.env.VITE_API_URL}/api/getPartBrands`)
       .then(res => res.json())
       .then(data => {
         if (data.success && Array.isArray(data.brands)) {
@@ -55,8 +55,9 @@ function PartsPage() {
 query += `&category=${selectedCategories.length ? selectedCategories.join(",") : ""}`;
 query += `&brand=${selectedBrands.length ? selectedBrands.join(",") : ""}`;
 
-const res = await fetch(`http://localhost:5000/api/getParts?${query}`);
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/getParts?${query}`);
 const data = await res.json();
+
 
 setParts(Array.isArray(data.data) ? data.data : []);
 setTotalPages(data.totalPages || 1);
@@ -254,7 +255,7 @@ setTotalPages(data.totalPages || 1);
               <div className="laptop-card" style={{ animationDelay: `${index * 0.08}s` }}>
                 <div className="laptop-img">
                   <img
-                    src={`http://localhost:5000/${img}`}
+                   src={`${import.meta.env.VITE_API_URL}/${img}`}
                     alt={item.category}
                     style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
                   />

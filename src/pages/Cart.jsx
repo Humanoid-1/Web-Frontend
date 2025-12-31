@@ -58,7 +58,8 @@ const Cart = ({ onClose }) => {
       handler: async (response) => {
         try {
          await axios.post(
-  "http://localhost:5000/api/save",
+`${import.meta.env.VITE_API_URL}/api/save`
+
   {
    products: cart.map((item) => ({
   productId: item._id,

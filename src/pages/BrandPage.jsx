@@ -36,19 +36,20 @@ function BrandPage({ cartOpen }) {
 
   /* ================= FETCH FILTER DATA ================= */
   useEffect(() => {
-    fetch("http://localhost:5000/api/getBrands")
+    fetch(`${import.meta.env.VITE_API_URL}/api/getBrands`)
       .then(res => res.json())
       .then(data => data.success && setBrands(data.brands || []));
 
-    fetch("http://localhost:5000/api/getCPUs")
+    fetch(`${import.meta.env.VITE_API_URL}/api/getCPUs`)
       .then(res => res.json())
       .then(data => setCpus(data.cpus || []));
 
-    fetch("http://localhost:5000/api/getRAMs")
+    fetch(`${import.meta.env.VITE_API_URL}/api/getRAMs`)
       .then(res => res.json())
       .then(data => setRams(data.rams || []));
 
-    fetch("http://localhost:5000/api/getStorages")
+    
+fetch(`${import.meta.env.VITE_API_URL}/api/getStorages`)
       .then(res => res.json())
       .then(data => setStorages(data.storages || []));
   }, []);
@@ -65,8 +66,9 @@ function BrandPage({ cartOpen }) {
         query += `&ram=${selectedRams.join(",")}`;
         query += `&storage=${selectedStorages.join(",")}`;
 
-        const res = await fetch(`http://localhost:5000/api/getLaptops?${query}`);
-        const data = await res.json();
+       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/getLaptops?${query}`);
+const data = await res.json();
+
 
         setLaptops(Array.isArray(data.data) ? data.data : []);
         setTotalPages(data.totalPages || 1);

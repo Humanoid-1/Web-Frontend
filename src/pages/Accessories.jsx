@@ -32,18 +32,29 @@ function AccessoriesPage() {
   };
 
   // Fetch categories
-  useEffect(() => {
-    fetch("http://localhost:5000/api/getAccessoryCategories")
-      .then(res => res.json())
-      .then(data => data.success && Array.isArray(data.categories) && setCategories(data.categories));
-  }, []);
+ useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_URL}/api/getAccessoryCategories`)
+    .then(res => res.json())
+    .then(
+      data =>
+        data.success &&
+        Array.isArray(data.categories) &&
+        setCategories(data.categories)
+    );
+}, []);
 
-  // Fetch brands
-  useEffect(() => {
-    fetch("http://localhost:5000/api/getAccessoryBrands")
-      .then(res => res.json())
-      .then(data => data.success && Array.isArray(data.brands) && setBrands(data.brands));
-  }, []);
+// Fetch brands
+useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_URL}/api/getAccessoryBrands`)
+    .then(res => res.json())
+    .then(
+      data =>
+        data.success &&
+        Array.isArray(data.brands) &&
+        setBrands(data.brands)
+    );
+}, []);
+
 
   // Fetch accessories
   useEffect(() => {
@@ -61,8 +72,11 @@ function AccessoriesPage() {
           query += `&brand=${encodeURIComponent(selectedBrands.join(","))}`;
         }
 
-        const res = await fetch(`http://localhost:5000/api/getAccessories?${query}`);
-        const data = await res.json();
+        const res = await fetch(
+  `${import.meta.env.VITE_API_URL}/api/getAccessories?${query}`
+);
+const data = await res.json();
+
         setAccessories(Array.isArray(data.data) ? data.data : []);
         setTotalPages(data.totalPages || 1);
       } catch {
@@ -172,7 +186,7 @@ function AccessoriesPage() {
           return (
             <Link key={item._id} to={`/accessories/${categoryParam}/${item._id}`} style={{ textDecoration: "none", color: "inherit" }}>
               <div style={{ background: "white", borderRadius: "15px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)", padding: "16px", textAlign: "center" }}>
-                <img src={`http://localhost:5000/${imageSrc}`} alt={item.type} style={{ maxWidth: "100%", height: "160px", objectFit: "contain" }} />
+               <img src={`${import.meta.env.VITE_API_URL}/${imageSrc}`}alt={item.type} style={{ maxWidth: "100%", height: "160px", objectFit: "contain" }} />
                 <h3>{item.category || item.type}</h3>
                 <p><b>Brand:</b> {item.brand}</p>
               </div>

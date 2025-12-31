@@ -13,14 +13,17 @@ const AddressSelector = ({ onClose, onSelect }) => {
       alert("You must be logged in to see saved addresses.");
       return;
     }
+try {
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/address/user`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
-    try {
-      const res = await fetch("http://localhost:5000/api/address/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
 
       if (!res.ok) {
         throw new Error("Failed to fetch addresses");

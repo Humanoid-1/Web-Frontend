@@ -23,8 +23,8 @@ const Detail = () => {
   useEffect(() => {
     const fetchLaptop = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/getLaptop/${id}`);
-        const data = await res.json();
+       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/getLaptop/${id}`);
+const data = await res.json();
 
         if (data?.success && data?.data) {
           setLaptop(data.data);

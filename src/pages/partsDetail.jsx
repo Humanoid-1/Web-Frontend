@@ -19,7 +19,8 @@ function PartsDetailPage() {
   const [showLens, setShowLens] = useState(false);
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
 
-  const BASE_URL = "http://localhost:5000";
+ const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
   const DEFAULT_IMAGE = "https://via.placeholder.com/400x300?text=No+Image";
 
   const getImageUrl = (img) => {

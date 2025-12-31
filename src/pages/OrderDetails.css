@@ -1,0 +1,27 @@
+.order-details {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.order-box,
+.price-box {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.loading,
+.error {
+  text-align: center;
+  margin-top: 40px;
+}

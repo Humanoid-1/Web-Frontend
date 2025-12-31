@@ -1,0 +1,192 @@
+/* AboutPage.css */
+
+.about-container {
+  padding: 2rem;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+   background: linear-gradient(120deg, #f9fafc 0%, #eef1f6 100%);
+  color: #333;
+}
+
+.about-section {
+  max-width: 1200px;
+}
+
+.about-header h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+   color: #2c3e50;
+  text-align: center;
+}
+
+.about-header p {
+  font-size: 1.1rem;
+  /* margin-bottom: 2rem; */
+}
+
+.about-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-main h2,
+.about-main h3 {
+  margin-top: 1.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.about-main ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  font-weight: 500;
+  margin-top: 1.5rem;
+}
+
+.why-card {
+  background-color: white;
+  padding: 1rem;
+  border-left: 5px solid skyblue;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+ animation: fadeInUp 0.6s forwards;
+}
+
+.why-card:hover{
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+  
+}
+
+.about-promise {
+  background-color: #e6f4ff;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.highlight {
+  background-color: #e6f4ff;
+  color: #007acc;
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.about-aside {
+  padding: 1rem;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+/* ✅ Updated logo styles - clean, no border/shadow, hover-only effect */
+.logo {
+  height: 60px;
+  width: auto; /* Keep original logo aspect ratio */
+  transition: transform 0.2s ease;
+  cursor: pointer; /* Optional: shows pointer on hover */
+  
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+/* ✅ Logo container styles */
+.brand-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* ✅ Optional: clean up anchor wrapper */
+.brand-logos a {
+  display: inline-block;
+}
+
+
+.about-aside ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+.aside-button a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.aside-button a:hover {
+  background-color: #197dc0;
+  
+}
+
+.aside-note {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #666;
+}
+
+
+/* 🔁 Responsive Media Queries */
+@media (max-width: 768px) {
+  .about-header h1 {
+    font-size: 2rem;
+  }
+
+  .about-main ul {
+    margin-left: 1rem;
+  }
+
+  .aside-button a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding: 1rem;
+  }
+
+  .brand-logos {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+
+
+  .about-header p {
+    font-size: 1rem;
+  }
+
+  .why-choose-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-main h2,
+  .about-main h3 {
+    font-size: 1.5rem;
+  }
+}

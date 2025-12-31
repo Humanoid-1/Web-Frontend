@@ -1,0 +1,180 @@
+/* ============================= */
+/* OVERLAY */
+/* ============================= */
+.address-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  /* prevent scroll bleed */
+  padding: 1rem;
+  overflow-x: hidden;
+}
+
+/* ============================= */
+/* MODAL CONTAINER */
+/* ============================= */
+.address-container {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+  /* mobile safety */
+  max-height: 90dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* ============================= */
+/* HEADER */
+/* ============================= */
+.address-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.address-header h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.close-btn {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* ============================= */
+/* SUBTITLE */
+/* ============================= */
+.subtitle {
+  font-size: 13px;
+  color: #555;
+  margin: 12px 0 6px;
+}
+
+/* ============================= */
+/* ADDRESS TYPE BUTTONS */
+/* ============================= */
+.type-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap; /* prevent overflow */
+}
+
+.type-buttons button {
+  flex: 1 1 120px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.type-buttons .active {
+  background: #e8f5e9;
+  border-color: #2e7d32;
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+/* ============================= */
+/* INPUTS */
+/* ============================= */
+.address-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* ============================= */
+/* INPUT WRAPPER */
+/* ============================= */
+.input-wrapper {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-wrapper input:focus {
+  border-color: #3498db;
+}
+
+/* Required star */
+.input-wrapper.required::after {
+  content: "*";
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  color: red;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* ============================= */
+/* SAVE BUTTON */
+/* ============================= */
+.save-btn {
+  width: 100%;
+  height: 48px;
+  background: #0a7a2f;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.save-btn:hover {
+  background: #075e25;
+  transform: translateY(-1px);
+}
+
+/* ============================= */
+/* MOBILE OPTIMIZATION */
+/* ============================= */
+@media (max-width: 480px) {
+  .address-container {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .address-header h3 {
+    font-size: 16px;
+  }
+
+  .save-btn {
+    font-size: 15px;
+  }
+}

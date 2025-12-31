@@ -58,16 +58,16 @@ const Cart = ({ onClose }) => {
 handler: async (response) => {
   try {
     await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/save`,
-      {
-        products: cart.map((item) => ({
-          productId: item._id,
-          name: item.brand + " " + item.model,
-          model: item.model,
-          category: item.category,
-          quantity: item.qty,
-          price: item.price,
-        })),
+       `${import.meta.env.VITE_API_URL}/api/save`, // <-- COMMA here
+  {
+    products: cart.map((item) => ({
+      productId: item._id,
+      name: item.brand + " " + item.model,
+      model: item.model,
+      category: item.category,
+      quantity: item.qty,
+      price: item.price,
+    })),
 
     shippingAddress: selectedAddress,
     itemsPrice,
